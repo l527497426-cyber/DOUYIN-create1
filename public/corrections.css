@@ -6,12 +6,12 @@
 
 
 
-.publish{position:relative;width:160px;height:88px;padding:8px;border:0;border-radius:12px;overflow:hidden;background:#0a0a0b}
+.publish{position:relative;width:160px;height:88px;padding:6px;border:0;border-radius:12px;overflow:hidden;background:#0a0a0b}
 .publish p{position:relative;z-index:1;visibility:visible;padding:6px 8px;font-size:12px;font-weight:400;line-height:16px;color:#999;white-space:nowrap}
 .publish>button{overflow:hidden;isolation:isolate}
 .publish>button>span,.publish>button>img{position:relative;z-index:1}
 .publish>button>.publish-flow{opacity:1}
-.publish button{position:absolute;left:8px;top:44px;width:144px;height:36px;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:600;line-height:20px;box-shadow:none;transition:background .2s}
+.publish button{position:absolute;left:6px;top:46px;width:148px;height:36px;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:600;line-height:20px;box-shadow:none;transition:background .2s}
 .publish button:hover{background:rgba(255,255,255,.19);box-shadow:none;transform:none}
 .publish button:active{background:rgba(255,255,255,.12);transform:none}
 .publish .publish-add{width:16px;height:16px;flex:none}
