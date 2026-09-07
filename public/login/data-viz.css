@@ -97,3 +97,5 @@
 }
 
 .earnings-gems{grid-template-rows:repeat(7,minmax(0,1fr));}.earnings-gems img{min-height:0;min-width:0;}
+
+.earnings-gems img{filter:brightness(0) invert(1);opacity:.72;}.earnings-gems img[src*="diamond-dark"]{opacity:.32;}
