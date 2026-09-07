@@ -67,6 +67,11 @@
 .trend-plot,.trend-svg{height:210px}.trend-footer{justify-content:flex-end}
 .profile .bio{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;line-height:20px}
 .card-art>.suibian-updated{transform:rotate(-4deg) scale(1.10)}
+.card-title{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative}
+.card-enter-action{display:flex;align-items:center;justify-content:center;width:24px;height:24px;margin:-2px 0;flex:none;opacity:0;transform:translateX(-5px) scale(.9);transition:opacity .2s ease,transform .25s ease}
+.card-enter-action .icon{width:12px;height:12px;filter:brightness(0)}
+.creation-card:hover .card-enter-action,.creation-card:focus-visible .card-enter-action{opacity:1;transform:translateX(0) scale(1)}
+.creation-card:active .card-enter-action{transform:scale(.92)}
 .card-art>.create-world-updated{transform:rotate(4deg) scale(1.10)}
 .hero .profile{padding-top:30px}
 .hero{height:auto;min-height:calc(237px + var(--card-growth));padding-bottom:23px}
