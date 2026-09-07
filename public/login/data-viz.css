@@ -132,3 +132,17 @@
 @keyframes color-drift{from{transform:translate(-6%,-5%) rotate(-12deg) scale(1.04)}to{transform:translate(8%,6%) rotate(17deg) scale(1.16)}}
 @keyframes ribbon-drift{from{transform:translate(-7%,0) rotate(18deg)}to{transform:translate(13%,12%) rotate(-19deg)}}
 @keyframes bloom-drift{from{transform:translate(0,-6%) scale(.94)}to{transform:translate(-9%,10%) scale(1.18)}}
+/* Frosted surfaces with a luminous rim and subtle material depth. */
+.data-viz .viz-pill,.data-viz .viz-stat,.data-viz .task-row{
+ background:linear-gradient(135deg,#ffffffdd 0%,#ffffff91 38%,#ffffff50 72%,#ffffff9c 100%);
+ border:1px solid #ffffffe0;
+ box-shadow:inset 0 1px 1px #fff,inset 0 -1px 2px #ffffff60,0 6px 14px #26355610,0 16px 30px #26355608;
+ backdrop-filter:blur(10px) saturate(1.12);
+}
+.data-viz .viz-pill{background:linear-gradient(125deg,#fffffff0,#ffffffa6 48%,#ffffff73 78%,#ffffffce);}
+.data-viz .viz-stat{background:radial-gradient(ellipse at 0 0,#ffffffcf,transparent 70%),linear-gradient(145deg,#ffffffa8,#ffffff52 70%,#ffffff9c);}
+.data-viz .task-row:last-child{background:linear-gradient(120deg,#fffffff0,#ffffff80 60%,#ffffffb8);}
+.data-viz .market-browser{background:linear-gradient(140deg,#ffffff66,#ffffff14 55%,#ffffff40);border-color:#ffffffbf;box-shadow:inset 0 1px 1px #ffffffee,0 12px 28px #244c5714;}
+.data-viz .market-item i,.data-viz .task-row i{background:linear-gradient(145deg,#ffffffad,#ffffff38 65%,#ffffff80);box-shadow:inset 0 1px 1px #ffffffd9,inset 0 -1px 2px #ffffff38,0 4px 8px #30496508;}
+.data-viz .revenue-bar{background:linear-gradient(100deg,#ffffff9c,#ffffff42 35%,#ffffff60 70%,#ffffffc7);border-color:#ffffffd9;box-shadow:inset 1px 0 2px #ffffffbf,inset -1px 0 2px #ffffff80,0 8px 24px #28436d12;}
+.data-viz .bar-2{background:linear-gradient(100deg,#ffffffe0,#ffffff80 35%,#ffffffa8 70%,#fffffff0);}
