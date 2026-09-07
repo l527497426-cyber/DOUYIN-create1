@@ -66,6 +66,8 @@
 
 .trend-plot,.trend-svg{height:210px}.trend-footer{justify-content:flex-end}
 .profile .bio{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;line-height:20px}
+.card-art>.suibian-updated{transform:rotate(-4deg) scale(1.10)}
+.card-art>.create-world-updated{transform:rotate(4deg) scale(1.10)}
 .hero .profile{padding-top:30px}
 .hero{height:auto;min-height:calc(237px + var(--card-growth));padding-bottom:23px}
 .metric-linked{position:relative}.metric.metric-active{background:#edf8ff;box-shadow:inset 0 0 0 1px #c9eaff}.metric.metric-active>span{color:#098dc9}.metric.metric-active b{color:#087fb8}.metric:not(.metric-linked){cursor:default}.metric:not(.metric-linked):hover{background:none;box-shadow:none}

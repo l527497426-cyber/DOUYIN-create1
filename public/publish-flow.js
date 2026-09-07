@@ -28,10 +28,10 @@ export function mountPublishFlow(){
           vec2 q=uv-vec2(.08,0.)+(pointer-.5)*energy*.09*depth;
           float drift=t*(.48+layer*.27)+layer*2.1;
           float cloud=field(q*vec2(2.6,1.8)+vec2(drift*.25,layer));
-          float center=.035+layer*.075+.08*sin(q.x*3.6+drift)
+          float center=.16+layer*.10+.08*sin(q.x*3.6+drift)
             +.026*sin(q.x*10.-drift*.8)+(cloud-.5)*.08;
           float distanceToLight=q.y-center;
-          float spread=.17-layer*.047;
+          float spread=.23-layer*.05;
           float halo=exp(-pow(distanceToLight/(spread*2.6),2.));
           float ribbon=exp(-pow(distanceToLight/spread,2.));
           float core=exp(-pow(distanceToLight/(.016+layer*.004),2.));
@@ -42,7 +42,7 @@ export function mountPublishFlow(){
           // Pink dominates, with a small cyan accent and no violet color stop.
           light+=envelope*color*(halo*.10+ribbon*.25+core*.12);
         }
-        float mask=1.-smoothstep(.35,.95,uv.y);
+        float mask=1.-smoothstep(.60,1.,uv.y);
         light*=mask*(.85+energy*1.05);
         vec3 mapped=vec3(1.)-exp(-light*1.5);
         float alpha=max(max(mapped.r,mapped.g),mapped.b);
