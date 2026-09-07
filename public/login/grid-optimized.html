@@ -9,7 +9,7 @@
   <script type="importmap">
     {"imports":{"three":"./vendor/three/build/three.module.js","postprocessing":"./vendor/postprocessing/build/index.js"}}
   </script>
-  <link rel="stylesheet" href="./data-viz.css?v=2" />
+  <link rel="stylesheet" href="./data-viz.css?v=3" />
 </head>
 <body class="grid-optimized-version">
   <header class="topbar">
@@ -215,10 +215,10 @@
         </div>
 
         <div class="operations-card-grid operations-monetize-grid" id="ops-panel-monetize" role="tabpanel" aria-labelledby="ops-tab-monetize" data-ops-panel="monetize">
-          <article class="operation-card operation-market"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-market-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>变现广场 · 快速找商单</h3><p>千粉以上作者可匹配任务并完成变现</p></div></article>
-          <article class="operation-card operation-tasks"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-tasks-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>我的任务 · 跟踪任务进度</h3><p>集中查看任务详情、审核结果与当前进度</p></div></article>
-          <article class="operation-card operation-earnings"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-earnings-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>收入金额 · 汇总收入</h3><p>统一呈现抖音内收入与当前可提现金额</p></div></article>
-          <article class="operation-card operation-revenue"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-revenue-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>收入分析 · 丰富收入渠道</h3><p>拆解各类收入来源，帮助拓展更多变现方式</p></div></article>
+          <article class="operation-card operation-market"><div class="operation-visual" aria-hidden="true"><div class="data-viz market-viz"><span class="viz-watermark">DEAL<br>MARKETPLACE</span><div class="market-browser"><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div></div><span class="viz-pill market-income">保底收入</span><span class="viz-pill market-high">高收益</span><span class="viz-pill market-review">好物测评</span></div></div><div class="operation-card-copy"><h3>变现广场 · 快速找商单</h3><p>千粉以上作者可匹配任务并完成变现</p></div></article>
+          <article class="operation-card operation-tasks"><div class="operation-visual" aria-hidden="true"><div class="data-viz tasks-viz"><span class="viz-watermark">MY<br>TASKS</span><div class="task-timeline"></div><div class="task-row" style="--i:0"><i></i><span>达人投稿</span><b></b></div><div class="task-row" style="--i:1"><i></i><span>结果公示</span><b></b></div><div class="task-row" style="--i:2"><i></i><span>奖金发放中</span><b></b></div></div></div><div class="operation-card-copy"><h3>我的任务 · 跟踪任务进度</h3><p>集中查看任务详情、审核结果与当前进度</p></div></article>
+          <article class="operation-card operation-earnings"><div class="operation-visual" aria-hidden="true"><div class="data-viz earnings-viz"><span class="viz-watermark">EARNINGS<br>SUMMARY</span><div class="earnings-amount"><span>收入总金额</span><b>￥9***</b><span>可提现金额</span><b>￥6***</b></div><div class="earnings-gems"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:0"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:1"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:2"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:3"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:4"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:5"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:6"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:7"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:8"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:9"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:10"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:11"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:12"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:13"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:14"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:15"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:16"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:17"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:18"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:19"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:20"></div></div></div><div class="operation-card-copy"><h3>收入金额 · 汇总收入</h3><p>统一呈现抖音内收入与当前可提现金额</p></div></article>
+          <article class="operation-card operation-revenue"><div class="operation-visual" aria-hidden="true"><div class="data-viz revenue-viz"><span class="viz-watermark">REVENUE<br>INSIGHTS</span><div class="revenue-bar bar-0" style="--i:0"></div><div class="viz-pill revenue-label label-0"><span>电商</span><b>￥5900</b></div><div class="revenue-bar bar-1" style="--i:1"></div><div class="viz-pill revenue-label label-1"><span>商单任务</span><b>￥900</b></div><div class="revenue-bar bar-2" style="--i:2"></div><div class="viz-pill revenue-label label-2"><span>直播</span><b>￥8424</b></div></div></div><div class="operation-card-copy"><h3>收入分析 · 丰富收入渠道</h3><p>拆解各类收入来源，帮助拓展更多变现方式</p></div></article>
         </div>
             </div>
           </div>
@@ -299,6 +299,6 @@
   <script type="module" src="./benefit-webgl.js?v=3-blue-gray-visible"></script>
   <script type="module" src="./footer-blaze.js?v=6-no-editor"></script>
   <script type="module" src="./capability-stage-webgl.js?v=8-glass-spacing"></script>
-  <script type="module" src="./data-viz.js?v=2"></script>
+  <script type="module" src="./data-viz.js?v=3"></script>
 </body>
 </html>
