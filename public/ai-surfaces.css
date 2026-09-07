@@ -1,0 +1,5 @@
+/* Only the outer surface from Figma 264:80190 → 264:80191. */
+:root{--ai-card-radius:32px;--ai-card-stroke:rgba(16,17,18,.08);--ai-card-shadow:0 4px 64px rgba(30,31,35,.02)}
+.invite-panel,.capability-card,.showcase-card{position:relative;isolation:isolate;border:1px solid var(--ai-card-stroke);border-radius:var(--ai-card-radius);background:transparent;box-shadow:var(--ai-card-shadow);backdrop-filter:none}
+.invite-panel::before,.capability-card::before,.showcase-card::before{content:"";position:absolute;inset:0;z-index:-1;border:1px solid #fff;border-radius:inherit;background:linear-gradient(180deg,rgba(251,251,251,.6),#fff);backdrop-filter:blur(12px);pointer-events:none}
+.showcase-card:hover{border-color:var(--ai-card-stroke);box-shadow:0 8px 64px rgba(30,31,35,.035)}

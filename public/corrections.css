@@ -118,13 +118,17 @@ main>header::before{content:"";position:absolute;top:0;left:0;right:0;height:112
 main>header .top-nav,main>header .account{pointer-events:auto}
 .top-nav button{transition:background-color .2s ease,color .2s ease,box-shadow .2s ease;transform:none}
 .top-nav button:not(.selected){color:#92929b}
-.top-nav button:not(.selected)>.icon{opacity:.48;transition:opacity .2s ease}
+html{overflow-y:scroll;scrollbar-gutter:stable}
+.top-nav button>.icon{filter:brightness(0) invert(1)}
+.top-nav button:not(.selected)>.icon{filter:brightness(0);opacity:.48;transition:opacity .2s ease}
 .top-nav button:not(.selected):hover>.icon,.top-nav button:not(.selected):focus-visible>.icon{opacity:.85}
 .top-nav button:not(.selected):focus-visible{color:#252632}
 .top-nav button:not(.selected):hover{background:rgba(37,38,50,.055);color:#252632;box-shadow:inset 0 0 0 .5px rgba(37,38,50,.035);transform:none}
 .top-nav button.selected:hover{background:#19191d;color:#fff;box-shadow:none;transform:none}
 .top-nav button:not(.selected):active{background:rgba(37,38,50,.09);transform:none}
 .top-nav button.selected:active{background:#000;color:#fff;transform:none}
+.top-nav button:disabled,.top-nav button:disabled:hover,.top-nav button:disabled:active{cursor:default;color:#aaaab2;background:transparent;box-shadow:none;transform:none}
+.top-nav button:disabled>.icon,.top-nav button:disabled:hover>.icon{opacity:.3}
 
 /* Lower content: transparent recommendations and Figma message-card spacing. */
 #lower-content{min-height:329px;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.05)}
@@ -215,6 +219,27 @@ main>header .top-nav,main>header .account{pointer-events:auto}
 .recommend-tabs button:not(.active):hover:after,.analytics .tabs>button:not(.active):hover:after{transform:scaleX(0)}
 
 
+.analytics .tabs{gap:12px}
+.segmented-tabs,.recommend-tabs.segmented-tabs{position:relative;isolation:isolate;display:inline-flex;align-items:center;align-self:flex-start;flex:none;gap:2px;height:36px;padding:2px;border:1px solid rgba(37,38,50,.045);border-radius:11px;background:#f8f8fa;box-shadow:none;width:max-content;max-width:100%}
+.segmented-tabs .tab-indicator{position:absolute;z-index:0;left:2px;top:2px;height:30px;border:1px solid rgba(37,38,50,.10);border-radius:7px;background:linear-gradient(180deg,#fff,#fefefe);box-shadow:inset 0 0 0 1px #fff,0 1px 2px rgba(37,38,50,.045),0 2px 4px rgba(37,38,50,.03);pointer-events:none}
+.segmented-tabs.is-ready .tab-indicator{transition:transform .32s cubic-bezier(.22,1,.36,1),width .32s cubic-bezier(.22,1,.36,1)}
+.segmented-tabs>button,.recommend-tabs.segmented-tabs>button{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;flex:none;height:30px;padding:0 12px;border:0;border-radius:7px;background:transparent;color:#91919b;font-size:14px;line-height:20px;white-space:nowrap;transition:color .2s}
+.segmented-tabs>button.active{color:#252632;font-weight:600}
+.segmented-tabs>button:after{display:none}
+.segmented-tabs>button:hover{color:#252632}
+.segmented-tabs>button:active{transform:none}
+.segmented-tabs>button:focus-visible{outline-offset:1px}
+@media(prefers-reduced-motion:reduce){.segmented-tabs.is-ready .tab-indicator{transition:none}}
+.ai-content-frame{display:block;width:100%;height:100vh;margin-top:-64px;border:0;background:transparent}
+.ai-content-frame[hidden]{display:none}
+.ai-shell-brand{position:fixed;left:20px;top:30.5px;z-index:60;display:block;pointer-events:auto}
+.show-ai-content .sidebar{display:none}
+.show-ai-content main{padding-bottom:0;margin-left:0}
+.show-ai-content main>header{background:transparent}
+.show-ai-content main>header::before{display:none}
+.show-ai-content main>header .top-nav{left:50%}
+.ai-shell-brand .brand-logo{width:144px;height:auto;display:block}
+.show-ai-content main>.hero,.show-ai-content main>.dashboard,.show-ai-content main>.bg{display:none}
 .recommend-title{color:#252632}
 /* Flat management rows: only the outer management card has a resting surface. */
 #lower-content .message-card,#lower-content .income-card,#lower-content .income-task{background:transparent;border-color:transparent;box-shadow:none}

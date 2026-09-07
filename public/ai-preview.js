@@ -1,0 +1,35 @@
+import {showcaseMarkup, mountShowcase} from '/ai-showcase.js';
+import {mountContentEntrance} from '/ai-entrance.js';
+import {mountAiBackground} from '/ai-background.js';
+const avatar = new URLSearchParams(location.search).get('view') !== 'workshop';
+const view = avatar ? 'avatar' : 'workshop';
+const embedded = new URLSearchParams(location.search).get('embedded') === '1';
+if (!embedded) location.replace(`/#ai-${view}`);
+document.body.classList.toggle('embedded', embedded);
+const title = avatar ? 'AI分身' : 'AI工坊';
+const base = '/assets/online-ai/';
+document.title = `${title} · 抖音创作者中心`;
+document.querySelector(`[data-view="${view}"]`).classList.add('selected');
+document.querySelector(`[data-view="${view}"]`).setAttribute('aria-current', 'page');
+const main = document.querySelector('main');
+main.classList.toggle('avatar-mode', avatar);
+main.innerHTML = `<section class="intro"><img class="hero-ring" src="${base}${avatar?'avatar-background.png':'workshop-hero.webp'}" alt="">${avatar?`<img class="hero-person" src="${base}avatar-hero.png" alt="">`:''}<h1>创所未见 · ${title}</h1><p>${avatar?'所见即所得，链接抖音生态':'把好想法变成好玩法 💡'}</p></section>
+<form class="invite-panel"><h2>输入邀请码，抢先解锁全新抖音创作生态</h2><div class="code-entry"><div class="code-boxes" aria-hidden="true">${Array.from({length:8},(_,i)=>`${i===4?'<i>–</i>':''}<span></span>`).join('')}</div><input name="invite-code" aria-label="8位邀请码" maxlength="8" autocomplete="off" spellcheck="false" autocapitalize="characters"></div><button class="experience" type="submit">立即体验</button><div class="agreement"><input id="agreement" type="checkbox"><div><label for="agreement">我已阅读并同意内测协议 </label><button class="text-link" type="button" data-info="《抖音AI工坊内测参与须知》">《抖音AI工坊内测参与须知》</button>${avatar?' 和 <button class="text-link" type="button" data-info="《AI分身生成服务协议》">《AI分身生成服务协议》</button>':''}</div></div><p class="apply-note">想要邀请码？<button class="text-link" type="button" data-info="填写问卷">填写问卷</button>${avatar?' 报名吧！':' 报名，其他功能咨询：<button class="text-link" type="button" data-info="加入抖音群">加入抖音群</button>'}</p><p class="form-status" role="status" aria-live="polite"></p></form>
+${showcaseMarkup(avatar)}`;
+const input = document.querySelector('[name="invite-code"]');
+const boxes = [...document.querySelectorAll('.code-boxes span')];
+const status = document.querySelector('.form-status');
+const sync = () => { input.value = input.value.replace(/[^a-z0-9]/gi,'').toUpperCase(); boxes.forEach((box,i)=>{box.textContent=input.value[i]||'';box.classList.toggle('cursor',i===Math.min(input.value.length,7));}); status.textContent=''; };
+input.addEventListener('input',sync); sync();
+const dialog = document.querySelector('dialog');
+const content = dialog.querySelector('.dialog-content');
+let opener;
+const show = html => { opener=document.activeElement;content.innerHTML=html;dialog.showModal(); };
+dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('close',()=>opener?.focus());
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();if(input.value.length!==8){status.textContent='请输入完整的 8 位邀请码';input.focus();return;}if(!document.querySelector('#agreement').checked){status.textContent='请先勾选内测协议';document.querySelector('#agreement').focus();return;}show(`<span class="preview-label">本地仿真</span><h2>体验流程已完成</h2><p>已模拟邀请码提交与确认反馈。当前页面不会验证真实邀请码，也不会开通线上服务。</p><button class="experience" data-close>返回页面</button>`);content.querySelector('[data-close]').onclick=()=>dialog.close();});
+document.querySelectorAll('[data-info]').forEach(b=>b.addEventListener('click',()=>show(`<span class="preview-label">本地仿真</span><h2>${b.dataset.info}</h2><p>此处保留线上入口的交互位置。协议、问卷和入群内容需在抖音官方页面查看；本地预览不提交信息。</p>`)));
+mountShowcase();
+mountContentEntrance();
+mountAiBackground();

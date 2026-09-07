@@ -16,8 +16,17 @@ document.querySelector('#app').innerHTML=`
 <aside class="right-rail"><section class="panel activities"><div class="section-heading"><h2>活动管理</h2>${more()}</div><div class="activity-date"><strong>7月活动总览</strong> <small>共2个进行中</small></div>${['快乐是小游戏给的','用营养守护足球梦','潮流收藏在抖音','心动观赛季'].map((s,i)=>`<button class="activity"><span class="bullet ${i===0?'red':''}"></span>${s}<small>${['12-01~12-08','11-18~12-20','11-02~01-02','10.26~12-26'][i]}</small></button>`).join('')}</section><section class="panel"><div class="section-heading"><h2>快捷导航</h2>${more()}</div><div class="quick-links">${['巨量引擎','剪映','抖店','巨量百应'].map((s,i)=>`<button>${img('section-2','imgImg'+(i||''))}<span>${s}</span></button>`).join('')}</div></section><section class="panel courses"><div class="section-heading"><h2>热门课程</h2>${more()}</div>${['剧情演绎规则课堂丨不良导向篇','如何开通视频赞赏','解说文案怎么写才吸引人','剧情演绎规则课堂丨不良导向篇','如何更专业地创作旅行类图文作品'].map((s,i)=>`<button class="course">${img('section-2','imgImg'+(4+i%4))}<span>${s}<small>播放量　${['3696.97','3276.39','2926.95','1501.07','1237.70'][i]}万</small></span></button>`).join('')}</section></aside></div></main><div class="toast" role="status"></div>`;
 let toastTimer;const toast=t=>{const el=document.querySelector('.toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400)};
 const slots=[...document.querySelectorAll('.card-slot')];
-slots.forEach((slot,i)=>{const card=slot.querySelector('button');card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.setProperty('--rx',-y*7+'deg');card.style.setProperty('--ry',x*9+'deg');card.style.setProperty('--mx',(x+.5)*100+'%');card.style.setProperty('--my',(y+.5)*100+'%')});card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')});card.addEventListener('click',()=>{const pin=!slot.classList.contains('pinned');slots.forEach(s=>{s.classList.remove('pinned');s.querySelector('button').setAttribute('aria-pressed','false')});slot.classList.toggle('pinned',pin);card.setAttribute('aria-pressed',String(pin))});card.addEventListener('keydown',e=>{if(e.key==='Escape'){slot.classList.remove('pinned');card.setAttribute('aria-pressed','false');card.blur()}if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();slots[(i+(e.key==='ArrowRight'?1:4))%5].querySelector('button').focus()}})});
-document.querySelectorAll('.top-nav button').forEach(b=>b.addEventListener('click',()=>{const i=Number(b.dataset.card);if(b.dataset.card!=='null')slots[i].querySelector('button').focus();else window.scrollTo({top:0,behavior:'smooth'})}));
+slots.forEach((slot,i)=>{const card=slot.querySelector('button');card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.setProperty('--rx',-y*7+'deg');card.style.setProperty('--ry',x*9+'deg');card.style.setProperty('--mx',(x+.5)*100+'%');card.style.setProperty('--my',(y+.5)*100+'%')});card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')});card.addEventListener('click',()=>{if(i===0||i===3){location.hash=i===0?'ai-avatar':'ai-workshop';return;}const pin=!slot.classList.contains('pinned');slots.forEach(s=>{s.classList.remove('pinned');s.querySelector('button').setAttribute('aria-pressed','false')});slot.classList.toggle('pinned',pin);card.setAttribute('aria-pressed',String(pin))});card.addEventListener('keydown',e=>{if(e.key==='Escape'){slot.classList.remove('pinned');card.setAttribute('aria-pressed','false');card.blur()}if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();slots[(i+(e.key==='ArrowRight'?1:4))%5].querySelector('button').focus()}})});
+document.querySelectorAll('.top-nav button').forEach(b=>{
+  b.disabled=!['null','0','3'].includes(b.dataset.card);
+  if(b.disabled)b.setAttribute('aria-disabled','true');
+  b.addEventListener('click',()=>{
+    if(b.disabled)return;
+    if(b.dataset.card==='0'||b.dataset.card==='3'){location.hash=b.dataset.card==='0'?'ai-avatar':'ai-workshop';return;}
+    if(location.hash.startsWith('#ai-')){history.pushState(null,'',location.pathname+location.search);window.dispatchEvent(new HashChangeEvent('hashchange'));}
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
 document.querySelectorAll('.side-menu button,.more,.activity,.quick-links button,.course,.video-card').forEach(b=>b.addEventListener('click',()=>toast('当前为设计预览，业务功能待接入')));
 document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');toast('当前展示设计稿示例数据')}));
 
@@ -68,3 +77,7 @@ if('requestIdleCallback' in window)requestIdleCallback(startPublishFlow,{timeout
 
 const {mountPeriodPicker}=await import('/analytics-period.js');
 mountPeriodPicker({select:document.querySelector('select'),linkedMetrics,metrics,arrow});
+const {mountSegmentedTabs}=await import('/segmented-tabs.js');
+mountSegmentedTabs();
+const {mountAiContent}=await import('/ai-content.js');
+mountAiContent();
