@@ -9,6 +9,7 @@
   <script type="importmap">
     {"imports":{"three":"./vendor/three/build/three.module.js","postprocessing":"./vendor/postprocessing/build/index.js"}}
   </script>
+  <link rel="stylesheet" href="./data-viz.css?v=2" />
 </head>
 <body class="grid-optimized-version">
   <header class="topbar">
@@ -207,10 +208,10 @@
         </div>
 
         <div class="operations-card-grid operations-data-grid" id="ops-panel-data" role="tabpanel" aria-labelledby="ops-tab-data" data-ops-panel="data">
-          <article class="operation-card operation-data"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-account-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>账号经营 · 全面分析</h3><p>对账号进行检测分析，并给出改进建议</p></div></article>
-          <article class="operation-card operation-work-data"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-content-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>内容作品 · 深度分析</h3><p>对单个作品进行全方位分析查看</p></div></article>
-          <article class="operation-card operation-fans"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-audience-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>粉丝群体 · 受众画像</h3><p>清晰查看作品受众的特征</p></div></article>
-          <article class="operation-card operation-live"><div class="operation-visual" aria-hidden="true"><img class="data-composite-image" src="./assets/ops-fusion-weekly-web.webp" alt="" loading="lazy" decoding="async" /></div><div class="operation-card-copy"><h3>阶段创作 · 周报汇总</h3><p>汇总一周数据表现，并给出创作建议</p></div></article>
+          <article class="operation-card operation-data"><div class="operation-visual" aria-hidden="true"><div class="data-viz account-viz"><span class="viz-watermark">ACCOUNT<br>INSIGHTS</span><img class="radar-base" src="./assets/data-viz/radar-base.svg" alt=""><img class="radar-value" src="./assets/data-viz/radar-value.svg" alt=""><span class="viz-pill radar-top">活跃度</span><span class="viz-pill radar-left">播放量</span><span class="viz-pill radar-right">互动率</span><span class="viz-pill radar-low-left">完播率</span><span class="viz-pill radar-low-right">涨粉数</span></div></div><div class="operation-card-copy"><h3>账号经营 · 全面分析</h3><p>对账号进行检测分析，并给出改进建议</p></div></article>
+          <article class="operation-card operation-work-data"><div class="operation-visual" aria-hidden="true"><div class="data-viz content-viz"><span class="viz-watermark">CONTENT<br>ANALYTICS</span><div class="trend-window"><img class="viz-trend" src="./assets/data-viz/trend.svg" alt=""></div><span class="viz-pill trend-label">近7日·最高播放 <b>1210.13</b> 万</span><span class="trend-dot"></span></div></div><div class="operation-card-copy"><h3>内容作品 · 深度分析</h3><p>对单个作品进行全方位分析查看</p></div></article>
+          <article class="operation-card operation-fans"><div class="operation-visual" aria-hidden="true"><div class="data-viz audience-viz"><span class="viz-watermark">AUDIENCE<br>PROFILE</span><span class="viz-pill">兴趣内容垂类 <b>TOP5</b></span><span class="viz-pill">兴趣 <b>TOP10</b></span><span class="viz-pill">职业分布 <b>TOP5</b></span><span class="viz-pill">喜欢/关注的同类作者 <b>TOP5</b></span><span class="viz-pill">新老用户 <b>TOP5</b></span></div></div><div class="operation-card-copy"><h3>粉丝群体 · 受众画像</h3><p>清晰查看作品受众的特征</p></div></article>
+          <article class="operation-card operation-live"><div class="operation-visual" aria-hidden="true"><div class="data-viz weekly-viz"><span class="viz-watermark">WEEKLY<br>RECAP</span><img class="viz-thumb" src="./assets/data-viz/thumb.svg" alt=""><div class="viz-stat"><b data-count="67">67%</b><span>创作表现超过了<br>同级作者</span></div><div class="viz-stat second"><b data-count="86">86%</b><span>视频播放超过了<br>其他用户</span></div></div></div><div class="operation-card-copy"><h3>阶段创作 · 周报汇总</h3><p>汇总一周数据表现，并给出创作建议</p></div></article>
         </div>
 
         <div class="operations-card-grid operations-monetize-grid" id="ops-panel-monetize" role="tabpanel" aria-labelledby="ops-tab-monetize" data-ops-panel="monetize">
@@ -298,5 +299,6 @@
   <script type="module" src="./benefit-webgl.js?v=3-blue-gray-visible"></script>
   <script type="module" src="./footer-blaze.js?v=6-no-editor"></script>
   <script type="module" src="./capability-stage-webgl.js?v=8-glass-spacing"></script>
+  <script type="module" src="./data-viz.js?v=2"></script>
 </body>
 </html>
