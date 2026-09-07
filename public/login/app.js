@@ -684,12 +684,12 @@ function initOrbStream() {
   if (!context) return;
 
   const sources = [
-    './assets/hero-life.png',
-    './assets/hero-creator-studio.png',
-    './assets/ai-lab.png',
-    './assets/ai-avatar.png',
-    './assets/remix.png',
-    './assets/encyclopedia.png'
+    './assets/hero-life-web.webp',
+    './assets/hero-creator-studio-web.webp',
+    './assets/ai-lab-web.webp',
+    './assets/ai-avatar-web.webp',
+    './assets/remix-web.webp',
+    './assets/encyclopedia-web.webp'
   ];
   const images = sources.map((source) => {
     const image = new Image();
