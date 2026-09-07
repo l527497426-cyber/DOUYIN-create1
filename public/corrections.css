@@ -74,7 +74,7 @@
 .creation-card:active .card-enter-action{transform:scale(.92)}
 .card-art>.create-world-updated{transform:rotate(4deg) scale(1.10)}
 .hero .profile{padding-top:30px}
-.hero{height:auto;min-height:calc(237px + var(--card-growth));padding-bottom:23px}
+.hero{height:auto;min-height:calc(253px + var(--card-growth));padding-top:36px;padding-bottom:23px}
 .metric-linked{position:relative}.metric.metric-active{background:#edf8ff;box-shadow:inset 0 0 0 1px #c9eaff}.metric.metric-active>span{color:#098dc9}.metric.metric-active b{color:#087fb8}.metric:not(.metric-linked){cursor:default}.metric:not(.metric-linked):hover{background:none;box-shadow:none}
 
 /* Keep navigation and account controls visible while preserving header space. */
