@@ -100,24 +100,35 @@
 
 .earnings-gems img{filter:brightness(0) invert(1);opacity:.72;}.earnings-gems img[src*="diamond-dark"]{opacity:.32;}
 
-/* Living color fields; transforms animate only while the card is visible. */
-.data-viz{color:var(--ink,#175951);--flow-a:#7de5d5;--flow-b:#dae76d;}
-.data-viz.account-viz{--ink:#175951;background:linear-gradient(145deg,#5bcec9,#7cba84);}
-.data-viz.content-viz{--ink:#742e5a;--flow-a:#ffad83;--flow-b:#cc79db;background:linear-gradient(145deg,#ee83aa,#a78bd8);}
-.data-viz.audience-viz{--ink:#374e8f;--flow-a:#8d96ed;--flow-b:#59c8ee;background:linear-gradient(145deg,#8998e6,#67b5e1);}
-.data-viz.weekly-viz{--ink:#785128;--flow-a:#efb585;--flow-b:#efcf64;background:linear-gradient(145deg,#c7a0ce,#e7b177);}
-.data-viz.market-viz{--ink:#165c60;--flow-a:#83efd0;--flow-b:#34bbca;background:linear-gradient(145deg,#55cbbb,#469aab);}
-.data-viz.tasks-viz{--ink:#513878;--flow-a:#d790d2;--flow-b:#9d81e8;background:linear-gradient(145deg,#b395df,#8586c5);}
-.data-viz.earnings-viz{--ink:#7c4635;--flow-a:#f6d270;--flow-b:#e58f85;background:linear-gradient(145deg,#eec27f,#c5918f);}
-.data-viz.revenue-viz{--ink:#245885;--flow-a:#66d8da;--flow-b:#6791e3;background:linear-gradient(145deg,#5ebbdc,#7b94d4);}
-.viz-color-flow{position:absolute;inset:-30%;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 25% 30%,var(--flow-a),transparent 58%),radial-gradient(ellipse at 78% 70%,var(--flow-b),transparent 55%);opacity:.62;transform:translate(-3%,-2%) scale(1.06);}
+/* Separate luminous color fields preserve clean hue boundaries. */
+.data-viz{color:var(--ink);--paper:#cbdffb;--petal:#ed83dc;--core:#ff797f;--ribbon:#ffdc86;--cool:#b49af4;--origin:25% 60%;}
+.data-viz.account-viz{--ink:#245b68;--paper:#c3eafa;--petal:#80ded2;--core:#39cbbb;--ribbon:#e5ed8b;--cool:#a5bbf5;}
+.data-viz.content-viz{--ink:#743654;--paper:#cddff8;--petal:#ed8bdc;--core:#ff737e;--ribbon:#ffd57d;--cool:#c4a5f5;}
+.data-viz.audience-viz{--ink:#3e4d86;--paper:#c7e8fb;--petal:#b995f4;--core:#8293f1;--ribbon:#f8b5e6;--cool:#73d1f0;}
+.data-viz.weekly-viz{--ink:#80502e;--paper:#f9e8cd;--petal:#ffb2ba;--core:#ff986c;--ribbon:#ffe678;--cool:#c8b7f6;}
+.data-viz.market-viz{--ink:#245f63;--paper:#c5eef4;--petal:#85e7c3;--core:#42d4c8;--ribbon:#f2ec89;--cool:#9fb8f4;}
+.data-viz.tasks-viz{--ink:#5b3a80;--paper:#dee3fb;--petal:#e8a1eb;--core:#b68aee;--ribbon:#ffbaa2;--cool:#96c8fb;}
+.data-viz.earnings-viz{--ink:#80423c;--paper:#fce7cf;--petal:#ffafcf;--core:#ff8c89;--ribbon:#ffdf80;--cool:#ccb9f8;}
+.data-viz.revenue-viz{--ink:#2f5487;--paper:#c6e6fa;--petal:#90c2fa;--core:#7f9ee9;--ribbon:#9cf0dc;--cool:#d6aff4;}
+.data-viz[class]{background:var(--paper);}
+.viz-color-flow{position:absolute;inset:-15%;pointer-events:none;z-index:-1;opacity:1;background:radial-gradient(ellipse 42% 58% at 23% 75%,var(--core) 8%,var(--petal) 48%,transparent 82%),radial-gradient(ellipse 30% 55% at 68% 65%,var(--cool) 15%,transparent 78%);transform:rotate(-9deg);}
+.viz-color-flow:before,.viz-color-flow:after{content:"";position:absolute;inset:-35%;}
+.viz-color-flow:before{background:radial-gradient(ellipse 19% 85% at 49% 24%,var(--ribbon) 3%,transparent 77%);transform:rotate(24deg);}
+.viz-color-flow:after{background:radial-gradient(ellipse 36% 27% at 22% 12%,var(--petal) 5%,transparent 83%),radial-gradient(ellipse 28% 28% at 86% 96%,var(--ribbon),transparent 85%);}
+.data-viz:before{mix-blend-mode:normal;background:radial-gradient(ellipse at var(--mx) var(--my),#ffffff30,transparent 52%);}
+.data-viz:after{background:none;}
 .data-viz .viz-pill,.data-viz .viz-stat,.data-viz .task-row,.data-viz .earnings-amount{color:var(--ink);}
 .data-viz .viz-pill b,.data-viz .viz-stat b{color:var(--ink);}
 .earnings-amount{text-shadow:none;}.earnings-amount span{opacity:.8;}
 @media(prefers-reduced-motion:no-preference){
-.viz-entered .viz-color-flow{animation:color-drift 12s ease-in-out infinite alternate;}
-.content-viz .viz-color-flow,.tasks-viz .viz-color-flow{animation-duration:15s;animation-direction:alternate-reverse;}
-.audience-viz .viz-color-flow,.earnings-viz .viz-color-flow{animation-duration:17s;}
-.weekly-viz .viz-color-flow,.revenue-viz .viz-color-flow{animation-duration:14s;animation-direction:alternate-reverse;}
+.viz-entered .viz-color-flow{animation:color-drift 7s ease-in-out infinite alternate;}
+.viz-entered .viz-color-flow:before{animation:ribbon-drift 9s ease-in-out infinite alternate;}
+.viz-entered .viz-color-flow:after{animation:bloom-drift 6s ease-in-out infinite alternate-reverse;}
+.content-viz .viz-color-flow,.tasks-viz .viz-color-flow{animation-delay:-3s;animation-direction:alternate-reverse;}
+.audience-viz .viz-color-flow,.earnings-viz .viz-color-flow{animation-delay:-5s;}
+.weekly-viz .viz-color-flow,.revenue-viz .viz-color-flow{animation-delay:-2s;animation-direction:alternate-reverse;}
+.viz-color-flow:before,.viz-color-flow:after{animation-play-state:inherit!important;}
 }
-@keyframes color-drift{from{transform:translate(-6%,-4%) rotate(-7deg) scale(1.04)}to{transform:translate(6%,5%) rotate(9deg) scale(1.18)}}
+@keyframes color-drift{from{transform:translate(-6%,-5%) rotate(-12deg) scale(1.04)}to{transform:translate(8%,6%) rotate(17deg) scale(1.16)}}
+@keyframes ribbon-drift{from{transform:translate(-7%,0) rotate(18deg)}to{transform:translate(13%,12%) rotate(-19deg)}}
+@keyframes bloom-drift{from{transform:translate(0,-6%) scale(.94)}to{transform:translate(-9%,10%) scale(1.18)}}
