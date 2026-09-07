@@ -1,0 +1,87 @@
+const img = "https://www.figma.com/api/mcp/asset/e0e3d4d6-4441-45fc-a5c3-bea562f4bd82.png";
+const imgIcColorPersonal = "https://www.figma.com/api/mcp/asset/ff898549-c5f0-49e6-8354-582b5b82e756.svg";
+
+export default function Frame2147242848() {
+  return (
+    <div className="content-stretch flex flex-col gap-[6px] items-start justify-center relative size-full" data-node-id="667:39593">
+      <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="667:39594">
+        <div className="blur-[12px] border-[1.156px] border-solid border-white col-1 ml-0 mt-[10px] opacity-20 relative rounded-[115.625px] row-1 size-[74px]" data-node-id="667:39595" data-name="头像">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[115.625px] size-full" src={img} />
+        </div>
+        <div className="border-[1.156px] border-solid border-white col-1 ml-0 mt-0 relative rounded-[115.625px] row-1 size-[74px]" data-node-id="667:39596" data-name="头像">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[115.625px] size-full" src={img} />
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-node-id="667:39597" data-name="text">
+        <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="667:39598" data-name="用户">
+          <p className="[word-break:break-word] font-['PingFang_SC:Semibold'] leading-[24px] not-italic relative shrink-0 text-[#252632] text-[16px] whitespace-nowrap" data-node-id="667:39599">
+            创作者用户昵称
+          </p>
+          <div className="bg-[rgba(255,255,255,0.7)] border border-solid border-white content-stretch flex gap-[6px] items-center px-[6px] py-[2px] relative rounded-[50px] shrink-0" data-node-id="667:39600" data-name="tag">
+            <div className="relative shrink-0 size-[14px]" data-node-id="667:39601" data-name="ic_color_personal">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcColorPersonal} />
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['PingFang_SC:Medium'] justify-center leading-[0] not-italic relative shrink-0 text-[#ff851d] text-[13px] whitespace-nowrap" data-node-id="667:39602">
+              <p className="leading-[18px]">抖音音乐人</p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[var(--semi\/spacing\/base-tight,12px)] items-center justify-center relative shrink-0" data-node-id="684:46449" data-name="text">
+          <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[16px] not-italic relative shrink-0 text-[12px] text-[rgba(35,35,35,0.6)] text-center whitespace-nowrap" data-node-id="684:46455">
+            抖音号：3473824292
+          </p>
+          <div className="bg-[#e2e2e2] h-[12px] relative shrink-0 w-px" data-node-id="684:46456" data-name="line" />
+          <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[16px] not-italic relative shrink-0 text-[12px] text-[rgba(35,35,35,0.6)] text-center whitespace-nowrap" data-node-id="684:46457">
+            这个人很懒，没有留下任何签名...
+          </p>
+        </div>
+        <div className="[word-break:break-word] content-stretch flex gap-[24px] items-center not-italic relative shrink-0 whitespace-nowrap" data-node-id="667:39603" data-name="data">
+          <div className="content-stretch flex gap-[8px] items-center px-[var(--semi\/spacing\/none,0px)] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-extra-small,2px)] shrink-0" data-node-id="667:39604" data-name="text">
+            <p className="font-['PingFang_SC:Semibold'] leading-[16px] relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)]" data-node-id="667:39605">
+              关注
+            </p>
+            <p className="font-['DouyinSans:Bold'] leading-[20px] relative shrink-0 text-[#252632] text-[14px]" data-node-id="667:39606">
+              30
+            </p>
+          </div>
+          <div className="content-stretch flex gap-[8px] items-center px-[var(--semi\/spacing\/none,0px)] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-extra-small,2px)] shrink-0" data-node-id="667:39607" data-name="text">
+            <p className="font-['PingFang_SC:Semibold'] leading-[16px] relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)]" data-node-id="667:39608">
+              粉丝
+            </p>
+            <div className="content-stretch flex gap-[2px] items-center leading-[20px] relative shrink-0 text-[#252632] text-[14px]" data-node-id="667:39609" data-name="text">
+              <p className="font-['DouyinSans:Bold'] relative shrink-0" data-node-id="667:39610">
+                140.5
+              </p>
+              <p className="font-['PingFang_SC:Semibold'] relative shrink-0" data-node-id="667:39611">
+                万
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[8px] items-center px-[var(--semi\/spacing\/none,0px)] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-extra-small,2px)] shrink-0" data-node-id="667:39613" data-name="text">
+            <p className="font-['PingFang_SC:Semibold'] leading-[16px] relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)]" data-node-id="667:39614">
+              获赞
+            </p>
+            <div className="content-stretch flex gap-[2px] items-center leading-[20px] relative shrink-0 text-[#252632] text-[14px]" data-node-id="667:39615" data-name="text">
+              <p className="font-['DouyinSans:Bold'] relative shrink-0" data-node-id="667:39616">
+                242.23
+              </p>
+              <p className="font-['PingFang_SC:Semibold'] relative shrink-0" data-node-id="667:39617">
+                万
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Light/usage/white/--color-white: #FFFFFF, text/--color-text-0: #252632, Header/header-6/CN-Semi Bold: Font(family: "PingFang SC", style: Semibold, size: 16, weight: 600, lineHeight: 24, letterSpacing: 0), color/white/--white: #FFFFFF, color/orange/--orange-5: #FF851D, text/--color-text-white: #FFFFFF, usage/text/--color-text-2: #232323, Paragraph/small/CN-Regular: Font(family: "PingFang SC", style: Regular, size: 12, weight: 400, lineHeight: 16, letterSpacing: 0), text/--color-text-2: #252632, Paragraph/small/CN-Semi Bold: Font(family: "PingFang SC", style: Semibold, size: 12, weight: 600, lineHeight: 16, letterSpacing: 0), Paragraph/regular/CN-Semi Bold: Font(family: "PingFang SC", style: Semibold, size: 14, weight: 600, lineHeight: 20, letterSpacing: 0).
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

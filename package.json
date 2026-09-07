@@ -1,0 +1,1 @@
+{"name":"douyin-creator-preview","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node server.mjs","start":"node server.mjs","assets":"node scripts/download-assets.mjs"}}

@@ -1,0 +1,33 @@
+const imgAsciiMagic11 = "https://www.figma.com/api/mcp/asset/737bf2ff-57a5-466d-8f48-6346eb15b531.png";
+const imgEllipse65694201 = "https://www.figma.com/api/mcp/asset/c3cd3bba-f87a-4387-8146-9ddb6d13022a.svg";
+
+export default function Bg() {
+  return (
+    <div className="contents relative size-full" data-node-id="667:39489" data-name="bg">
+      <div className="absolute h-[449px] left-0 overflow-clip top-0 w-[1240px]" data-node-id="667:42729">
+        <div className="absolute h-[449px] right-0 top-0 w-[1240px]" data-node-id="667:39490" style={{ backgroundImage: "linear-gradient(269.9999999999986deg, rgba(249, 249, 249, 0) 40.245%, rgb(249, 249, 249) 100%), linear-gradient(180deg, rgba(253, 253, 253, 0) 71.41%, rgb(253, 253, 253) 100%)" }} data-name="aigcstudio_httpss.mj.runnptStpyKqgc_Endless_looping_landscape_c9ada150-3a5b-4fea-b885-1d46b412f53f_0 3" />
+        <div className="absolute flex h-[1163.101px] items-center justify-center left-[249px] top-[-804.33px] w-[1172.123px]" data-node-id="678:38191">
+          <div className="flex-none rotate-[43.86deg]">
+            <div className="h-[664.831px] relative w-[986.747px]">
+              <div className="absolute inset-[-36.7%_-24.73%]">
+                <img alt="" className="block max-w-none size-full" src={imgEllipse65694201} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute left-[calc(50%+16.5px)] mix-blend-multiply opacity-40 size-[1037px] top-[-203px]" data-node-id="667:39491" data-name="ascii-magic-1 1">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgAsciiMagic11} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

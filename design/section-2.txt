@@ -1,0 +1,427 @@
+const imgImg = "https://www.figma.com/api/mcp/asset/c431100e-4073-4109-a2d4-b94ae3c741c5.png";
+const imgImg1 = "https://www.figma.com/api/mcp/asset/b295bce4-b6e6-4718-9e5e-7a60d10179bf.png";
+const imgImg2 = "https://www.figma.com/api/mcp/asset/4dbc0d8b-f354-41a3-94e0-1c987c780c7d.png";
+const imgImg3 = "https://www.figma.com/api/mcp/asset/9fae5eb2-ee0b-41d3-b9f9-6e466cd19f92.png";
+const imgImg4 = "https://www.figma.com/api/mcp/asset/cd06758d-3021-4162-b387-9e13173ee6f0.png";
+const imgImg5 = "https://www.figma.com/api/mcp/asset/cc1cc920-d817-4542-9198-0e05ce53b06e.png";
+const imgImg6 = "https://www.figma.com/api/mcp/asset/97f22a4b-977c-4594-bfb4-b1e892c6053b.png";
+const imgImg7 = "https://www.figma.com/api/mcp/asset/d5caefc7-73a5-4389-af98-aac865014ddc.png";
+const imgSemiIconsChevronRight = "https://www.figma.com/api/mcp/asset/e91e28ea-3b0c-449b-9673-ee6722dd1c87.svg";
+const imgEllipse = "https://www.figma.com/api/mcp/asset/1f350b09-d7c4-4138-b83e-d544733e4990.svg";
+const imgEllipse1 = "https://www.figma.com/api/mcp/asset/4d491f26-38ca-4b2e-9ec2-92afa74a5c13.svg";
+const imgHandPointing = "https://www.figma.com/api/mcp/asset/4b38058d-f278-4431-98a1-8c27c45f67a1.svg";
+const imgSemiIconsChevronRight1 = "https://www.figma.com/api/mcp/asset/5605326d-b643-4013-87cf-1d1127ba5fa7.svg";
+const imgSemiIconsChevronRight2 = "https://www.figma.com/api/mcp/asset/d2f554e7-3b28-4e52-b203-ba0c84b623dc.svg";
+
+export default function Container() {
+  return (
+    <div className="content-stretch flex flex-col gap-[12px] items-start relative rounded-[20px] size-full" data-node-id="667:39766" data-name="Container">
+      <div className="border-[0.5px] border-[rgba(16,17,18,0.1)] border-solid relative rounded-[20px] shadow-[0px_4px_64px_0px_rgba(30,31,35,0.05)] shrink-0 w-[291px]" data-node-id="678:41077">
+        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+          <div className="backdrop-blur-[12px] bg-gradient-to-b border border-solid border-white content-stretch flex from-[rgba(251,251,251,0.6)] items-center px-[17px] py-[13px] relative rounded-[20px] shrink-0 to-white" data-node-id="678:41078">
+            <div className="relative rounded-[20px] shrink-0" data-node-id="678:41079" data-name="活动日历">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
+                <div className="relative shrink-0 w-[256px]" data-node-id="678:41080" data-name="活动日历">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-start overflow-clip relative rounded-[inherit] size-full">
+                    <div className="content-stretch flex items-center justify-between pt-[8px] px-[4px] relative shrink-0 w-[256px]" data-node-id="678:41082" data-name="Title">
+                      <div className="[word-break:break-word] flex flex-col font-['PingFang_SC:Semibold'] justify-center leading-[0] not-italic relative shrink-0 text-[#252632] text-[16px] whitespace-nowrap" data-node-id="678:41083">
+                        <p className="leading-[22px]">活动管理</p>
+                      </div>
+                      <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-node-id="678:41084" data-name="btn">
+                        <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-right whitespace-nowrap" data-node-id="678:41085">
+                          更多
+                        </p>
+                        <div className="relative shrink-0 size-[12px]" data-node-id="678:41086" data-name="semi-icons-chevron_right">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSemiIconsChevronRight} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-px items-start px-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="678:41087" data-name="line" />
+                    <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-node-id="678:41089" data-name="list">
+                      <div className="content-stretch flex flex-col items-start pb-[8px] px-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="678:41090" data-name="活动日历">
+                        <div className="content-stretch flex items-center relative shrink-0 w-full" data-node-id="678:41091" data-name="Title">
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['PingFang_SC:Semibold'] justify-center leading-[0] min-w-px not-italic relative text-[#252632] text-[14px]" data-node-id="678:41092">
+                            <p className="leading-[20px]">2023-07-06</p>
+                          </div>
+                          <div className="content-stretch flex items-center relative shrink-0" data-node-id="678:41093" data-name="btn">
+                            <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-right whitespace-nowrap" data-node-id="678:41094">
+                              共2个进行中
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="content-stretch flex gap-[4px] items-center px-[var(--semi\/spacing\/base-tight,12px)] py-[var(--semi\/spacing\/tight,8px)] relative shrink-0 w-full" data-node-id="678:41095" data-name=".list">
+                        <div className="content-stretch flex flex-[1_0_0] items-center min-w-px relative" data-node-id="I678:41095;800:141844" data-name="text">
+                          <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/extra-tight,4px)] items-center min-w-px py-px relative" data-node-id="I678:41095;800:141845" data-name="text">
+                            <div className="relative shrink-0 size-[4px]" data-node-id="I678:41095;800:141846" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse} />
+                            </div>
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['PingFang_SC:Regular'] h-[18px] leading-[20px] min-w-px not-italic overflow-hidden relative text-[#252632] text-[14px] text-ellipsis whitespace-nowrap" data-node-id="I678:41095;800:141847">
+                              快乐是小游戏给的
+                            </p>
+                          </div>
+                        </div>
+                        <div className="content-stretch flex items-center justify-end relative shrink-0" data-node-id="I678:41095;800:141848" data-name="time">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Regular'] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-ellipsis text-right whitespace-nowrap" data-node-id="I678:41095;800:141849">
+                            <p className="overflow-hidden text-ellipsis">
+                              <span className="leading-[18px]">12</span>
+                              <span className="[word-break:break-word] font-['Arial:Regular'] leading-[18px] not-italic">-</span>
+                              <span className="leading-[18px]">01~12</span>
+                              <span className="[word-break:break-word] font-['Arial:Regular'] leading-[18px] not-italic">-</span>
+                              <span className="leading-[18px]">08</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-white content-stretch flex gap-[4px] h-[34px] items-center px-[var(--semi\/spacing\/base-tight,12px)] py-[var(--semi\/spacing\/tight,8px)] relative shrink-0 w-full" data-node-id="678:41096" data-name=".list">
+                        <div className="content-stretch flex flex-[1_0_0] items-center min-w-px relative" data-node-id="I678:41096;800:141837" data-name="text">
+                          <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/extra-tight,4px)] items-center min-w-px py-px relative" data-node-id="I678:41096;800:141838" data-name="text">
+                            <div className="relative shrink-0 size-[4px]" data-node-id="I678:41096;800:141839" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                            </div>
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['PingFang_SC:Regular'] h-[18px] leading-[20px] min-w-px not-italic overflow-hidden relative text-[#252632] text-[14px] text-ellipsis whitespace-nowrap" data-node-id="I678:41096;800:141840">
+                              用营养守护足球梦
+                            </p>
+                          </div>
+                        </div>
+                        <div className="content-stretch flex items-center justify-end relative shrink-0" data-node-id="I678:41096;800:141841" data-name="time">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Regular'] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-ellipsis text-right whitespace-nowrap" data-node-id="I678:41096;800:141842">
+                            <p className="overflow-hidden text-ellipsis">
+                              <span className="leading-[18px]">11</span>
+                              <span className="[word-break:break-word] font-['Arial:Regular'] leading-[18px] not-italic">-</span>
+                              <span className="leading-[18px]">18~12</span>
+                              <span className="[word-break:break-word] font-['Arial:Regular'] leading-[18px] not-italic">-</span>
+                              <span className="leading-[18px]">20</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[#f9f9fa] content-stretch flex gap-[4px] h-[34px] items-center px-[var(--semi\/spacing\/base-tight,12px)] py-[var(--semi\/spacing\/tight,8px)] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)] shrink-0 w-full" data-node-id="678:41097" data-name=".list">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[4px] items-center min-w-px relative" data-node-id="I678:41097;645:110517" data-name="text">
+                          <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/extra-tight,4px)] items-center min-w-px py-px relative" data-node-id="I678:41097;645:110518" data-name="text">
+                            <div className="relative shrink-0 size-[4px]" data-node-id="I678:41097;757:114391" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                            </div>
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['PingFang_SC:Regular'] h-[18px] leading-[20px] min-w-px not-italic overflow-hidden relative text-[#252632] text-[14px] text-ellipsis whitespace-nowrap" data-node-id="I678:41097;645:110519">
+                              潮流收藏在抖音
+                            </p>
+                          </div>
+                        </div>
+                        <div className="content-stretch flex gap-[10px] items-center justify-end relative shrink-0" data-node-id="I678:41097;645:110521" data-name="time">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Regular'] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-ellipsis text-right whitespace-nowrap" data-node-id="I678:41097;645:110526">
+                            <p className="leading-[18px] overflow-hidden text-ellipsis">11-02~01-02</p>
+                          </div>
+                        </div>
+                        <div className="absolute h-[15.309px] left-[137px] top-[11.28px] w-[14.396px]" data-node-id="I678:41097;645:110527" data-name="悬停Hand-Pointing">
+                          <div className="absolute inset-[-2.45%_-8.16%_-14.21%_-8.16%]">
+                            <img alt="" className="block max-w-none size-full" src={imgHandPointing} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="content-stretch flex gap-[4px] h-[34px] items-center px-[var(--semi\/spacing\/base-tight,12px)] py-[var(--semi\/spacing\/tight,8px)] relative shrink-0 w-full" data-node-id="678:41098" data-name=".list">
+                        <div className="content-stretch flex flex-[1_0_0] items-center min-w-px relative" data-node-id="I678:41098;800:141837" data-name="text">
+                          <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/extra-tight,4px)] items-center min-w-px py-px relative" data-node-id="I678:41098;800:141838" data-name="text">
+                            <div className="relative shrink-0 size-[4px]" data-node-id="I678:41098;800:141839" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                            </div>
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['PingFang_SC:Regular'] h-[18px] leading-[20px] min-w-px not-italic overflow-hidden relative text-[#252632] text-[14px] text-ellipsis whitespace-nowrap" data-node-id="I678:41098;800:141840">
+                              心动观赛季
+                            </p>
+                          </div>
+                        </div>
+                        <div className="content-stretch flex items-center justify-end relative shrink-0" data-node-id="I678:41098;800:141841" data-name="time">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Regular'] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-ellipsis text-right whitespace-nowrap" data-node-id="I678:41098;800:141842">
+                            <p className="overflow-hidden text-ellipsis">
+                              <span className="leading-[18px]">10</span>
+                              <span className="leading-[18px]">.</span>
+                              <span className="leading-[18px]">26~12</span>
+                              <span className="[word-break:break-word] font-['Arial:Regular'] leading-[18px] not-italic">-</span>
+                              <span className="leading-[18px]">26</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-[0.5px] border-[rgba(16,17,18,0.1)] border-solid relative rounded-[20px] shadow-[0px_4px_64px_0px_rgba(30,31,35,0.05)] shrink-0 w-[291px]" data-node-id="678:41228">
+        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+          <div className="backdrop-blur-[12px] bg-gradient-to-b border border-solid border-white content-stretch flex flex-col from-[rgba(251,251,251,0.6)] gap-[16px] items-center px-[17px] py-[13px] relative rounded-[20px] shrink-0 to-white" data-node-id="667:39861" data-name="快速导航">
+            <div className="relative shrink-0 w-full" data-node-id="667:39862" data-name="Title">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between pt-[8px] px-[4px] relative size-full">
+                <div className="[word-break:break-word] flex flex-col font-['PingFang_SC:Semibold'] justify-center leading-[0] not-italic relative shrink-0 text-[#252632] text-[16px] whitespace-nowrap" data-node-id="667:39863">
+                  <p className="leading-[22px]">快捷导航</p>
+                </div>
+                <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-node-id="667:39864" data-name="btn">
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-right whitespace-nowrap" data-node-id="667:39865">
+                    查看更多
+                  </p>
+                  <div className="relative shrink-0 size-[16px]" data-node-id="667:39866" data-name="semi-icons-chevron_right">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSemiIconsChevronRight1} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-[256px]" data-node-id="667:39867" data-name="item">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[6px] items-start px-[var(--semi\/spacing\/base-tight,12px)] relative size-full">
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-center min-w-px p-[8px] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)]" data-node-id="667:39868" data-name="业务">
+                  <div className="border border-[#f2f2f4] border-solid relative rounded-[8px] shrink-0 size-[40px]" data-node-id="I667:39868;1694:50112" data-name="img-巨量星图">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" src={imgImg} />
+                  </div>
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[#252632] text-[12px] whitespace-nowrap" data-node-id="I667:39868;1694:50114">
+                    巨量引擎
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-center min-w-px p-[8px] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)]" data-node-id="667:39869" data-name="业务">
+                  <div className="border border-[#f2f2f4] border-solid relative rounded-[8px] shrink-0 size-[40px]" data-node-id="I667:39869;1694:50112" data-name="img-巨量星图">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" src={imgImg1} />
+                  </div>
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[#252632] text-[12px] whitespace-nowrap" data-node-id="I667:39869;1694:50114">
+                    剪映
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-center min-w-px p-[8px] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)]" data-node-id="667:39870" data-name="业务">
+                  <div className="border border-[#f2f2f4] border-solid relative rounded-[8px] shrink-0 size-[40px]" data-node-id="I667:39870;1694:50112" data-name="img-巨量星图">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" src={imgImg2} />
+                  </div>
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[#252632] text-[12px] whitespace-nowrap" data-node-id="I667:39870;1694:50114">
+                    抖店
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-center min-w-px p-[8px] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)]" data-node-id="667:39871" data-name="业务">
+                  <div className="border border-[#f2f2f4] border-solid relative rounded-[8px] shrink-0 size-[40px]" data-node-id="I667:39871;1694:50112" data-name="img-巨量星图">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" src={imgImg3} />
+                  </div>
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[#252632] text-[12px] whitespace-nowrap" data-node-id="I667:39871;1694:50114">
+                    巨量百应
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-[0.5px] border-[rgba(16,17,18,0.1)] border-solid relative rounded-[20px] shadow-[0px_4px_64px_0px_rgba(30,31,35,0.05)] shrink-0" data-node-id="678:41290">
+        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+          <div className="backdrop-blur-[12px] bg-gradient-to-b border border-solid border-white content-stretch flex flex-col from-[rgba(251,251,251,0.6)] gap-[16px] items-center overflow-clip px-[17px] py-[13px] relative rounded-[20px] shrink-0 to-white" data-node-id="667:39872" data-name="重点关心">
+            <div className="relative shrink-0 w-full" data-node-id="667:39873" data-name="Title">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between pt-[8px] px-[4px] relative size-full">
+                <div className="[word-break:break-word] flex flex-col font-['PingFang_SC:Semibold'] justify-center leading-[0] not-italic relative shrink-0 text-[#252632] text-[16px] whitespace-nowrap" data-node-id="667:39874">
+                  <p className="leading-[22px]">热门课程</p>
+                </div>
+                <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-node-id="667:39875" data-name="btn">
+                  <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] text-right whitespace-nowrap" data-node-id="667:39876">
+                    查看更多
+                  </p>
+                  <div className="relative shrink-0 size-[16px]" data-node-id="667:39877" data-name="semi-icons-chevron_right">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSemiIconsChevronRight1} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white h-[954.982px] relative rounded-[8px] shrink-0 w-[258px]" data-node-id="667:39879" data-name="全网热榜">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-between relative size-full">
+                <div className="content-stretch flex flex-col gap-[var(--semi\/spacing\/none,0px)] items-start relative shrink-0 w-full" data-node-id="667:39880" data-name="list">
+                  <div className="content-stretch flex items-start p-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="667:39881" data-name=".list">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/base-tight,12px)] items-start justify-center min-w-px relative" data-node-id="I667:39881;581:125891" data-name="list">
+                      <div className="content-stretch flex gap-[4px] items-center overflow-clip relative rounded-[4px] shrink-0" data-node-id="I667:39881;581:125892" data-name="img">
+                        <div className="h-[70px] relative rounded-[2px] shrink-0 w-[52px]" data-node-id="I667:39881;581:125893" data-name="img">
+                          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2px] size-full" src={imgImg4} />
+                        </div>
+                        <div className="absolute bg-[#fe2c55] border border-[rgba(255,255,255,0.8)] border-solid content-stretch flex flex-col items-start left-0 px-[4px] py-[1.5px] rounded-br-[10px] top-0" data-node-id="I667:39881;581:125894" data-name="1.">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="I667:39881;581:125895">
+                            <p className="leading-[normal]">1</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px not-italic relative" data-node-id="I667:39881;581:125896" data-name="text">
+                        <p className="font-['PingFang_SC:Regular'] h-[40px] leading-[normal] min-w-full overflow-hidden relative shrink-0 text-[#252632] text-[14px] text-ellipsis w-[min-content]" data-node-id="I667:39881;581:125897">
+                          剧情演绎规则课堂 I 不良导向篇
+                        </p>
+                        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0 text-[12px] text-[rgba(37,38,50,0.8)] whitespace-nowrap" data-node-id="I667:39881;581:125898" data-name="text">
+                          <div className="flex flex-col font-['PingFang_SC:Regular'] justify-center leading-[0] relative shrink-0" data-node-id="I667:39881;3416:169369">
+                            <p className="leading-[18px]">播放量</p>
+                          </div>
+                          <div className="content-stretch flex gap-[var(--semi\/spacing\/none,0px)] items-center leading-[18px] relative shrink-0 text-right" data-node-id="I667:39881;3457:195119" data-name="text">
+                            <p className="font-['DIN_Alternate:Bold'] relative shrink-0" data-node-id="I667:39881;581:125899">
+                              3696.97
+                            </p>
+                            <p className="font-['PingFang_SC:Regular'] relative shrink-0" data-node-id="I667:39881;3457:188365">
+                              万
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex items-start p-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="667:39882" data-name=".list">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/base-tight,12px)] items-start justify-center min-w-px relative" data-node-id="I667:39882;581:125891" data-name="list">
+                      <div className="content-stretch flex gap-[4px] items-center overflow-clip relative rounded-[4px] shrink-0" data-node-id="I667:39882;581:125892" data-name="img">
+                        <div className="h-[70px] relative rounded-[2px] shrink-0 w-[52px]" data-node-id="I667:39882;581:125893" data-name="img">
+                          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2px] size-full" src={imgImg5} />
+                        </div>
+                        <div className="absolute bg-[#ff851d] border border-[rgba(255,255,255,0.8)] border-solid content-stretch flex flex-col items-start left-0 px-[4px] py-[1.5px] rounded-br-[10px] top-0" data-node-id="I667:39882;581:125894" data-name="1.">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="I667:39882;581:125895">
+                            <p className="leading-[normal]">2</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px not-italic relative" data-node-id="I667:39882;581:125896" data-name="text">
+                        <p className="font-['PingFang_SC:Regular'] h-[40px] leading-[normal] min-w-full overflow-hidden relative shrink-0 text-[#252632] text-[14px] text-ellipsis w-[min-content]" data-node-id="I667:39882;581:125897">
+                          如何开通视频赞赏
+                        </p>
+                        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0 text-[12px] text-[rgba(37,38,50,0.8)] whitespace-nowrap" data-node-id="I667:39882;581:125898" data-name="text">
+                          <div className="flex flex-col font-['PingFang_SC:Regular'] justify-center leading-[0] relative shrink-0" data-node-id="I667:39882;3416:169369">
+                            <p className="leading-[18px]">播放量</p>
+                          </div>
+                          <div className="content-stretch flex gap-[var(--semi\/spacing\/none,0px)] items-center leading-[18px] relative shrink-0 text-right" data-node-id="I667:39882;3457:195119" data-name="text">
+                            <p className="font-['DIN_Alternate:Bold'] relative shrink-0" data-node-id="I667:39882;581:125899">
+                              3276.39
+                            </p>
+                            <p className="font-['PingFang_SC:Regular'] relative shrink-0" data-node-id="I667:39882;3457:188365">
+                              万
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex items-start p-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="667:39883" data-name=".list">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/base-tight,12px)] items-start justify-center min-w-px relative" data-node-id="I667:39883;581:125891" data-name="list">
+                      <div className="content-stretch flex gap-[4px] items-center overflow-clip relative rounded-[4px] shrink-0" data-node-id="I667:39883;581:125892" data-name="img">
+                        <div className="h-[70px] relative rounded-[2px] shrink-0 w-[52px]" data-node-id="I667:39883;581:125893" data-name="img">
+                          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2px] size-full" src={imgImg6} />
+                        </div>
+                        <div className="absolute bg-[#face15] border border-[rgba(255,255,255,0.8)] border-solid content-stretch flex flex-col items-start left-0 px-[4px] py-[1.5px] rounded-br-[10px] top-0" data-node-id="I667:39883;581:125894" data-name="1.">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="I667:39883;581:125895">
+                            <p className="leading-[normal]">3</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px not-italic relative" data-node-id="I667:39883;581:125896" data-name="text">
+                        <p className="font-['PingFang_SC:Regular'] h-[40px] leading-[normal] min-w-full overflow-hidden relative shrink-0 text-[#252632] text-[14px] text-ellipsis w-[min-content]" data-node-id="I667:39883;581:125897">
+                          解说文案怎么写才吸引人
+                        </p>
+                        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0 text-[12px] text-[rgba(37,38,50,0.8)] whitespace-nowrap" data-node-id="I667:39883;581:125898" data-name="text">
+                          <div className="flex flex-col font-['PingFang_SC:Regular'] justify-center leading-[0] relative shrink-0" data-node-id="I667:39883;3416:169369">
+                            <p className="leading-[18px]">播放量</p>
+                          </div>
+                          <div className="content-stretch flex gap-[var(--semi\/spacing\/none,0px)] items-center leading-[18px] relative shrink-0 text-right" data-node-id="I667:39883;3457:195119" data-name="text">
+                            <p className="font-['DIN_Alternate:Bold'] relative shrink-0" data-node-id="I667:39883;581:125899">
+                              2926.95
+                            </p>
+                            <p className="font-['PingFang_SC:Regular'] relative shrink-0" data-node-id="I667:39883;3457:188365">
+                              万
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex items-start p-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="667:39884" data-name=".list">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/base-tight,12px)] items-start justify-center min-w-px relative" data-node-id="I667:39884;581:125891" data-name="list">
+                      <div className="content-stretch flex gap-[4px] items-center overflow-clip relative rounded-[4px] shrink-0" data-node-id="I667:39884;581:125892" data-name="img">
+                        <div className="h-[70px] relative rounded-[2px] shrink-0 w-[52px]" data-node-id="I667:39884;581:125893" data-name="img">
+                          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2px] size-full" src={imgImg5} />
+                        </div>
+                        <div className="absolute bg-[#929399] border border-[rgba(255,255,255,0.8)] border-solid content-stretch flex flex-col items-start left-0 px-[4px] py-[1.5px] rounded-br-[10px] top-0" data-node-id="I667:39884;581:125894" data-name="1.">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="I667:39884;581:125895">
+                            <p className="leading-[normal]">4</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px not-italic relative" data-node-id="I667:39884;581:125896" data-name="text">
+                        <p className="font-['PingFang_SC:Regular'] h-[40px] leading-[normal] min-w-full overflow-hidden relative shrink-0 text-[#252632] text-[14px] text-ellipsis w-[min-content]" data-node-id="I667:39884;581:125897">
+                          剧情演绎规则课堂 I 不良导向篇
+                        </p>
+                        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0 text-[12px] text-[rgba(37,38,50,0.8)] whitespace-nowrap" data-node-id="I667:39884;581:125898" data-name="text">
+                          <div className="flex flex-col font-['PingFang_SC:Regular'] justify-center leading-[0] relative shrink-0" data-node-id="I667:39884;3416:169369">
+                            <p className="leading-[18px]">播放量</p>
+                          </div>
+                          <div className="content-stretch flex gap-[var(--semi\/spacing\/none,0px)] items-center leading-[18px] relative shrink-0 text-right" data-node-id="I667:39884;3457:195119" data-name="text">
+                            <p className="font-['DIN_Alternate:Bold'] relative shrink-0" data-node-id="I667:39884;581:125899">
+                              1501.07
+                            </p>
+                            <p className="font-['PingFang_SC:Regular'] relative shrink-0" data-node-id="I667:39884;3457:188365">
+                              万
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex items-start p-[var(--semi\/spacing\/base-tight,12px)] relative shrink-0 w-full" data-node-id="667:39885" data-name=".list">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--semi\/spacing\/base-tight,12px)] items-start justify-center min-w-px relative" data-node-id="I667:39885;581:125891" data-name="list">
+                      <div className="content-stretch flex gap-[4px] items-center overflow-clip relative rounded-[4px] shrink-0" data-node-id="I667:39885;581:125892" data-name="img">
+                        <div className="h-[70px] relative rounded-[2px] shrink-0 w-[52px]" data-node-id="I667:39885;581:125893" data-name="img">
+                          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2px] size-full" src={imgImg7} />
+                        </div>
+                        <div className="absolute bg-[#929399] border border-[rgba(255,255,255,0.8)] border-solid content-stretch flex flex-col items-start left-0 px-[4px] py-[1.5px] rounded-br-[10px] top-0" data-node-id="I667:39885;581:125894" data-name="1.">
+                          <div className="[word-break:break-word] flex flex-col font-['Arial:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="I667:39885;581:125895">
+                            <p className="leading-[normal]">5</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px not-italic relative" data-node-id="I667:39885;581:125896" data-name="text">
+                        <p className="font-['PingFang_SC:Regular'] h-[40px] leading-[normal] min-w-full overflow-hidden relative shrink-0 text-[#252632] text-[14px] text-ellipsis w-[min-content]" data-node-id="I667:39885;581:125897">
+                          如何更专业的创作旅行类图文作品
+                        </p>
+                        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0 text-[12px] text-[rgba(37,38,50,0.8)] whitespace-nowrap" data-node-id="I667:39885;581:125898" data-name="text">
+                          <div className="flex flex-col font-['PingFang_SC:Regular'] justify-center leading-[0] relative shrink-0" data-node-id="I667:39885;3416:169369">
+                            <p className="leading-[18px]">播放量</p>
+                          </div>
+                          <div className="content-stretch flex gap-[var(--semi\/spacing\/none,0px)] items-center leading-[18px] relative shrink-0 text-right" data-node-id="I667:39885;3457:195119" data-name="text">
+                            <p className="font-['DIN_Alternate:Bold'] relative shrink-0" data-node-id="I667:39885;581:125899">
+                              1237.70
+                            </p>
+                            <p className="font-['PingFang_SC:Regular'] relative shrink-0" data-node-id="I667:39885;3457:188365">
+                              万
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-center justify-center overflow-clip px-[var(--semi\/spacing\/base-tight,12px)] py-[8px] relative shrink-0 w-full" data-node-id="667:39886" data-name="Button">
+                  <div className="content-stretch flex flex-[1_0_0] gap-[4px] items-center justify-center min-w-px overflow-clip px-[8px] py-[3px] relative rounded-[var(--semi\/border\/radius\/--semi-border-radius-small,4px)]" data-node-id="667:39887" data-name="Button">
+                    <p className="[word-break:break-word] font-['PingFang_SC:Regular'] leading-[18px] not-italic relative shrink-0 text-[12px] text-[rgba(37,38,50,0.6)] whitespace-nowrap" data-node-id="I667:39887;772:46648">
+                      查看全部
+                    </p>
+                    <div className="relative shrink-0 size-[12px]" data-node-id="I667:39887;772:46649" data-name="icon">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSemiIconsChevronRight2} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: text/--color-text-2: #252632, text/--color-text-0: #252632, Paragraph/regular/CN-Semi Bold: Font(family: "PingFang SC", style: Semibold, size: 14, weight: 600, lineHeight: 20, letterSpacing: 0), Paragraph/small/CN-Regular: Font(family: "PingFang SC", style: Regular, size: 12, weight: 400, lineHeight: 18, letterSpacing: 0), primary/--color-primary: #FE2C55, Paragraph/regular/CN-Regular: Font(family: "PingFang SC", style: Regular, size: 14, weight: 400, lineHeight: 20, letterSpacing: 0), Paragraph/small/EN-Regular: Font(family: "Arial", style: Regular, size: 12, weight: 400, lineHeight: 18, letterSpacing: 0), link/--color-link: #168EF9, color/white/--white: #FFFFFF, Light/color/white/--white: #FFFFFF, Light/color/black/--black: #000000, default/--color-default: #F9F9FA, secondary-light/--color-secondary-light-active: #C9C9CC, fill/--color-fill-0: #F2F2F4, text/--color-text-white: #FFFFFF, text/--color-text-1: #252632, color/orange/--orange-5: #FF851D, color/yellow/--yellow-5: #FACE15, color/grey/--grey-4: #929399.
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Button
+**Node ID:** 11:5486
+
+用户使用按钮来触发一个操作或者进行跳转
+
+**Documentation:**
+- [https://semi.bytedance.net/zh-CN/components/button](https://semi.bytedance.net/zh-CN/components/button)
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
