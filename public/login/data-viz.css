@@ -212,3 +212,12 @@
  93%{translate:0 2px;transform:rotate(.5deg);animation-timing-function:ease-out;}
  100%{translate:0 0;opacity:1;transform:rotate(0deg);}
 }
+/* Padding belongs inside each capsule. Actual collisions determine the pile. */
+.audience-viz .viz-pill{padding:3cqw 3.8cqw;font-size:3.05cqw;}
+.audience-viz .viz-pill:nth-of-type(2){left:3%;top:70%;}
+.audience-viz .viz-pill:nth-of-type(3){left:43%;top:67%;}
+.audience-viz .viz-pill:nth-of-type(4){right:3%;top:55%;}
+.audience-viz .viz-pill:nth-of-type(5){left:3%;bottom:6%;}
+.audience-viz .viz-pill:nth-of-type(6){right:3%;bottom:6%;}
+.data-viz.viz-entered.audience-viz .viz-pill{animation:none;}
+.data-viz.audience-viz.physics-active .viz-pill{left:0;top:0;right:auto;bottom:auto;rotate:none;translate:none;transform-origin:center;transition:none;opacity:1;}
