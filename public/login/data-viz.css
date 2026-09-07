@@ -146,3 +146,10 @@
 .data-viz .market-item i,.data-viz .task-row i{background:linear-gradient(145deg,#ffffffad,#ffffff38 65%,#ffffff80);box-shadow:inset 0 1px 1px #ffffffd9,inset 0 -1px 2px #ffffff38,0 4px 8px #30496508;}
 .data-viz .revenue-bar{background:linear-gradient(100deg,#ffffff9c,#ffffff42 35%,#ffffff60 70%,#ffffffc7);border-color:#ffffffd9;box-shadow:inset 1px 0 2px #ffffffbf,inset -1px 0 2px #ffffff80,0 8px 24px #28436d12;}
 .data-viz .bar-2{background:linear-gradient(100deg,#ffffffe0,#ffffff80 35%,#ffffffa8 70%,#fffffff0);}
+
+/* Publishing uses the same layered colors at a lighter reading strength. */
+.grid-optimized-version .operations-shell .operations-publish-grid .operation-card:nth-child(n) .operation-visual{background:#f2f8ff!important;isolation:isolate;--petal:#adede1;--core:#78dacb;--ribbon:#f3efaf;--cool:#bdd9fa;}
+.grid-optimized-version .operations-shell .operations-publish-grid .operation-card.operation-manage .operation-visual{background:#fbf4ff!important;--petal:#f4bada;--core:#f7a9ad;--ribbon:#ffe4a5;--cool:#d7c3f7;}
+.grid-optimized-version .operations-shell .operations-publish-grid .operation-card.operation-interaction .operation-visual{background:#f1f7ff!important;--petal:#c8b9f7;--core:#a2b9f3;--ribbon:#b6eee8;--cool:#f4cce4;}
+.publish-color-shell .viz-color-flow{opacity:.55;}
+.grid-optimized-version .operations-shell .operations-publish-grid .operation-card:nth-child(n) .operation-visual{box-shadow:inset 0 1px 1px #fff,inset 0 -1px 1px #ffffff90;}

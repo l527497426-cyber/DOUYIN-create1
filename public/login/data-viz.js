@@ -33,3 +33,6 @@ if(matchMedia('(hover:hover)').matches&&!reduced.matches){
 // CSS transform-only color motion; the existing observer stops hidden cards.
 document.querySelectorAll('.data-viz').forEach(card=>{const flow=document.createElement('div');flow.className='viz-color-flow';flow.setAttribute('aria-hidden','true');card.prepend(flow);});
 document.addEventListener('visibilitychange',()=>{document.querySelectorAll('.viz-color-flow').forEach(el=>{el.style.animationPlayState=document.hidden?'paused':'running';});});
+
+// Publish backgrounds share the same visibility-controlled color movement.
+document.querySelectorAll('.operations-publish-grid .operation-visual').forEach(card=>{card.classList.add('publish-color-shell');const flow=document.createElement('div');flow.className='viz-color-flow';flow.setAttribute('aria-hidden','true');card.prepend(flow);observer.observe(card);});
