@@ -29,3 +29,7 @@ if(matchMedia('(hover:hover)').matches&&!reduced.matches){
   card.addEventListener('pointerleave',()=>{if(frame)cancelAnimationFrame(frame);frame=0;['--mx','--my','--rx','--ry','--dx','--dy'].forEach(p=>card.style.removeProperty(p));});
  });
 }
+
+// CSS transform-only color motion; the existing observer stops hidden cards.
+document.querySelectorAll('.data-viz').forEach(card=>{const flow=document.createElement('div');flow.className='viz-color-flow';flow.setAttribute('aria-hidden','true');card.prepend(flow);});
+document.addEventListener('visibilitychange',()=>{document.querySelectorAll('.viz-color-flow').forEach(el=>{el.style.animationPlayState=document.hidden?'paused':'running';});});
