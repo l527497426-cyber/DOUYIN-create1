@@ -194,3 +194,21 @@
 }
 
 .grid-optimized-version .operations-shell .operations-publish-grid .ops-feature-item{position:relative;z-index:1;}
+/* Audience tags drop into a comfortably inset pile. */
+.audience-viz .viz-pill{font-size:3.05cqw;padding:2.6cqw 3.3cqw;}
+.audience-viz .viz-pill:nth-of-type(2){left:7%;top:66%;--delay:220ms;}
+.audience-viz .viz-pill:nth-of-type(3){left:45%;top:62%;--delay:340ms;}
+.audience-viz .viz-pill:nth-of-type(4){right:7%;top:46%;--delay:460ms;}
+.audience-viz .viz-pill:nth-of-type(5){left:7%;bottom:11%;--delay:0ms;}
+.audience-viz .viz-pill:nth-of-type(6){right:7%;bottom:11%;--delay:110ms;}
+@media(prefers-reduced-motion:no-preference){
+.data-viz.viz-entered.audience-viz .viz-pill{animation:audience-drop 1.4s var(--delay,0ms) both;}
+}
+@keyframes audience-drop{
+ 0%{translate:0 -280px;opacity:0;transform:rotate(-10deg);animation-timing-function:cubic-bezier(.5,0,.9,.55);}
+ 15%{opacity:1;}
+ 64%{translate:0 5px;transform:rotate(3deg);animation-timing-function:cubic-bezier(.15,.65,.3,1);}
+ 80%{translate:0 -12px;transform:rotate(-2deg);animation-timing-function:ease-in;}
+ 93%{translate:0 2px;transform:rotate(.5deg);animation-timing-function:ease-out;}
+ 100%{translate:0 0;opacity:1;transform:rotate(0deg);}
+}
