@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>登录页 · 抖音创作者中心</title>
+  <link rel="stylesheet" href="./vendor/lenis/dist/lenis.css" />
+  <link rel="stylesheet" href="./styles.css?v=256-image-webp" />
+  <script type="importmap">
+    {"imports":{"three":"./vendor/three/build/three.module.js","postprocessing":"./vendor/postprocessing/build/index.js"}}
+  </script>
+  <link rel="stylesheet" href="./data-viz.css?v=16" />
+</head>
+<body class="grid-optimized-version">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="抖音创作者中心">
+      <img src="./assets/logo-mark.svg" alt="" />
+      <img class="brand-copy" src="./assets/logo-text.svg" alt="抖音创作者中心" />
+    </a>
+    <div class="top-note" aria-hidden="true"></div>
+    <button class="login-trigger" type="button" aria-expanded="true">登录 <span>↗</span></button>
+  </header>
+
+  <main id="top">
+    <div class="hero-ai-chapter">
+      <div class="shared-visual-stage" aria-hidden="true">
+        <div class="hero-media scroll-video-version">
+          <img class="hero-frame-sequence hero-focus-sequence" src="./assets/hero-people-focus-webp/frame-001.webp" data-frame-folder="./assets/hero-people-focus-webp" data-mobile-frame-folder="./assets/hero-people-focus-webp" data-frame-count="96" alt="" />
+          <img class="hero-line-soft-edge" src="./assets/enhanced-hand-black-webp/frame-001.webp" alt="" />
+          <img class="hero-line-sequence" src="./assets/enhanced-hand-black-webp/frame-001.webp" data-frame-folder="./assets/enhanced-hand-black-webp" data-frame-count="56" alt="" />
+          <canvas class="hero-liquid-canvas" aria-hidden="true"></canvas>
+          <canvas class="hero-line-transition-canvas" aria-hidden="true"></canvas>
+          <div class="hero-shade"></div>
+        </div>
+      </div>
+    <section class="hero scroll-scrub-hero" aria-label="创作者中心登录首屏">
+      <div class="hero-stage hero-sticky">
+        <div class="hero-copy">
+          <h1>让热爱被看见<br />让创作更有价值</h1>
+          <p>抖音创作者的一站式创作与服务平台</p>
+        </div>
+        <aside class="login-layer open" id="login-dialog" aria-label="登录创作者中心">
+      <div class="login-panel">
+        <button class="login-modal-close" type="button" aria-label="关闭登录框"><span aria-hidden="true">×</span></button>
+        <img class="login-shape login-shape-creator" src="./assets/login-shape.svg" alt="" />
+        <img class="login-shape login-shape-mcn" src="./assets/login-shape.svg" alt="" />
+        <div class="identity-switch" role="tablist">
+          <button class="active" data-identity="creator" type="button" role="tab" aria-selected="true"><img src="./assets/login-creator.svg" alt="" />我是创作者</button>
+          <button data-identity="mcn" type="button" role="tab" aria-selected="false"><img src="./assets/login-mcn.png" alt="" />我是MCN机构<img class="help-icon" src="./assets/login-help.svg" alt="" /></button>
+        </div>
+        <div class="login-body">
+          <section class="qr-column">
+            <h3>扫码登录</h3>
+            <div class="qr-art" aria-label="登录二维码"><img class="qr-image" src="./assets/login-qr.png" alt="" /><img class="qr-logo" src="./assets/login-douyin.svg" alt="" /></div>
+            <p>打开「抖音APP」点击左上角 <img src="./assets/login-scan.svg" alt="" /> 进行扫一扫</p>
+            <button class="qr-help" type="button">如何扫码</button>
+          </section>
+          <form class="phone-column" data-view="phone">
+            <div class="method-tabs"><button class="active" data-method="code" type="button">验证码登录</button><i></i><button data-method="password" type="button">密码登录</button></div>
+            <div class="phone-field"><span class="country-code">+86<img src="./assets/login-country-arrow.png" alt="" /></span><i class="field-divider" aria-hidden="true"></i><input type="tel" placeholder="请输入手机号" /></div>
+            <div class="code-field"><input type="text" placeholder="请输入验证码" /><button type="button">获取验证码</button></div>
+            <button class="submit-login" type="submit">登录/注册</button>
+            <p class="agreement">登录或注册即代表同意用户协议和隐私政策</p>
+          </form>
+        </div>
+      </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="system-section ai-system scene-entered story-ready ai-lines-entered" id="ai-creation" data-active="0">
+      <div class="ai-column-lines" aria-hidden="true"><i></i><i></i></div>
+      <div class="ai-scene-content">
+      <div class="story-layout">
+        <aside class="story-left">
+          <header class="system-head">
+            <h2>AI 赋能创作者</h2>
+            <p>高效创作投稿及运营</p>
+          </header>
+          <nav class="capability-nav" aria-label="AI 创作能力">
+            <canvas class="composing-orb" width="64" height="64" aria-label="Composing"></canvas>
+            <button class="active" data-capability="0" type="button"><strong>AI工坊</strong><small>把好想法变成好玩法</small></button>
+            <button data-capability="1" type="button"><strong>AI分身</strong><small>创造陪伴用户的另一个“你”</small></button>
+            <button data-capability="2" type="button"><strong>随变</strong><small>自由角色创作，专业 Agent 成片</small></button>
+            <button data-capability="3" type="button"><strong>世界书</strong><small>让灵感和角色持续生长</small></button>
+            <button data-capability="4" type="button"><strong>造世界</strong><small>一句灵感，展开可探索的世界</small></button>
+          </nav>
+        </aside>
+        <div class="story-middle">
+          <div class="capability-display">
+            <div class="cube-backdrop" aria-hidden="true">
+              <img class="active" data-cube-backdrop="0" src="./assets/figma-ai-lab-gradient-web.webp" alt="" />
+              <img data-cube-backdrop="1" src="./assets/figma-ai-avatar-web.webp" alt="" />
+              <img data-cube-backdrop="2" src="./assets/figma-remix-web.webp" alt="" />
+              <img data-cube-backdrop="3" src="./assets/figma-worldbook-web.webp" alt="" />
+            </div>
+            <div class="capability-cube-shell">
+              <div class="capability-cube">
+                <article class="capability-panel cube-face cube-face-front active" data-panel="0"><img src="./assets/figma-ai-lab-gradient-web.webp" alt="AI工坊" /></article>
+                <article class="capability-panel cube-face cube-face-right" data-panel="1"><img src="./assets/figma-ai-avatar-web.webp" alt="AI分身" /></article>
+                <article class="capability-panel cube-face cube-face-back" data-panel="2"><img src="./assets/figma-remix-web.webp" alt="随变" /></article>
+                <article class="capability-panel cube-face cube-face-left" data-panel="3"><img src="./assets/figma-worldbook-web.webp" alt="世界书" /></article>
+                <article class="capability-panel cube-face cube-face-world" data-panel="4"><img src="./assets/cube-world-user-web.webp" alt="造世界" /><span class="cube-world-label">造世界</span></article>
+                
+              </div>
+            </div>
+            <div class="ambient-wash" aria-hidden="true"></div>
+            <div class="story-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="story-copy">
+          <article class="active" data-story="0"><span>AI工坊</span><h3>把好想法<br />变成好玩法</h3><p>在抖音AI工坊，你的每一个好想法都可以变成好玩的抖音应用。在这里，人人都是AI创作者，描述灵感、预览成果、发布到抖音，一站式完成抖音应用生产。</p></article>
+          <article data-story="1"><span>AI分身</span><h3>创造陪伴用户的<br />另一个“你”</h3><p>基于账号内容与表达风格，塑造承载你态度与温度的 AI 分身。跨越时间与场景，为用户提供作品推荐、即时回复、情感陪伴与视频互动，助力账号经营。</p></article>
+          <article data-story="2"><span>随变</span><h3>自由角色创作<br />专业 Agent <span style="white-space:nowrap">成片</span></h3><p>从角色设定、形象生成到剧情创作与动画演绎，轻松将脑海中的人设变成鲜活短片。还可以发布作品、认识同好，让角色被看见，让故事持续生长。</p></article>
+          <article data-story="3"><span>世界书</span><h3>让世界和角色<br />持续生长</h3><p>把零散素材和灵感整理成世界书与角色档案，就像一份可反复使用和迭代的“创作说明书”。AI帮你补全设定，后续创作可直接调用，不断延展新的内容持续生长。</p></article>
+          <article data-story="4"><span>造世界</span><h3>一句灵感<br />展开整个世界</h3><p>从一个想法出发，生成场景、角色、关系与故事线，让世界在互动中持续演化，并随时延展为新的内容和体验。</p></article>
+        </div>
+      </div>
+      </div>
+	      <div class="capability-prompt" aria-hidden="true">
+	        <span class="capability-prompt-plus" aria-hidden="true">＋</span>
+        <span class="capability-prompt-text" aria-live="polite"></span>
+        <span class="capability-prompt-caret" aria-hidden="true"></span>
+        <span class="capability-prompt-send" aria-hidden="true">↗</span>
+      </div>
+    </section>
+    </div>
+
+    <div class="operations-column-transition" aria-hidden="true">
+      <i></i><i></i><i></i><i></i>
+    </div>
+
+    <section class="system-section operations" id="creator-operations" data-figma-node="613:21910">
+      <div class="operations-scroll-track">
+        <div class="operations-stage">
+          <div class="operations-shell">
+            <div class="operations-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <header class="system-head operations-editorial-head">
+              <h2>助力创作者高效运营</h2>
+              <p>让内容创作、发布与数据复盘更简单。</p>
+            </header>
+            <div class="operations-regular">
+        <nav class="operations-single-tab" aria-label="运营能力" role="tablist">
+          <button class="active" id="ops-tab-publish" type="button" role="tab" aria-selected="true" aria-controls="ops-panel-publish" data-ops-tab="publish"><b>作品发布及管理</b></button>
+          <button id="ops-tab-data" type="button" role="tab" aria-selected="false" aria-controls="ops-panel-data" data-ops-tab="data"><b>作品数据分析</b></button>
+          <button id="ops-tab-monetize" type="button" role="tab" aria-selected="false" aria-controls="ops-panel-monetize" data-ops-tab="monetize"><b>商单任务变现</b></button>
+        </nav>
+        <div class="operations-card-grid active operations-publish-grid" id="ops-panel-publish" role="tabpanel" aria-labelledby="ops-tab-publish" data-ops-panel="publish">
+          <article class="operation-card operation-publish">
+            <div class="operation-card-copy">
+              <h3>丰富的作品体裁</h3>
+            </div>
+            <div class="operation-visual ops-figma-feature-list">
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-video.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>发布视频</strong><p>支持 MP4、WebM 等常用格式，建议分辨率 720p 及以上</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-image.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>发布图文</strong><p>支持 JPG、PNG 格式，单次最多上传 35 张图片</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-panorama.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>发布全景视频</strong><p>推荐 MP4、WebM 格式，支持 4K（3840×1920）及以上</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="operation-card operation-manage">
+            <div class="operation-card-copy">
+              <h3>高效的内容管理</h3>
+            </div>
+            <div class="operation-visual ops-figma-feature-list">
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-manage.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>全方面的作品管理</strong><p>集中管理作品，追踪发布状态，关键数据与管理建议一目了然</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-collection.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>多样的合集形式</strong><p>将视频整理成合集，支持短剧、付费及普通合集</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-protect.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>全面保护原创作品</strong><p>查看作品是否被搬运或抄袭，一键申诉，维护原创权益</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="operation-card operation-interaction">
+            <div class="operation-card-copy">
+              <h3>便捷的互动管理</h3>
+            </div>
+            <div class="operation-visual ops-figma-feature-list">
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-fans.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>粉丝可按互动分管理</strong><p>按观看贡献与互动分管理粉丝，快速识别活跃粉丝</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <svg class="ops-feature-icon ops-color-heart" viewBox="0 0 56 56" aria-hidden="true"><defs><linearGradient id="ops-heart-color" x2="1" y2="1"><stop stop-color="#ff83ab"/><stop offset="1" stop-color="#de4277"/></linearGradient></defs><rect x="5.6" y="5.6" width="44.8" height="44.8" rx="11" fill="url(#ops-heart-color)"/><path d="M28 40 16 28C7 18 21 11 28 21c7-10 21-3 12 7Z" fill="white"/></svg>
+                <div><strong>快捷添加最关心的作者</strong><p>批量管理关注，标记重点作者，及时关注他们的数据变化</p></div>
+              </div>
+              <div class="ops-feature-item">
+                <img class="ops-feature-icon ops-color-icon" src="./assets/figma-ops-icon-message.png" alt="" loading="lazy" decoding="async" />
+                <div><strong>批量回复评论与私信</strong><p>集中处理作品评论与粉丝私信，批量回复，沟通更高效</p></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="operations-card-grid operations-data-grid" id="ops-panel-data" role="tabpanel" aria-labelledby="ops-tab-data" data-ops-panel="data">
+          <article class="operation-card operation-data"><div class="operation-visual" aria-hidden="true"><div class="data-viz account-viz"><span class="viz-watermark">ACCOUNT<br>INSIGHTS</span><img class="radar-base" src="./assets/data-viz/radar-base.svg" alt=""><img class="radar-value" src="./assets/data-viz/radar-value.svg" alt=""><span class="viz-pill radar-top">活跃度</span><span class="viz-pill radar-left">播放量</span><span class="viz-pill radar-right">互动率</span><span class="viz-pill radar-low-left">完播率</span><span class="viz-pill radar-low-right">涨粉数</span></div></div><div class="operation-card-copy"><h3>账号经营 · 全面分析</h3><p>对账号进行检测分析，并给出改进建议</p></div></article>
+          <article class="operation-card operation-work-data"><div class="operation-visual" aria-hidden="true"><div class="data-viz content-viz"><span class="viz-watermark">CONTENT<br>ANALYTICS</span><div class="trend-window"><img class="viz-trend" src="./assets/data-viz/trend.svg" alt=""></div><span class="viz-pill trend-label">近7日·最高播放 <b>1210.13</b> 万</span><span class="trend-dot"></span></div></div><div class="operation-card-copy"><h3>内容作品 · 深度分析</h3><p>对单个作品进行全方位分析查看</p></div></article>
+          <article class="operation-card operation-fans"><div class="operation-visual" aria-hidden="true"><div class="data-viz audience-viz"><span class="viz-watermark">AUDIENCE<br>PROFILE</span><span class="viz-pill">兴趣内容垂类 <b>TOP5</b></span><span class="viz-pill">兴趣 <b>TOP10</b></span><span class="viz-pill">职业分布 <b>TOP5</b></span><span class="viz-pill">喜欢/关注的同类作者 <b>TOP5</b></span><span class="viz-pill">新老用户 <b>TOP5</b></span></div></div><div class="operation-card-copy"><h3>粉丝群体 · 受众画像</h3><p>清晰查看作品受众的特征</p></div></article>
+          <article class="operation-card operation-live"><div class="operation-visual" aria-hidden="true"><div class="data-viz weekly-viz"><span class="viz-watermark">WEEKLY<br>RECAP</span><img class="viz-thumb" src="./assets/data-viz/thumb.svg" alt=""><div class="viz-stat"><b data-count="67">67%</b><span>创作表现超过了<br>同级作者</span></div><div class="viz-stat second"><b data-count="86">86%</b><span>视频播放超过了<br>其他用户</span></div></div></div><div class="operation-card-copy"><h3>阶段创作 · 周报汇总</h3><p>汇总一周数据表现，并给出创作建议</p></div></article>
+        </div>
+
+        <div class="operations-card-grid operations-monetize-grid" id="ops-panel-monetize" role="tabpanel" aria-labelledby="ops-tab-monetize" data-ops-panel="monetize">
+          <article class="operation-card operation-market"><div class="operation-visual" aria-hidden="true"><div class="data-viz market-viz"><span class="viz-watermark">DEAL<br>MARKETPLACE</span><div class="market-browser"><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div><div class="market-item"><i></i><b></b><em></em></div></div><span class="viz-pill market-income">保底收入</span><span class="viz-pill market-high">高收益</span><span class="viz-pill market-review">好物测评</span></div></div><div class="operation-card-copy"><h3>变现广场 · 快速找商单</h3><p>千粉以上作者可匹配任务并完成变现</p></div></article>
+          <article class="operation-card operation-tasks"><div class="operation-visual" aria-hidden="true"><div class="data-viz tasks-viz"><span class="viz-watermark">MY<br>TASKS</span><div class="task-timeline"></div><div class="task-row" style="--i:0"><i></i><span>达人投稿</span><b></b></div><div class="task-row" style="--i:1"><i></i><span>结果公示</span><b></b></div><div class="task-row" style="--i:2"><i></i><span>奖金发放中</span><b></b></div></div></div><div class="operation-card-copy"><h3>我的任务 · 跟踪任务进度</h3><p>集中查看任务详情、审核结果与当前进度</p></div></article>
+          <article class="operation-card operation-earnings"><div class="operation-visual" aria-hidden="true"><div class="data-viz earnings-viz"><span class="viz-watermark">EARNINGS<br>SUMMARY</span><div class="earnings-amount"><span>收入总金额</span><b>￥9***</b><span>可提现金额</span><b>￥6***</b></div><div class="earnings-gems"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:0"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:1"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:2"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:3"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:4"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:5"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:6"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:7"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:8"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:9"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:10"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:11"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:12"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:13"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:14"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:15"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:16"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:17"><img src="./assets/data-viz/diamond-dark.svg" alt="" style="--i:18"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:19"><img src="./assets/data-viz/diamond-light.svg" alt="" style="--i:20"></div></div></div><div class="operation-card-copy"><h3>收入金额 · 汇总收入</h3><p>统一呈现抖音内收入与当前可提现金额</p></div></article>
+          <article class="operation-card operation-revenue"><div class="operation-visual" aria-hidden="true"><div class="data-viz revenue-viz"><span class="viz-watermark">REVENUE<br>INSIGHTS</span><div class="revenue-bar bar-0" style="--i:0"></div><div class="viz-pill revenue-label label-0"><span>电商</span><b>￥5900</b></div><div class="revenue-bar bar-1" style="--i:1"></div><div class="viz-pill revenue-label label-1"><span>商单任务</span><b>￥900</b></div><div class="revenue-bar bar-2" style="--i:2"></div><div class="viz-pill revenue-label label-2"><span>直播</span><b>￥8424</b></div></div></div><div class="operation-card-copy"><h3>收入分析 · 丰富收入渠道</h3><p>拆解各类收入来源，帮助拓展更多变现方式</p></div></article>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="system-section benefits" id="institution-services" data-active="0" data-figma-node="613:22003">
+      <canvas class="benefit-webgl-bg" aria-hidden="true"></canvas>
+      <div class="benefit-layout">
+        <div class="benefit-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <header class="system-head benefit-editorial-head">
+          <h2>机构服务权益</h2>
+          <p>让每一次创作与经营，都获得更稳定的支持。</p>
+        </header>
+        <div class="benefit-preview" aria-hidden="true">
+          <span class="benefit-preview-backdrop"></span>
+          <div class="benefit-preview-media">
+            <img class="active" data-benefit-image="0" src="./assets/figma-benefit-entry-web.webp" alt="" />
+            <img data-benefit-image="1" src="./assets/figma-benefit-talent-web.webp" alt="" />
+            <img data-benefit-image="2" src="./assets/figma-benefit-analysis-web.webp" alt="" />
+            <img data-benefit-image="3" src="./assets/figma-benefit-growth-web.webp" alt="" />
+          </div>
+        </div>
+        <div class="benefit-accordion">
+          <article class="open" data-benefit="0"><button id="benefit-trigger-0" type="button" aria-expanded="true" aria-controls="benefit-panel-0"><strong class="benefit-name">入驻签约</strong><i aria-hidden="true"></i></button><p id="benefit-panel-0" role="region" aria-labelledby="benefit-trigger-0" aria-hidden="false">支持机构入驻，以及机构线下完成签约的作者，通过创作者中心三方签约线上签约的流程。</p></article>
+          <article data-benefit="1"><button id="benefit-trigger-1" type="button" aria-expanded="false" aria-controls="benefit-panel-1"><strong class="benefit-name">达人管理</strong><i aria-hidden="true"></i></button><p id="benefit-panel-1" role="region" aria-labelledby="benefit-trigger-1" aria-hidden="true">达人线上签约，系统自动分账结算、达人作品管理、达人权限管理、内容灵感选题挖掘。</p></article>
+          <article data-benefit="2"><button id="benefit-trigger-2" type="button" aria-expanded="false" aria-controls="benefit-panel-2"><strong class="benefit-name">经营分析</strong><i aria-hidden="true"></i></button><p id="benefit-panel-2" role="region" aria-labelledby="benefit-trigger-2" aria-hidden="true">机构经营周期性诊断总结及提升建议，快速洞察经营问题，明确待提升的经营方向。</p></article>
+          <article data-benefit="3"><button id="benefit-trigger-3" type="button" aria-expanded="false" aria-controls="benefit-panel-3"><strong class="benefit-name">成长激励</strong><i aria-hidden="true"></i></button><p id="benefit-panel-3" role="region" aria-labelledby="benefit-trigger-3" aria-hidden="true">创作者中心 · 机构版提供机构榜单、分级权益、激励活动、学习中心等帮助机构成长的激励机制。</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="login-modal-backdrop" aria-hidden="true" hidden></div>
+
+  <footer class="site-footer" id="site-footer" aria-labelledby="footer-login-title">
+    <div class="footer-blaze-content" aria-hidden="true"></div>
+    <canvas class="footer-blaze-source" aria-hidden="true"></canvas>
+    <canvas class="footer-blaze-output" aria-hidden="true"></canvas>
+    <div class="footer-content">
+      <div class="footer-conversion">
+        <section class="footer-column footer-login-column footer-reveal" style="--footer-delay:0ms">
+          <h2 id="footer-login-title">千万创作者邀你同行</h2>
+          <div class="footer-actions">
+            <button class="footer-login-choice footer-login-creator" type="button" data-login-open data-login-identity="creator" aria-haspopup="dialog" aria-controls="login-dialog">创作者登录</button>
+            <button class="footer-login-choice footer-login-mcn" type="button" data-login-open data-login-identity="mcn" aria-haspopup="dialog" aria-controls="login-dialog">MCN机构登录</button>
+          </div>
+        </section>
+        <nav class="footer-primary-links footer-reveal" style="--footer-delay:90ms" aria-label="平台与账号支持">
+          <a href="#">抖音社区自律公约</a>
+          <a href="#">账号授权协议</a>
+          <a href="#">用户服务协议</a>
+          <a href="#">隐私政策</a>
+          <a href="#">账号找回</a>
+          <a href="#">联系我们</a>
+        </nav>
+      </div>
+
+      <div class="footer-meta footer-reveal" style="--footer-delay:230ms">
+        <div class="footer-records">
+          <div><span>2026 © 抖音</span><a href="#">京ICP备16016397号-3</a><span>北京抖音科技有限公司</span><span>增值电信业务经营许可证：京B2-20170846</span></div>
+          <div><a href="#">中国互联网举报中心</a><span>网络文化经营许可证：京网文〔2025〕0181-061号</span><span>违法和不良信息举报：400-140-2108</span><a href="mailto:feedback@douyin.com">举报邮箱：feedback@douyin.com</a></div>
+          <div><img src="./assets/figma-police-badge.png" alt="" /><a href="#">京公网安备11000002002046号</a><span>地址：北京市海淀区北三环西路甲18号院4号楼2层2022</span></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="./vendor/lenis/dist/lenis.min.js"></script>
+    <script type="module" src="./orbs.js?v=5"></script>
+    <script type="module" src="./capability-cube.js?v=25-webgl-dof"></script>
+    <script type="module" src="./text-motion.js?v=9-unified-ai-entry"></script>
+    <script type="module" src="./radial-particles.js?v=4-clean-color-palette"></script>
+  <script type="module" src="./liquid-runtime.js?v=9-hero-only"></script>
+  <script src="./hero-texture-transition.js?v=5-pointer-budget"></script>
+  <script src="./app.js?v=128-image-webp"></script>
+  <script type="module" src="./capability-prompt.js?v=20-picture-prompts"></script>
+  <script type="module" src="./benefit-webgl.js?v=3-blue-gray-visible"></script>
+  <script type="module" src="./footer-blaze.js?v=6-no-editor"></script>
+  <script type="module" src="./capability-stage-webgl.js?v=8-glass-spacing"></script>
+  <script type="module" src="./data-viz.js?v=7"></script>
+<script type="module" src="./audience-physics.js?v=2"></script>
+</body>
+</html>
