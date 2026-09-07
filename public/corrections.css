@@ -8,6 +8,9 @@
 
 .publish{position:relative;width:160px;height:88px;padding:8px;border:0;border-radius:12px;overflow:hidden;background:#0a0a0b}
 .publish p{position:relative;z-index:1;visibility:visible;padding:6px 8px;font-size:12px;font-weight:400;line-height:16px;color:#999;white-space:nowrap}
+.publish>button{overflow:hidden;isolation:isolate}
+.publish>button>span,.publish>button>img{position:relative;z-index:1}
+.publish>button>.publish-flow{opacity:1}
 .publish button{position:absolute;left:8px;top:44px;width:144px;height:36px;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:600;line-height:20px;box-shadow:none;transition:background .2s}
 .publish button:hover{background:rgba(255,255,255,.19);box-shadow:none;transform:none}
 .publish button:active{background:rgba(255,255,255,.12);transform:none}
@@ -157,14 +160,14 @@ main>header .top-nav,main>header .account{pointer-events:auto}
 
 /* Animated light stays under the exported button lettering. */
 .publish{isolation:isolate}
-.publish::before{content:"";position:absolute;left:-16px;right:-16px;bottom:-26px;height:70px;background:radial-gradient(ellipse at 33% 75%,#ff276f 0%,transparent 54%),radial-gradient(ellipse at 76% 75%,#52d5ff 0%,transparent 54%);filter:blur(13px);mix-blend-mode:screen;opacity:.2;pointer-events:none;animation:publish-glow-drift 8s ease-in-out infinite;transition:opacity .55s ease;z-index:0}
-.publish::after{content:"";position:absolute;left:-24px;right:-24px;bottom:-24px;height:64px;background:radial-gradient(ellipse at 40% 80%,#ff3999 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,#70e5ff 0%,transparent 50%);filter:blur(12px);mix-blend-mode:screen;opacity:0;pointer-events:none;animation:publish-glow-hover 3.2s ease-in-out infinite;transition:opacity .45s ease;z-index:0}
-.publish:hover::before,.publish:focus-within::before,.publish.is-open::before{opacity:.32}
-.publish:hover::after,.publish:focus-within::after,.publish.is-open::after{opacity:.55}
+.publish>button::before{content:"";position:absolute;left:-16px;right:-16px;bottom:-26px;height:70px;background:radial-gradient(ellipse at 33% 75%,#ff276f 0%,transparent 54%),radial-gradient(ellipse at 76% 75%,#52d5ff 0%,transparent 54%);filter:blur(13px);mix-blend-mode:screen;opacity:.2;pointer-events:none;animation:publish-glow-drift 8s ease-in-out infinite;transition:opacity .55s ease;z-index:0}
+.publish>button::after{content:"";position:absolute;left:-24px;right:-24px;bottom:-24px;height:64px;background:radial-gradient(ellipse at 40% 80%,#ff3999 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,#70e5ff 0%,transparent 50%);filter:blur(12px);mix-blend-mode:screen;opacity:0;pointer-events:none;animation:publish-glow-hover 3.2s ease-in-out infinite;transition:opacity .45s ease;z-index:0}
+.publish>button:hover::before,.publish>button:focus-within::before,.publish.is-open>button::before{opacity:.32}
+.publish>button:hover::after,.publish>button:focus-within::after,.publish.is-open>button::after{opacity:.55}
 .publish>button{z-index:1}
 @keyframes publish-glow-drift{0%,100%{transform:translate(-6px,4px) scale(.95)}50%{transform:translate(7px,0) scale(1.08)}}
 @keyframes publish-glow-hover{0%,100%{transform:translate(-10px,4px) scale(.95)}50%{transform:translate(10px,-3px) scale(1.12)}}
-@media(prefers-reduced-motion:reduce){.publish::before,.publish::after{animation:none;transition:none}}
+@media(prefers-reduced-motion:reduce){.publish>button::before,.publish>button::after{animation:none;transition:none}}
 
 /* Publish dropdown uses Figma 771:22820 icons and native menu semantics. */
 .publish-menu{position:absolute;top:172px;left:20px;width:320px;padding:10px;border:1px solid rgba(255,255,255,.65);border-radius:18px;background:linear-gradient(155deg,rgba(247,247,250,.66),rgba(255,255,255,.48));box-shadow:0 18px 48px rgba(32,33,43,.18),0 4px 12px rgba(32,33,43,.07),0 0 0 .5px #0000000d;backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);z-index:60;transform-origin:32px top;animation:publish-menu-in .18s ease-out}
@@ -177,7 +180,7 @@ main>header .top-nav,main>header .account{pointer-events:auto}
 @keyframes publish-menu-in{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.publish-menu{animation:none}}
 .publish-flow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:.88;mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.12) 18%,rgba(0,0,0,.6) 42%,#000 68%);-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.12) 18%,rgba(0,0,0,.6) 42%,#000 68%)}
-.publish.has-flow::before,.publish.has-flow::after{display:none;animation:none}
+.publish>button.has-flow::before,.publish>button.has-flow::after{display:none;animation:none}
 /* Side navigation follows the six-item Figma NavigationItem export. */
 .side-menu{display:grid;gap:12px;margin-top:12px}
 .side-menu>button{display:flex;align-items:center;gap:12px;height:36px;padding:0 12px;font-size:14px;font-weight:600;line-height:20px;color:rgba(37,38,50,.6);border-radius:6px}

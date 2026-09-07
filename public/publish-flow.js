@@ -1,6 +1,6 @@
 // A small GPU color field; the Figma artwork remains the static fallback.
 export function mountPublishFlow(){
-  const host=document.querySelector('.publish');
+  const host=document.querySelector('.publish > button');
   if(!host||host.querySelector('canvas'))return;
   const canvas=document.createElement('canvas');
   canvas.className='publish-flow';canvas.setAttribute('aria-hidden','true');
@@ -20,7 +20,7 @@ export function mountPublishFlow(){
       float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.)),f.x),f.y);}
       float field(vec2 p){return .57*noise(p)+.28*noise(p*2.03)+.15*noise(p*4.07);}
       void main(){
-        float t=time*.24;
+        float t=time*.28;
         vec3 light=vec3(0.);
         // Far haze, middle ribbons and a closer light core move at different depths.
         for(int i=0;i<3;i++){
@@ -42,8 +42,8 @@ export function mountPublishFlow(){
           // Pink dominates, with a small cyan accent and no violet color stop.
           light+=envelope*color*(halo*.10+ribbon*.25+core*.12);
         }
-        float mask=1.-smoothstep(.25,.69,uv.y);
-        light*=mask*(.58+energy*.85);
+        float mask=1.-smoothstep(.35,.95,uv.y);
+        light*=mask*(.85+energy*1.05);
         vec3 mapped=vec3(1.)-exp(-light*1.5);
         float alpha=max(max(mapped.r,mapped.g),mapped.b);
         gl_FragColor=vec4(mapped/max(alpha,.001),alpha);
@@ -64,7 +64,7 @@ export function mountPublishFlow(){
   let x=.5,y=.2,targetX=.5,targetY=.2;
   const draw=(now)=>{
     frame=0;if(lost||document.hidden||!visible)return;
-    const active=hover||host.matches(':focus-within')||host.classList.contains('is-open');
+    const active=hover||host.matches(':focus-within')||host.closest('.publish').classList.contains('is-open');
     const delta=last?Math.min((now-last)/1000,.1):0;
     if(!reduced.matches&&last&&delta<(active?1/60:1/30)){frame=requestAnimationFrame(draw);return;}
     last=now;const ease=1-Math.exp(-delta*5);
