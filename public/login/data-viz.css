@@ -153,3 +153,25 @@
 .grid-optimized-version .operations-shell .operations-publish-grid .operation-card.operation-interaction .operation-visual{background:#f1f7ff!important;--petal:#c8b9f7;--core:#a2b9f3;--ribbon:#b6eee8;--cool:#f4cce4;}
 .publish-color-shell .viz-color-flow{opacity:.55;}
 .grid-optimized-version .operations-shell .operations-publish-grid .operation-card:nth-child(n) .operation-visual{box-shadow:inset 0 1px 1px #fff,inset 0 -1px 1px #ffffff90;}
+/* Softer publishing wash and more compact secondary copy. */
+.publish-color-shell .viz-color-flow{opacity:.24;}
+.grid-optimized-version .operations-shell .operations-publish-grid .ops-figma-feature-list .ops-feature-item p{font-size:13px;line-height:1.55;}
+@media(min-width:1001px) and (max-width:1200px){
+.grid-optimized-version .operations-shell .operations-publish-grid .ops-figma-feature-list .ops-feature-item p{font-size:11px;line-height:1.55;}
+}
+/* Each card gets its own composition, beyond a palette swap. */
+.viz-color-flow{background:radial-gradient(ellipse var(--size-a,42% 58%) at var(--pos-a,23% 75%),var(--core) 8%,var(--petal) 48%,transparent 82%),radial-gradient(ellipse var(--size-b,30% 55%) at var(--pos-b,68% 65%),var(--cool) 15%,transparent 78%);}
+.viz-color-flow:before{background:radial-gradient(ellipse var(--band-size,19% 85%) at var(--band-pos,49% 24%),var(--ribbon) 3%,transparent 77%);}
+.viz-color-flow:after{background:radial-gradient(ellipse 36% 27% at var(--edge-a,22% 12%),var(--petal) 5%,transparent 83%),radial-gradient(ellipse 28% 28% at var(--edge-b,86% 96%),var(--ribbon),transparent 85%);}
+.account-viz{--pos-a:12% 85%;--size-a:44% 48%;--pos-b:85% 15%;--size-b:35% 40%;--band-pos:65% 60%;--band-size:15% 65%;}
+.content-viz{--pos-a:15% 60%;--size-a:35% 75%;--pos-b:90% 72%;--size-b:36% 45%;--band-pos:50% 25%;--band-size:15% 90%;}
+.audience-viz{--pos-a:50% 100%;--size-a:60% 34%;--pos-b:0% 30%;--size-b:34% 70%;--band-pos:88% 40%;--band-size:25% 48%;--edge-a:75% 10%;}
+.weekly-viz{--pos-a:85% 20%;--size-a:45% 52%;--pos-b:10% 85%;--size-b:55% 32%;--band-pos:30% 5%;--band-size:65% 20%;--edge-b:65% 95%;}
+.market-viz{--pos-a:0% 40%;--size-a:38% 80%;--pos-b:100% 80%;--size-b:38% 70%;--band-pos:50% 5%;--band-size:55% 25%;--edge-a:10% 100%;}
+.tasks-viz{--pos-a:80% 90%;--size-a:65% 40%;--pos-b:25% 5%;--size-b:65% 32%;--band-pos:15% 55%;--band-size:20% 65%;--edge-a:90% 30%;}
+.earnings-viz{--pos-a:50% 40%;--size-a:34% 45%;--pos-b:85% 95%;--size-b:65% 30%;--band-pos:75% 15%;--band-size:55% 18%;--edge-a:0% 75%;}
+.revenue-viz{--pos-a:95% 50%;--size-a:40% 80%;--pos-b:15% 10%;--size-b:50% 35%;--band-pos:25% 80%;--band-size:65% 24%;--edge-a:45% 100%;}
+.operation-publish .publish-color-shell{--pos-a:5% 90%;--size-a:55% 42%;--pos-b:90% 10%;--size-b:42% 50%;--band-pos:50% 40%;--band-size:18% 80%;}
+.operation-manage .publish-color-shell{--pos-a:80% 35%;--size-a:55% 50%;--pos-b:5% 80%;--size-b:50% 40%;--band-pos:20% 5%;--band-size:65% 22%;}
+.operation-interaction .publish-color-shell{--pos-a:45% 100%;--size-a:70% 30%;--pos-b:10% 10%;--size-b:35% 65%;--band-pos:90% 40%;--band-size:25% 65%;}
+.grid-optimized-version .operations-shell .operations-publish-grid .publish-color-shell .viz-color-flow{opacity:.24!important;}
