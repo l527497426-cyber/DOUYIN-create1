@@ -12,7 +12,7 @@ export function mountAiBackground() {
   if (!context || !maskContext) return;
   const characters = ['0','8','@','S','X','#','+'];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let width=0, height=0, samples=[], mask, frame=0, last=0;
+  let width=0, height=0, samples=[], mask, frame=0, last=0, active=true;
   function coverage(x,y) {
     let max=0, sum=0, count=0;
     for(let dy=-5;dy<=5;dy+=2) {
@@ -29,6 +29,7 @@ export function mountAiBackground() {
   }
   function resize() {
     const nextWidth=Math.round(host.clientWidth);
+    if(!nextWidth)return;
     const nextHeight=Math.round(Math.max(host.clientHeight,host.scrollHeight));
     if(nextWidth===width&&nextHeight===height)return;
     width=nextWidth;height=nextHeight;
@@ -75,7 +76,7 @@ export function mountAiBackground() {
     cancelAnimationFrame(frame);
     if(!mask)return;
     if(reduced.matches){draw(0);return;}
-    if(!document.hidden)frame=requestAnimationFrame(animate);
+    if(active&&!document.hidden)frame=requestAnimationFrame(animate);
   }
   const observer=new ResizeObserver(resize);
   observer.observe(host);
@@ -90,6 +91,10 @@ export function mountAiBackground() {
   };
   image.src='/assets/online-ai/ascii-mask.webp';
   document.addEventListener('visibilitychange',play);
+  window.addEventListener('message',event=>{
+    if(event.source!==parent||event.origin!==location.origin||event.data?.type!=='ai-page-active')return;
+    active=Boolean(event.data.active);play();
+  });
   reduced.addEventListener('change',play);
   window.addEventListener('pagehide',()=>{observer.disconnect();cancelAnimationFrame(frame);},{once:true});
 }

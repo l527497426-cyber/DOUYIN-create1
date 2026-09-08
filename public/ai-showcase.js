@@ -20,10 +20,19 @@ const iconPaths = [
 const chevron = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L13.586 12 8.293 6.707a1 1 0 0 1 0-1.414Z"/></svg>';
 export function showcaseMarkup(avatar) {
   if (avatar) return `<section class="capability-section" aria-label="AI 分身能力">${features.map((f,i)=>`<article class="capability-card"><div class="capability-heading"><span class="capability-icon"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="${iconPaths[i]}"/></svg></span><strong>${f[0]}</strong></div><p>${f[1]}</p></article>`).join('')}</section>`;
-  return `<section class="showcase-section" aria-labelledby="showcase-title"><h2 id="showcase-title">看看大家的兴趣卡</h2><div class="showcase-grid">${interests.map((c,i)=>`<button class="showcase-card" data-interest="${i}" aria-label="查看精选项目：${c[1]}" aria-expanded="false" aria-controls="qr-${i}"><span class="showcase-meta"><span class="showcase-category">${c[0]}</span><span class="showcase-title">${c[1]}${chevron}</span><span class="showcase-description">${c[2]}</span></span><span class="showcase-phone"><span class="showcase-phone-motion"><span class="showcase-screen"><img class="showcase-home" src="${base}${c[3]}" alt="" loading="lazy" draggable="false"><img class="showcase-detail" src="${base}${c[4]}" alt="" loading="lazy" draggable="false"><span class="showcase-qr" id="qr-${i}" aria-hidden="true"><span>使用抖音APP扫码预览</span><span class="qr-paper"><img src="${base}interest-qr-${i}.webp" alt="${c[1]}抖音扫码预览二维码" loading="lazy" draggable="false"></span></span></span><img class="showcase-hardware" src="${base}interest-card-glass-hardware.bbf4898b.png" alt="" loading="lazy" draggable="false"></span></span></button>`).join('')}</div></section>`;
+  return `<section class="showcase-section" aria-labelledby="showcase-title"><h2 id="showcase-title">看看大家的兴趣卡</h2><div class="showcase-grid">${interests.map((c,i)=>`<button class="showcase-card" data-interest="${i}" aria-label="查看精选项目：${c[1]}" aria-expanded="false" aria-controls="qr-${i}"><span class="showcase-meta"><span class="showcase-category">${c[0]}</span><span class="showcase-title">${c[1]}${chevron}</span><span class="showcase-description">${c[2]}</span></span><span class="showcase-phone"><span class="showcase-phone-motion"><span class="showcase-screen"><img class="showcase-home" src="${base}${c[3]}" alt="" loading="lazy" draggable="false"><img class="showcase-detail" data-src="${base}${c[4]}" alt="" loading="lazy" draggable="false"><span class="showcase-qr" id="qr-${i}" aria-hidden="true"><span>使用抖音APP扫码预览</span><span class="qr-paper"><img src="${base}interest-qr-${i}.webp" alt="${c[1]}抖音扫码预览二维码" loading="lazy" draggable="false"></span></span></span><img class="showcase-hardware" src="${base}interest-card-glass-hardware.bbf4898b.png" alt="" loading="lazy" draggable="false"></span></span></button>`).join('')}</div></section>`;
 }
 export function mountShowcase() {
   const cards = [...document.querySelectorAll('.showcase-card')];
+  cards.forEach(card=>{
+    const loadDetail=()=>{
+      const img=card.querySelector('.showcase-detail');
+      if(img.dataset.src){img.addEventListener('load',()=>card.classList.add('detail-ready'),{once:true});img.src=img.dataset.src;delete img.dataset.src;}
+    };
+    card.addEventListener('pointerenter',loadDetail,{once:true});
+    card.addEventListener('focus',loadDetail,{once:true});
+    card.addEventListener('click',loadDetail,{once:true});
+  });
   const setOpen = active => cards.forEach(card => {
     const open = card === active;
     card.classList.toggle('is-open', open);

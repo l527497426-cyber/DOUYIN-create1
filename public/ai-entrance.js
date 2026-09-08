@@ -1,4 +1,8 @@
+let entranceObserver;
 export function mountContentEntrance() {
+  entranceObserver?.disconnect();
+  document.querySelectorAll('.ai-reveal').forEach(e=>e.classList.remove('ai-reveal-visible'));
+  void document.body.offsetHeight;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const stages = [
     ['.hero-ring', 0], ['.hero-person', 80],
@@ -21,6 +25,7 @@ export function mountContentEntrance() {
       observer.unobserve(entry.target);
     });
   }, {threshold: .08});
+  entranceObserver=observer;
   cards.forEach((card, index) => {
     const visible = card.getBoundingClientRect().top < innerHeight - 12;
     prepare(card, visible ? 430 + index * 75 : 0);

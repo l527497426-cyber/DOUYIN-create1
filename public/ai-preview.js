@@ -9,8 +9,6 @@ document.body.classList.toggle('embedded', embedded);
 const title = avatar ? 'AI分身' : 'AI工坊';
 const base = '/assets/online-ai/';
 document.title = `${title} · 抖音创作者中心`;
-document.querySelector(`[data-view="${view}"]`).classList.add('selected');
-document.querySelector(`[data-view="${view}"]`).setAttribute('aria-current', 'page');
 const main = document.querySelector('main');
 main.classList.toggle('avatar-mode', avatar);
 main.innerHTML = `<section class="intro"><img class="hero-ring" src="${base}${avatar?'avatar-background.png':'workshop-hero.webp'}" alt="">${avatar?`<img class="hero-person" src="${base}avatar-hero.png" alt="">`:''}<h1>创所未见 · ${title}</h1><p>${avatar?'所见即所得，链接抖音生态':'把好想法变成好玩法 💡'}</p></section>
@@ -33,3 +31,10 @@ document.querySelectorAll('[data-info]').forEach(b=>b.addEventListener('click',(
 mountShowcase();
 mountContentEntrance();
 mountAiBackground();
+let pageActive=true;
+window.addEventListener('message',event=>{
+  if(event.source!==parent||event.origin!==location.origin||event.data?.type!=='ai-page-active')return;
+  const next=Boolean(event.data.active);
+  if(next&&!pageActive){window.scrollTo(0,0);mountContentEntrance();}
+  pageActive=next;
+});
