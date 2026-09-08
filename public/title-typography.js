@@ -2,7 +2,7 @@ import {titleOutlines} from '/title-outlines.js';
 
 // Replace only matching text nodes, preserving heading semantics and adjacent controls.
 export function mountTitleOutlines(root=document) {
-  const selectors='h2,.intro h1,.capability-heading strong,.showcase-title,.activity-date strong';
+  const selectors='h2,.intro h1,.capability-heading strong,.showcase-title,.activity-date strong,.creation-card .card-title';
   root.querySelectorAll(selectors).forEach(heading=>{
     [...heading.childNodes].filter(node=>node.nodeType===Node.TEXT_NODE).forEach(node=>{
       const title=node.textContent.trim();

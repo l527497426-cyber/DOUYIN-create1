@@ -2,7 +2,7 @@
 Add-Type -AssemblyName PresentationCore
 $font = [System.Windows.Media.GlyphTypeface]::new([Uri]$FontPath)
 $numberFont = [System.Windows.Media.GlyphTypeface]::new([Uri]"$env:LOCALAPPDATA/Microsoft/Windows/Fonts/ByteSans-Bold.ttf")
-$titles = @('数据中心','互动管理','收入变现','创作推荐','活动管理','快捷导航','热门课程','7月活动总览','创所未见 · AI分身','创所未见 · AI工坊','输入邀请码，抢先解锁全新抖音创作生态','看看大家的兴趣卡','AI 聊天','评论区','群聊','答案之书','单词学习','中国色鉴赏','恋爱回复挑战','猜猜小狗品种')
+$titles = @('数据中心','互动管理','收入变现','创作推荐','活动管理','快捷导航','热门课程','7月活动总览','创所未见 · AI分身','创所未见 · AI工坊','输入邀请码，抢先解锁全新抖音创作生态','看看大家的兴趣卡','AI 聊天','评论区','群聊','答案之书','单词学习','中国色鉴赏','恋爱回复挑战','猜猜小狗品种','AI分身','随变','世界书','AI工坊','造世界')
 $result = [ordered]@{}
 $culture = [Globalization.CultureInfo]::InvariantCulture
 foreach($title in $titles){
