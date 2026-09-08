@@ -10,3 +10,8 @@
 /* Soft white light inside the upper half of the invitation surface. */
 .invite-panel{overflow:hidden}
 .invite-panel::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:70%;height:260px;left:15%;top:-130px;border-radius:50%;background:rgba(255,255,255,.95);filter:blur(48px)}
+
+/* Original border-beam line preset, mounted as a small React island. */
+.experience-react-root{width:512px;max-width:100%;height:50px;margin:auto}
+.experience-original-beam .experience{width:100%;max-width:none;height:50px;background:#000}
+.experience-original-beam .experience:hover{background:#000}

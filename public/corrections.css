@@ -268,3 +268,14 @@ html{overflow-y:scroll;scrollbar-gutter:stable}
 #lower-content .task-owned:hover,#lower-content .task-owned:focus-within{background-color:rgba(169,134,219,.10)}
 #lower-content .task-watermark{opacity:.35;transition:opacity .2s ease}
 #lower-content .task-owned:hover .task-watermark,#lower-content .task-owned:focus-within .task-watermark{opacity:.45}
+
+/* Emphasize counts, while dates and timestamps remain regular. */
+.message-heading em{font-weight:700}
+.message-heading time,.income-date,.activity>small{font-weight:400}
+
+/* Calendar dates use the regular UI typeface, rather than Byte Sans numerals. */
+.message-heading time,.income-date,.activity>small,.data-panel>.section-heading>small,.time-options small,.trend-tooltip>span,.chart .axis{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-weight:400}
+.trend-date{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-weight:400}
+
+.course small{font-size:12px;line-height:18px;font-weight:400;color:#91919b}
+.course .course-play-count{font-weight:500;color:#62626d}

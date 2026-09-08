@@ -25,7 +25,7 @@ main:before{display:none}
 .showcase-title{display:flex;align-items:center;gap:2px;margin-top:7px;max-width:100%;font-size:16px;line-height:22px;font-weight:600;white-space:nowrap}
 .showcase-title svg{width:14px;height:14px;flex:none;transition:transform .3s}
 .showcase-card:hover .showcase-title svg{transform:translateX(2px)}
-.showcase-description{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-top:11px;font-size:11px;font-weight:300;line-height:20px}
+.showcase-description{color:#15161b80;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-top:11px;font-size:11px;font-weight:300;line-height:20px}
 .showcase-phone{position:absolute;left:50%;top:145px;width:142px;height:286px;transform:translateX(-50%);pointer-events:none}
 .showcase-phone-motion{position:relative;display:block;width:100%;height:100%;transform:scale(.94);transform-origin:top center;filter:drop-shadow(0 12px 16px #00000014)}
 .showcase-screen{position:absolute;left:6px;top:5px;width:130px;height:281px;overflow:hidden;border-radius:18px;background:#121212;isolation:isolate}

@@ -1,0 +1,5 @@
+/* Byte Sans applies only to digits and numeric punctuation; Chinese stays unchanged. */
+@font-face{font-family:ByteSansNumbers;src:url('/assets/fonts/ByteSans-Regular.ttf') format('truetype');font-style:normal;font-weight:100 400;font-display:swap;unicode-range:U+0030-0039,U+0025,U+002B-002F,U+003A,U+00A5,U+2212,U+FF05,U+FFE5}
+@font-face{font-family:ByteSansNumbers;src:url('/assets/fonts/ByteSans-Medium.ttf') format('truetype');font-style:normal;font-weight:500 600;font-display:swap;unicode-range:U+0030-0039,U+0025,U+002B-002F,U+003A,U+00A5,U+2212,U+FF05,U+FFE5}
+@font-face{font-family:ByteSansNumbers;src:url('/assets/fonts/ByteSans-Bold.ttf') format('truetype');font-style:normal;font-weight:700 900;font-display:swap;unicode-range:U+0030-0039,U+0025,U+002B-002F,U+003A,U+00A5,U+2212,U+FF05,U+FFE5}
+:root{font-family:ByteSansNumbers,"PingFang SC","Microsoft YaHei",Arial,sans-serif}

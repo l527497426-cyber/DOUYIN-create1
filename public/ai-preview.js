@@ -1,3 +1,6 @@
+import {mountExperienceBeam} from '/experience-beam.js';
+import {mountHeroMotion} from '/ai-hero-motion.js';
+import {mountTitleOutlines} from '/title-typography.js';
 import {showcaseMarkup, mountShowcase} from '/ai-showcase.js';
 import {mountContentEntrance} from '/ai-entrance.js';
 import {mountAiBackground} from '/ai-background.js';
@@ -28,9 +31,12 @@ dialog.addEventListener('close',()=>opener?.focus());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();if(input.value.length!==8){status.textContent='请输入完整的 8 位邀请码';input.focus();return;}if(!document.querySelector('#agreement').checked){status.textContent='请先勾选内测协议';document.querySelector('#agreement').focus();return;}show(`<span class="preview-label">本地仿真</span><h2>体验流程已完成</h2><p>已模拟邀请码提交与确认反馈。当前页面不会验证真实邀请码，也不会开通线上服务。</p><button class="experience" data-close>返回页面</button>`);content.querySelector('[data-close]').onclick=()=>dialog.close();});
 document.querySelectorAll('[data-info]').forEach(b=>b.addEventListener('click',()=>show(`<span class="preview-label">本地仿真</span><h2>${b.dataset.info}</h2><p>此处保留线上入口的交互位置。协议、问卷和入群内容需在抖音官方页面查看；本地预览不提交信息。</p>`)));
+mountTitleOutlines();
 mountShowcase();
 mountContentEntrance();
 mountAiBackground();
+mountHeroMotion();
+mountExperienceBeam();
 let pageActive=true;
 window.addEventListener('message',event=>{
   if(event.source!==parent||event.origin!==location.origin||event.data?.type!=='ai-page-active')return;
