@@ -82,11 +82,12 @@ const smartWorks: { id: string; title: string; description: string; product: Pro
 ]
 const smartPosters = smartWorks.map(work => asset(`media/${work.id}.webp`))
 
-function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void }) {
+function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: ProductId) => void; expanded?: boolean }) {
   const [phase, setPhase] = useState(2)
   const phaseRef = useRef(2)
   const stripRef = useRef<HTMLDivElement>(null)
   const stripWidthRef = useRef(371)
+  const [stripWidth, setStripWidth] = useState(371)
   const hoveredRef = useRef<number | null>(null)
   const readyVideoRef = useRef<number | null>(null)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
@@ -155,6 +156,10 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
     const animate = (now: number) => {
       const elapsed = previousTime ? Math.min(now - previousTime, 50) : 0
       previousTime = now
+      if (expanded && stripWidthRef.current >= 640) {
+        frame = window.requestAnimationFrame(animate)
+        return
+      }
       if (dragRef.current?.active) {
         const remaining = (dragTargetRef.current ?? phaseRef.current) - phaseRef.current
         const easedStep = remaining * (1 - Math.exp(-elapsed / 45))
@@ -180,10 +185,10 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
     }
     frame = window.requestAnimationFrame(animate)
     return () => window.cancelAnimationFrame(frame)
-  }, [reducedMotion])
+  }, [reducedMotion, expanded])
 
   const startDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.button !== 0 || dragRef.current) return
+    if ((expanded && stripWidthRef.current >= 640) || event.button !== 0 || dragRef.current) return
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, lastX: event.clientX, lastTime: event.timeStamp, velocity: 0, active: false }
   }
 
@@ -232,11 +237,12 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
   useEffect(() => {
     const strip = stripRef.current
     if (!strip) return
-    const resize = () => { stripWidthRef.current = strip.clientWidth }
+    const resize = () => { stripWidthRef.current = strip.clientWidth; setStripWidth(strip.clientWidth) }
     resize()
     const observer = new ResizeObserver(resize)
     observer.observe(strip)
     const onWheel = (event: WheelEvent) => {
+      if (expanded && stripWidthRef.current >= 640) return
       const rawDelta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX
       const delta = Math.max(-180, Math.min(180, rawDelta * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 100 : 1)))
       if (Math.abs(delta) < 4) return
@@ -252,17 +258,18 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
     }
     strip.addEventListener('wheel', onWheel, { passive: false })
     return () => { strip.removeEventListener('wheel', onWheel); observer.disconnect() }
-  }, [reducedMotion])
+  }, [reducedMotion, expanded])
 
+  const fixedEntries = expanded && stripWidth >= 640
   const centerIndex = ((Math.round(phase) % smartWorks.length) + smartWorks.length) % smartWorks.length
   return (
-    <><section className="fh-panel fh-smart" aria-label="智能创作">
+    <><section className={`fh-panel fh-smart${fixedEntries ? " fh-smart-fixed" : ""}`} aria-label="智能创作">
       <h2>智能创作</h2>
       <div ref={stripRef} className={`fh-orbs${webglReady ? ' has-webgl' : ''}${dragging ? ' is-dragging' : ''}`} style={{ '--glass-rim-opacity': glassSettings.cssRimOpacity, '--glass-rim-blur': `${glassSettings.cssRimBlur}px` } as CSSProperties} role="group" aria-roledescription="轮播" aria-label="滚动切换智能创作作品" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={event => endDrag(event)} onPointerCancel={event => endDrag(event, true)} onPointerLeave={() => { if (dragRef.current && !dragRef.current.active) dragRef.current = null }} onClickCapture={event => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }} onDragStart={event => event.preventDefault()}>
-        <SmartGlassScene posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} />
+        <SmartGlassScene expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} />
         {smartWorks.map((work, index) => {
-          const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidthRef.current)
-          const isCenter = index === centerIndex
+          const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidthRef.current, expanded)
+          const isCenter = fixedEntries || index === centerIndex
           const prominence = (size - 64) / 76
           const revealProgress = Math.max(0, Math.min(1, (0.5 - Math.abs(distance)) / 0.35))
           const descriptionOpacity = revealProgress * revealProgress * (3 - 2 * revealProgress)
@@ -278,7 +285,7 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
             onFocus={() => playVideo(index)}
             onBlur={() => pauseVideo(index)}
             onClick={() => {
-              if (Math.abs(distance) < 0.5) {
+              if (fixedEntries || Math.abs(distance) < 0.5) {
                 if (work.product === 'create-world') toast('造世界（演示）')
                 else onOpenProduct(work.product)
               }
@@ -290,13 +297,13 @@ function SmartCreate({ onOpenProduct }: { onOpenProduct: (id: ProductId) => void
               }
             }}
             aria-label={`${work.title}${isCenter ? '，进入' : '，移至中间'}`}
-            aria-current={isCenter ? 'true' : undefined}
+            aria-current={!fixedEntries && isCenter ? 'true' : undefined}
           ><img className="fh-orb-media fh-orb-poster" src={smartPosters[index]} alt="" draggable={false} /><video className={`fh-orb-media fh-orb-video${readyVideoIndex === index ? ' is-playing' : ''}`} ref={videoRefCallbacks[index]} poster={smartPosters[index]} preload="none" muted loop playsInline aria-hidden="true" /></button>
-            {!webglReady && <div className="fh-smart-caption" style={{ opacity: Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
+            {(!webglReady || fixedEntries) && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
               <strong style={{ transform: `scale(${0.8 + 0.2 * prominence})`, opacity: 0.6 + 0.4 * prominence }}>{work.title}</strong>
               <span
-                style={{ opacity: descriptionOpacity, transform: `translate3d(0, ${(1 - descriptionOpacity) * 6}px, 0)` }}
-                aria-hidden={descriptionOpacity === 0}
+                style={{ opacity: fixedEntries ? 1 : descriptionOpacity, transform: `translate3d(0, ${(1 - descriptionOpacity) * 6}px, 0)` }}
+                aria-hidden={!fixedEntries && descriptionOpacity === 0}
               >{work.description}</span>
             </div>}
           </div>
@@ -440,7 +447,7 @@ export default function FigmaHomeContent({ onOpenProduct, onScrollStateChange }:
     <div className="fh-content-grid">
       <div className="fh-left-column">
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}><Profile /></motion.div>
-        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}>{classicLayout ? <PublishRow /> : <SmartCreate onOpenProduct={onOpenProduct} />}</motion.div>
+        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}>{classicLayout ? <PublishRow /> : <SmartCreate expanded onOpenProduct={onOpenProduct} />}</motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.16 }}><Overview /></motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.46, delay: 0.22 }}><WorkPerformance /></motion.div>
         <Monetization />

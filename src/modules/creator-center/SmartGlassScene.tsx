@@ -38,6 +38,7 @@ const artworkFragmentShader = `
 `
 
 type GlassSceneProps = {
+  expanded?: boolean
   posters: string[]
   captions: { title: string; description: string }[]
   phaseRef: RefObject<number>
@@ -48,7 +49,7 @@ type GlassSceneProps = {
   onReady: (ready: boolean) => void
 }
 
-function SmartGlassScene({ posters, captions, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady }: GlassSceneProps) {
+function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady }: GlassSceneProps) {
   const hostRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -160,7 +161,7 @@ function SmartGlassScene({ posters, captions, phaseRef, hoveredRef, readyVideoRe
     }
 
     const updatePositions = () => groups.forEach((group, index) => {
-      const { size, offset, distance } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth)
+      const { size, offset, distance } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
       group.position.set(offset, 0, -Math.abs(distance) * 0.01)
       group.scale.setScalar(size / 2)
       group.visible = Math.abs(distance) < 2.5
@@ -172,10 +173,10 @@ function SmartGlassScene({ posters, captions, phaseRef, hoveredRef, readyVideoRe
         caption.title.position.set(offset, -size / 2 - 22, 1)
         caption.title.scale.setScalar(0.8 + 0.2 * prominence)
         caption.title.material.opacity = edgeOpacity * (0.6 + 0.4 * prominence)
-        caption.title.visible = group.visible
+        caption.title.visible = group.visible && !(expanded && sceneWidth >= 640)
         caption.description.position.set(offset, -size / 2 - 42 - (1 - reveal) * 6, 1)
         caption.description.material.opacity = edgeOpacity * reveal
-        caption.description.visible = group.visible && reveal > 0
+        caption.description.visible = group.visible && reveal > 0 && !(expanded && sceneWidth >= 640)
       }
     })
 
@@ -186,7 +187,7 @@ function SmartGlassScene({ posters, captions, phaseRef, hoveredRef, readyVideoRe
         lastRenderTime = now
         const settings = settingsRef.current
         shellMaterials.forEach((material, index) => {
-          const distance = Math.abs(smartOrbGeometry(index, phaseRef.current, posters.length).distance)
+          const distance = Math.abs(smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded).distance)
           const transition = THREE.MathUtils.smoothstep(distance, 0.2, 1.6)
           const optics = 1 - transition * 0.28
           const chromatic = 1 - transition * 0.65
@@ -306,7 +307,7 @@ function SmartGlassScene({ posters, captions, phaseRef, hoveredRef, readyVideoRe
       renderer.domElement.remove()
       onReady(false)
     }
-  }, [captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
+  }, [expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
 
   return <div ref={hostRef} className="fh-glass-canvas" aria-hidden="true" />
 }

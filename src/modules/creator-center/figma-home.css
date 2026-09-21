@@ -369,3 +369,8 @@
   .fh-layout-create-first .fh-music-badge { font-size: 11px; padding: 2px 4px; }
   .fh-publish-panel .fh-publish-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
 }
+.fh-smart-fixed .fh-orbs, .fh-smart-fixed .fh-orb { cursor: pointer; }
+.fh-smart-fixed .fh-smart-caption { width: calc(100% + 20px); top: calc(100% + 12px); gap: 6px; }
+.fh-smart-fixed .fh-smart-caption strong { transform: none !important; opacity: 1 !important; }
+.fh-smart-fixed .fh-smart-caption span { transform: none !important; max-width: 100%; line-height: 18px; text-wrap: balance; }
+.fh-smart-fixed .fh-orb:focus-visible { outline-offset: 4px; }
