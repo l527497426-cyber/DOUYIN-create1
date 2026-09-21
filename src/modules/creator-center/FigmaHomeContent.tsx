@@ -302,7 +302,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
             aria-label={`${work.title}${isCenter ? '，进入' : '，移至中间'}`}
             aria-current={!fixedEntries && isCenter ? 'true' : undefined}
           ><img className="fh-orb-media fh-orb-poster" src={smartPosters[index]} alt="" draggable={false} /><video className={`fh-orb-media fh-orb-video${readyVideoIndex === index ? ' is-playing' : ''}`} ref={videoRefCallbacks[index]} poster={smartPosters[index]} preload="none" muted loop playsInline aria-hidden="true" /></button>
-            {(!webglReady || fixedEntries) && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
+            {!webglReady && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
               <strong style={{ transform: `scale(${0.8 + 0.2 * prominence})`, opacity: 0.6 + 0.4 * prominence }}>{work.title}</strong>
               <span
                 style={{ opacity: fixedEntries ? 1 : descriptionOpacity, transform: `translate3d(0, ${(1 - descriptionOpacity) * 6}px, 0)` }}
@@ -457,7 +457,7 @@ export default function FigmaHomeContent({ onOpenProduct, onScrollStateChange }:
         <CreationRecommendations />
       </div>
       <div className="fh-right-column">
-        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>{classicLayout ? <SmartCreate onOpenProduct={onOpenProduct} /> : <section className="fh-panel fh-publish-panel"><h2>作品发布</h2><PublishRow /></section>}</motion.div>
+        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>{classicLayout ? <SmartCreate onOpenProduct={onOpenProduct} /> : <div className="fh-publish-panel"><PublishRow /></div>}</motion.div>
         <Activity />
       </div>
     </div>

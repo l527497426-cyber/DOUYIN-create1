@@ -384,3 +384,6 @@
 @media (prefers-reduced-motion: reduce) {
   .fh-layout-create-first .fh-orb { transition: none; }
 }
+.fh-publish-panel { padding: 0; background: none; }
+.fh-publish-panel .fh-publish-row { gap: 16px; }
+.fh-publish-panel .fh-publish-item { height: 85px; background: #fff; border-radius: 20px; padding: 16px; }

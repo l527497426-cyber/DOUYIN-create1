@@ -77,7 +77,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
 
     const scene = new THREE.Scene()
     // Extend the viewport below the balls without changing their screen-space size.
-    const camera = new THREE.OrthographicCamera(-173.5, 173.5, 70, -142, 0.1, 1000)
+    const camera = new THREE.OrthographicCamera(-173.5, 173.5, 70, expanded ? -158 : -142, 0.1, 1000)
     camera.position.z = 400
     const room = new RoomEnvironment()
     const pmrem = new THREE.PMREMGenerator(renderer)
@@ -109,6 +109,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     const groups: THREE.Group[] = []
     const hoverScales = posters.map(() => 1)
     const captionGeometry = new THREE.PlaneGeometry(220, 20)
+    const descriptionGeometry = new THREE.PlaneGeometry(220, expanded ? 40 : 20)
     const captionMeshes: { title: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>; description: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> }[] = []
     const captionTextures: THREE.Texture[] = []
     const artworkMaterials: THREE.ShaderMaterial[] = []
@@ -121,7 +122,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     const resize = () => {
       const width = host.clientWidth || 347
       sceneWidth = width
-      renderer.setSize(width, 212, false)
+      renderer.setSize(width, expanded ? 228 : 212, false)
       camera.left = -width / 2
       camera.right = width / 2
       camera.updateProjectionMatrix()
@@ -179,16 +180,18 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       group.visible = Math.abs(distance) < 2.5
       const caption = captionMeshes[index]
       if (caption) {
+        const fixedEntries = expanded && sceneWidth >= 640
+        const captionY = -floatY - size / 2 * hoverScales[index]
         const prominence = (size - 64) / 76
-        const edgeOpacity = THREE.MathUtils.smoothstep(2.2 - Math.abs(distance), 0, 0.6)
-        const reveal = THREE.MathUtils.smoothstep(0.5 - Math.abs(distance), 0, 0.35)
-        caption.title.position.set(offset, -size / 2 - 22, 1)
-        caption.title.scale.setScalar(0.8 + 0.2 * prominence)
-        caption.title.material.opacity = edgeOpacity * (0.6 + 0.4 * prominence)
-        caption.title.visible = group.visible && !(expanded && sceneWidth >= 640)
-        caption.description.position.set(offset, -size / 2 - 42 - (1 - reveal) * 6, 1)
+        const edgeOpacity = fixedEntries ? 1 : THREE.MathUtils.smoothstep(2.2 - Math.abs(distance), 0, 0.6)
+        const reveal = fixedEntries ? 1 : THREE.MathUtils.smoothstep(0.5 - Math.abs(distance), 0, 0.35)
+        caption.title.position.set(offset, captionY - 22, 1)
+        caption.title.scale.setScalar(fixedEntries ? 1 : 0.8 + 0.2 * prominence)
+        caption.title.material.opacity = edgeOpacity * (fixedEntries ? 1 : 0.6 + 0.4 * prominence)
+        caption.title.visible = group.visible
+        caption.description.position.set(offset, captionY - (expanded ? 48 : 42) - (1 - reveal) * 6, 1)
         caption.description.material.opacity = edgeOpacity * reveal
-        caption.description.visible = group.visible && reveal > 0 && !(expanded && sceneWidth >= 640)
+        caption.description.visible = group.visible && reveal > 0
       }
     })
 
@@ -210,15 +213,15 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.transmission = 1 - (1 - settings.transmission) * optics
           material.ior = 1 + (settings.ior - 1) * optics * (softenRefraction ? 0.25 : 1)
           material.thickness = settings.thickness * optics * (softenRefraction ? 0.16 : 1)
-          material.dispersion = settings.dispersion * chromatic * (expanded ? 0.25 : 1)
+          material.dispersion = settings.dispersion * chromatic * (softenRefraction ? 0.25 : 1)
           material.roughness = settings.roughness
           material.clearcoat = settings.clearcoat * reflection
           material.clearcoatRoughness = settings.clearcoatRoughness
-          material.specularIntensity = settings.specularIntensity * reflection
-          material.envMapIntensity = settings.envMapIntensity * reflection
+          material.specularIntensity = settings.specularIntensity * reflection * (expanded ? 1.6 : 1)
+          material.envMapIntensity = settings.envMapIntensity * reflection * (expanded ? 1.8 : 1)
           material.attenuationDistance = settings.attenuationDistance
-          const lightPhase = expanded && !motionPreference.matches ? now * 0.00016 + index * 0.7 : 0
-          material.envMapRotation.set(Math.sin(lightPhase) * 0.12, lightPhase, Math.sin(lightPhase * 0.7) * 0.08)
+          const lightPhase = expanded && !motionPreference.matches ? now * 0.00045 + index * 0.7 : 0
+          material.envMapRotation.set(Math.sin(lightPhase) * 0.45, lightPhase, Math.sin(lightPhase * 0.7) * 0.3)
         })
         artworkMaterials.forEach(material => {
           material.uniforms.uBrightness.value = settings.imageBrightness
@@ -234,8 +237,10 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
 
     const loader = new THREE.TextureLoader()
     const makeCaption = async (text: string, title: boolean) => {
-      const escaped = text.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]!)
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="660" height="60" viewBox="0 0 220 20"><text x="110" y="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="${title ? 14 : 12}" font-weight="${title ? 600 : 400}" fill="${title ? '#252632' : '#7c7d84'}">${escaped}</text></svg>`
+      const lines = expanded && !title ? (text.match(/.{1,10}/gu) ?? [text]) : [text]
+      const height = expanded && !title ? 40 : 20
+      const textNodes = lines.map((line, i) => '<text x="110" y="' + (15 + i * 18) + '" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="' + (title ? 14 : 12) + '" font-weight="' + (title ? 600 : 400) + '" fill="' + (title ? '#252632' : '#7c7d84') + '">' + line.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]!) + '</text>').join('')
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="660" height="' + height * 3 + '" viewBox="0 0 220 ' + height + '">' + textNodes + '</svg>'
       const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }))
       try {
         const texture = await loader.loadAsync(url)
@@ -246,7 +251,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         texture.generateMipmaps = false
         captionTextures.push(texture)
         const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, opacity: 0 })
-        const mesh = new THREE.Mesh(captionGeometry, material)
+        const mesh = new THREE.Mesh(title ? captionGeometry : descriptionGeometry, material)
         mesh.renderOrder = 2
         scene.add(mesh)
         return mesh
@@ -311,9 +316,10 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       artworkMaterials.forEach(material => material.dispose())
       captionTextures.forEach(texture => texture.dispose())
       scene.traverse(node => {
-        if (node instanceof THREE.Mesh && node.geometry === captionGeometry) node.material.dispose()
+        if (node instanceof THREE.Mesh && (node.geometry === captionGeometry || node.geometry === descriptionGeometry)) node.material.dispose()
       })
       captionGeometry.dispose()
+      descriptionGeometry.dispose()
       circleGeometry.dispose()
       sphereGeometry.dispose()
       shellMaterials.forEach(material => material.dispose())
@@ -326,7 +332,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     }
   }, [expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
 
-  return <div ref={hostRef} className="fh-glass-canvas" aria-hidden="true" />
+  return <div ref={hostRef} className="fh-glass-canvas" style={expanded ? { height: 228 } : undefined} aria-hidden="true" />
 }
 
 export default memo(SmartGlassScene)
