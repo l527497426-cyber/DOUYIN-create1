@@ -434,19 +434,20 @@ function CreationRecommendations() {
 
 export default function FigmaHomeContent({ onOpenProduct, onScrollStateChange }: { onOpenProduct: (id: ProductId) => void; onScrollStateChange?: (scrolled: boolean) => void }) {
   const reducedMotion = useReducedMotion()
-  return <main className="fh-main" onScroll={event => onScrollStateChange?.(event.currentTarget.scrollTop > 8)}>
+  const classicLayout = new URLSearchParams(window.location.search).get('layout') === 'classic'
+  return <main className={`fh-main${classicLayout ? '' : ' fh-layout-create-first'}`} onScroll={event => onScrollStateChange?.(event.currentTarget.scrollTop > 8)}>
     <div className="fh-hero-background" aria-hidden="true"><img src={designAsset('ascii-magic.png')} alt="" /></div>
     <div className="fh-content-grid">
       <div className="fh-left-column">
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}><Profile /></motion.div>
-        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}><PublishRow /></motion.div>
+        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}>{classicLayout ? <PublishRow /> : <SmartCreate onOpenProduct={onOpenProduct} />}</motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.16 }}><Overview /></motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.46, delay: 0.22 }}><WorkPerformance /></motion.div>
         <Monetization />
         <CreationRecommendations />
       </div>
       <div className="fh-right-column">
-        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}><SmartCreate onOpenProduct={onOpenProduct} /></motion.div>
+        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>{classicLayout ? <SmartCreate onOpenProduct={onOpenProduct} /> : <section className="fh-panel fh-publish-panel"><h2>作品发布</h2><PublishRow /></section>}</motion.div>
         <Activity />
       </div>
     </div>

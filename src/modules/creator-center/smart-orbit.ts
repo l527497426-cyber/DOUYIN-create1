@@ -7,7 +7,7 @@ export const smartDistance = (index: number, phase: number, count: number) => {
 
 export const smartOrbGeometry = (index: number, phase: number, count: number, width = 371) => {
   const distance = smartDistance(index, phase, count)
-  const spacing = Math.max(1, Math.min(1.2, width / 371))
+  const spacing = Math.max(1, Math.min(2.2, width / 371))
   return {
     distance,
     size: 64 + 76 * Math.exp(-1.558 * distance * distance),
