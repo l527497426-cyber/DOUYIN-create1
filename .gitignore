@@ -38,3 +38,4 @@ coverage/
 design-refs/
 
 /node_modules
+.env*

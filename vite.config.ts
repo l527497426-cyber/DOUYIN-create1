@@ -57,8 +57,23 @@ function kimiDevApi(): PluginOption {
   }
 }
 
+function loginPageRoute(): PluginOption {
+  const rewrite = (req: IncomingMessage, _res: ServerResponse, next: () => void) => {
+    const url = new URL(req.url || '/', 'http://local')
+    if (url.pathname === '/login' || url.pathname === '/login/') {
+      req.url = `/login/index.html${url.search}`
+    }
+    next()
+  }
+  return {
+    name: 'login-page-route',
+    configureServer(server) { server.middlewares.use(rewrite) },
+    configurePreviewServer(server) { server.middlewares.use(rewrite) },
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss(), kimiDevApi()],
+  plugins: [loginPageRoute(), react(), tailwindcss(), kimiDevApi()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

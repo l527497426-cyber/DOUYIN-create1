@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 1166" aria-hidden="true">
+  <defs>
+    <linearGradient id="soft-edge" x1="0" y1="594" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".1" stop-color="#fff" stop-opacity="1"/>
+      <stop offset=".68" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="texture" width="3" height="3" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".42" fill="#797979" opacity=".34"/>
+    </pattern>
+    <mask id="fade">
+      <path d="M0 594H568L574 638L550 683L608 715L562 760L611 812L570 900H0Z" fill="url(#soft-edge)"/>
+    </mask>
+  </defs>
+  <path d="M0 594H568L574 638L550 683L608 715L562 760L611 812L570 900H0Z" fill="#202021" mask="url(#fade)"/>
+  <path d="M0 594H568L574 638L550 683L608 715L562 760L611 812L570 900H0Z" fill="url(#texture)" mask="url(#fade)"/>
+</svg>
