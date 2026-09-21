@@ -127,7 +127,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     const pointerLights = posters.map(() => new THREE.Vector2())
     const isWorld = posters.map(url => url.endsWith("/mountain.webp"))
     const captionGeometry = new THREE.PlaneGeometry(220, 20)
-    const descriptionGeometry = new THREE.PlaneGeometry(220, expanded ? 40 : 20)
+    const descriptionGeometry = new THREE.PlaneGeometry(220, 20)
     const captionMeshes: { title: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>; description: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> }[] = []
     const captionTextures: THREE.Texture[] = []
     const artworkMaterials: THREE.ShaderMaterial[] = []
@@ -222,7 +222,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         caption.title.scale.setScalar(fixedEntries ? 1 : 0.8 + 0.2 * prominence)
         caption.title.material.opacity = edgeOpacity * (fixedEntries ? 1 : 0.6 + 0.4 * prominence)
         caption.title.visible = group.visible
-        caption.description.position.set(offset, captionY - (expanded ? 48 : 42) - (1 - reveal) * 6, 1)
+        caption.description.position.set(offset, captionY - (expanded ? 54 : 42) - (1 - reveal) * 6, 1)
         caption.description.material.opacity = edgeOpacity * reveal
         caption.description.visible = group.visible && reveal > 0
       }
@@ -273,8 +273,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
 
     const loader = new THREE.TextureLoader()
     const makeCaption = async (text: string, title: boolean) => {
-      const lines = expanded && !title ? (text.match(/.{1,10}/gu) ?? [text]) : [text]
-      const height = expanded && !title ? 40 : 20
+      const lines = [text]
+      const height = 20
       const textNodes = lines.map((line, i) => '<text x="110" y="' + (15 + i * 18) + '" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="' + (title ? 14 : 12) + '" font-weight="' + (title ? 600 : 400) + '" fill="' + (title ? '#252632' : '#7c7d84') + '">' + line.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]!) + '</text>').join('')
       const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="660" height="' + height * 3 + '" viewBox="0 0 220 ' + height + '">' + textNodes + '</svg>'
       const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }))
