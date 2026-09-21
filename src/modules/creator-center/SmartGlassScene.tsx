@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, type RefObject } from 'react'
 import * as THREE from 'three'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
-import { smartOrbGeometry } from './smart-orbit'
+import { smartFloat, smartOrbGeometry } from './smart-orbit'
 import type { GlassSettings } from './glass-settings'
 
 const artworkVertexShader = `
@@ -64,6 +64,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       return
     }
 
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)")
     let disposed = false
     let frame = 0
     let visible = true
@@ -169,7 +170,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
 
     const updatePositions = () => groups.forEach((group, index) => {
       const { size, offset, distance } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
-      group.position.set(offset, 0, -Math.abs(distance) * 0.01)
+      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, performance.now()) : 0
+      group.position.set(offset, -floatY, -Math.abs(distance) * 0.01)
       group.scale.setScalar(size / 2)
       group.visible = Math.abs(distance) < 2.5
       const caption = captionMeshes[index]
@@ -196,14 +198,15 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         shellMaterials.forEach((material, index) => {
           const distance = Math.abs(smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded).distance)
           const transition = THREE.MathUtils.smoothstep(distance, 0.2, 1.6)
+          const softenRefraction = expanded && isInterfaceArtwork[index]
           const optics = 1 - transition * 0.28
           const chromatic = 1 - transition * 0.65
           const reflection = 1 - transition * 0.12
           material.color.set(settings.tintColor)
           material.attenuationColor.set(settings.attenuationColor)
           material.transmission = 1 - (1 - settings.transmission) * optics
-          material.ior = 1 + (settings.ior - 1) * optics * (expanded ? 0.25 : 1)
-          material.thickness = settings.thickness * optics * (expanded ? 0.16 : 1)
+          material.ior = 1 + (settings.ior - 1) * optics * (softenRefraction ? 0.25 : 1)
+          material.thickness = settings.thickness * optics * (softenRefraction ? 0.16 : 1)
           material.dispersion = settings.dispersion * chromatic * (expanded ? 0.25 : 1)
           material.roughness = settings.roughness
           material.clearcoat = settings.clearcoat * reflection
@@ -211,6 +214,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.specularIntensity = settings.specularIntensity * reflection
           material.envMapIntensity = settings.envMapIntensity * reflection
           material.attenuationDistance = settings.attenuationDistance
+          const lightPhase = expanded && !motionPreference.matches ? now * 0.00016 + index * 0.7 : 0
+          material.envMapRotation.set(Math.sin(lightPhase) * 0.12, lightPhase, Math.sin(lightPhase * 0.7) * 0.08)
         })
         artworkMaterials.forEach(material => {
           material.uniforms.uBrightness.value = settings.imageBrightness

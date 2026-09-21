@@ -15,3 +15,6 @@ export const smartOrbGeometry = (index: number, phase: number, count: number, wi
     offset: (101 * distance + 19 * Math.sin(Math.PI * distance / 2)) * spacing,
   }
 }
+
+// Shared clock keeps WebGL spheres, hit targets and labels moving together.
+export const smartFloat = (index: number, time: number) => 6 + Math.sin(time * 0.001 * (0.82 + index * 0.045) + index * 1.3) * 4

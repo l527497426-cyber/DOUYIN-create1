@@ -5,7 +5,7 @@ import type { ProductId } from './data'
 import SmartGlassScene from './SmartGlassScene'
 import GlassEditor from './GlassEditor'
 import { loadGlassSettings, saveGlassSettings } from './glass-settings'
-import { smartDistance, smartOrbGeometry } from './smart-orbit'
+import { smartDistance, smartFloat, smartOrbGeometry } from './smart-orbit'
 import './figma-home.css'
 
 const asset = (name: string) => `/figma-home/${name}`
@@ -156,6 +156,9 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
     const animate = (now: number) => {
       const elapsed = previousTime ? Math.min(now - previousTime, 50) : 0
       previousTime = now
+      stripRef.current?.querySelectorAll<HTMLElement>(".fh-orb-position").forEach((element, index) => {
+        element.style.translate = expanded && stripWidthRef.current >= 640 && !reducedMotion ? `0 ${smartFloat(index, now)}px` : "none"
+      })
       if (expanded && stripWidthRef.current >= 640) {
         frame = window.requestAnimationFrame(animate)
         return
