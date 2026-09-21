@@ -72,8 +72,9 @@ function SmartGlassScene({ expanded = false, posters, captions, motionTimeRef, p
     let frame = 0
     let visible = true
     let lastRenderTime = 0
-    renderer.transmissionResolutionScale = 0.75
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+    // Keep the refracted artwork at full resolution; low-res transmission softens videos.
+    renderer.transmissionResolutionScale = 1
+    renderer.setPixelRatio(2)
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.setClearColor(0xffffff, 0)
     renderer.domElement.setAttribute('aria-hidden', 'true')
