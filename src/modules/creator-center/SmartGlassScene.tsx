@@ -105,6 +105,20 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       depthWrite: false,
     })
     const shellMaterials = posters.map((_, index) => index === 0 ? shellMaterial : shellMaterial.clone())
+    // Orthographic rays are parallel: perspective rays shift off-center artwork
+    // sideways as soon as the transmission pass replaces the HTML poster.
+    shellMaterials.forEach(material => {
+      material.onBeforeCompile = shader => {
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <transmission_fragment>',
+          THREE.ShaderChunk.transmission_fragment.replace(
+            'vec3 v = normalize( cameraPosition - pos );',
+            'vec3 v = isOrthographic ? normalize( vec3( viewMatrix[0].z, viewMatrix[1].z, viewMatrix[2].z ) ) : normalize( cameraPosition - pos );',
+          ),
+        )
+      }
+      material.customProgramCacheKey = () => 'orthographic-transmission-v1'
+    })
     // Fill more of the sphere with UI artwork while retaining the shared glass optics.
     const isInterfaceArtwork = posters.map(url => url.endsWith('/interface.webp'))
     const groups: THREE.Group[] = []
