@@ -829,7 +829,7 @@ input:focus-visible {
 .ai-grid {
   display: flex;
   gap: 16px;
-  margin-top: 32px;
+  margin-top: 60px;
   perspective: 1400px;
   perspective-origin: 50% 50%;
 }
@@ -2388,7 +2388,7 @@ input:focus-visible {
   }
 
   .ai-grid {
-    margin-top: 34px;
+    margin-top: 60px;
   }
 
   .operations,
