@@ -101,6 +101,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
   const [dragging, setDragging] = useState(false)
   const [readyVideoIndex, setReadyVideoIndex] = useState<number | null>(null)
   const [webglReady, setWebglReady] = useState(false)
+  const [captionsReady, setCaptionsReady] = useState(false)
   const [glassSettings, setGlassSettings] = useState(loadGlassSettings)
   const settingsRef = useRef(glassSettings)
   settingsRef.current = glassSettings
@@ -269,7 +270,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
     <><section className={`fh-panel fh-smart${fixedEntries ? " fh-smart-fixed" : ""}`} aria-label="智能创作">
       <h2>智能创作</h2>
       <div ref={stripRef} className={`fh-orbs${webglReady ? ' has-webgl' : ''}${dragging ? ' is-dragging' : ''}`} style={{ '--glass-rim-opacity': glassSettings.cssRimOpacity, '--glass-rim-blur': `${glassSettings.cssRimBlur}px` } as CSSProperties} role="group" aria-roledescription="轮播" aria-label="滚动切换智能创作作品" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={event => endDrag(event)} onPointerCancel={event => endDrag(event, true)} onPointerLeave={() => { if (dragRef.current && !dragRef.current.active) dragRef.current = null }} onClickCapture={event => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }} onDragStart={event => event.preventDefault()}>
-        <SmartGlassScene expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} />
+        <SmartGlassScene expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} onCaptionsReady={setCaptionsReady} />
         {smartWorks.map((work, index) => {
           const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidthRef.current, expanded)
           const isCenter = fixedEntries || index === centerIndex
@@ -302,7 +303,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
             aria-label={`${work.title}${isCenter ? '，进入' : '，移至中间'}`}
             aria-current={!fixedEntries && isCenter ? 'true' : undefined}
           ><img className="fh-orb-media fh-orb-poster" src={smartPosters[index]} alt="" draggable={false} /><video className={`fh-orb-media fh-orb-video${readyVideoIndex === index ? ' is-playing' : ''}`} ref={videoRefCallbacks[index]} poster={smartPosters[index]} preload="none" muted loop playsInline aria-hidden="true" /></button>
-            {!webglReady && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
+            {(!webglReady || !captionsReady) && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
               <strong style={{ transform: `scale(${0.8 + 0.2 * prominence})`, opacity: 0.6 + 0.4 * prominence }}>{work.title}</strong>
               <span
                 style={{ opacity: fixedEntries ? 1 : descriptionOpacity, transform: `translate3d(0, ${(1 - descriptionOpacity) * 6}px, 0)` }}

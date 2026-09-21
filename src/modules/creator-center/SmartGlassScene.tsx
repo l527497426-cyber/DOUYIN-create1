@@ -50,9 +50,10 @@ type GlassSceneProps = {
   videoRefs: RefObject<(HTMLVideoElement | null)[]>
   settingsRef: RefObject<GlassSettings>
   onReady: (ready: boolean) => void
+  onCaptionsReady: (ready: boolean) => void
 }
 
-function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady }: GlassSceneProps) {
+function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady, onCaptionsReady }: GlassSceneProps) {
   const hostRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -70,12 +71,22 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     let frame = 0
     let visible = true
     let lastRenderTime = 0
+    renderer.transmissionResolutionScale = 0.75
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.setClearColor(0xffffff, 0)
     renderer.domElement.setAttribute('aria-hidden', 'true')
     host.appendChild(renderer.domElement)
 
+    // Start network requests before generating the environment and GPU resources.
+    const loader = new THREE.TextureLoader()
+    const postersReady = Promise.all(posters.map(async url => {
+      const texture = await loader.loadAsync(url)
+      texture.colorSpace = THREE.SRGBColorSpace
+      texture.minFilter = THREE.LinearFilter
+      texture.magFilter = THREE.LinearFilter
+      return texture
+    }))
     const scene = new THREE.Scene()
     // Extend the viewport below the balls without changing their screen-space size.
     const camera = new THREE.OrthographicCamera(-173.5, 173.5, 70, expanded ? -158 : -142, 0.1, 1000)
@@ -273,7 +284,6 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       frame = window.requestAnimationFrame(render)
     }
 
-    const loader = new THREE.TextureLoader()
     const makeCaption = async (text: string, title: boolean) => {
       const lines = [text]
       const height = 20
@@ -295,18 +305,11 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         return mesh
       } finally { URL.revokeObjectURL(url) }
     }
-    const captionReady = Promise.all(captions.map(async (caption, index) => {
+    void Promise.all(captions.map(async (caption, index) => {
       const [title, description] = await Promise.all([makeCaption(caption.title, true), makeCaption(caption.description, false)])
       if (title && description) captionMeshes[index] = { title, description }
-    }))
-    const postersReady = Promise.all(posters.map(async url => {
-      const texture = await loader.loadAsync(url)
-      texture.colorSpace = THREE.SRGBColorSpace
-      texture.minFilter = THREE.LinearFilter
-      texture.magFilter = THREE.LinearFilter
-      return texture
-    }))
-    Promise.all([postersReady, captionReady]).then(([textures]) => {
+    })).then(() => { if (!disposed) onCaptionsReady(true) }).catch(() => { /* Keep HTML captions if SVG decoding fails. */ })
+    postersReady.then((textures) => {
       if (disposed) { textures.forEach(texture => texture.dispose()); return }
       posterTextures = textures
       textures.forEach((texture, index) => {
@@ -370,8 +373,9 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       renderer.dispose()
       renderer.domElement.remove()
       onReady(false)
+      onCaptionsReady(false)
     }
-  }, [expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
+  }, [onCaptionsReady, expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
 
   return <div ref={hostRef} className="fh-glass-canvas" style={expanded ? { height: 228 } : undefined} aria-hidden="true" />
 }
