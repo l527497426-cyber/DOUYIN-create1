@@ -347,7 +347,11 @@ function Overview() {
         <button type="button" className="fh-more" onClick={() => toast('数据中心（演示）')}>更多 <Arrow size={12} /></button>
       </div>
     </div>
-    <div className="fh-insight"><span className="fh-insight-icon"><img src={designAsset('overview-insight.svg')} alt="" aria-hidden="true" /></span><p>播放在涨，吸粉效率却 <b>下降了 9%。</b> 冷门佳片带来更多观看，但关注转化低于你的平均水平。下一条建议把“创作背景”进行前置。</p></div>
+    <div className="fh-insight"><span className="fh-insight-icon" aria-hidden="true">
+      <span className="fh-insight-glow" />
+      {[18, 63, 106, 151, 198, 242, 287, 332].map((angle, index) => <span key={angle} className={'fh-insight-ray ' + (index % 3 === 0 ? 'is-front' : 'is-back')} style={{ '--ray-angle': angle + 'deg', '--ray-delay': -index * 0.43 + 's', '--ray-duration': (2.6 + index % 3 * 0.35) + 's' } as CSSProperties}><i /></span>)}
+      <img src={designAsset('overview-insight.svg')} alt="" />
+    </span><p>播放在涨，吸粉效率却 <b>下降了 9%。</b> 冷门佳片带来更多观看，但关注转化低于你的平均水平。下一条建议把“创作背景”进行前置。</p></div>
     <div className="fh-metrics">{metrics.map(metric => <div className="fh-metric" key={metric.label}><span>{metric.label}</span><div><strong>{metric.value}</strong><small>较前7日 <em className={metric.positive ? 'rise' : 'fall'}>{metric.delta}</em></small></div></div>)}</div>
   </section>
 }
