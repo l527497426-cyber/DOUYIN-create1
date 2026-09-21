@@ -77,6 +77,11 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     host.appendChild(renderer.domElement)
 
     const scene = new THREE.Scene()
+    // Direct lights produce moving clearcoat highlights, independently of the
+    // environment reflections. The video shader remains unlit.
+    const pointerKeyLight = new THREE.PointLight(0xffffff, 0, 400, 0)
+    const pointerFillLight = new THREE.PointLight(0xffffff, 0, 400, 0)
+    scene.add(pointerKeyLight, pointerFillLight)
     // Extend the viewport below the balls without changing their screen-space size.
     const camera = new THREE.OrthographicCamera(-173.5, 173.5, 70, expanded ? -158 : -142, 0.1, 1000)
     camera.position.z = 400
@@ -266,6 +271,20 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         })
         updateVideo(elapsed)
         updatePositions(elapsed)
+        const activeIndex = hoveredRef.current
+        const lightEase = motionPreference.matches ? 1 : 1 - Math.exp(-elapsed / 100)
+        pointerKeyLight.intensity += ((activeIndex === null ? 0 : 3.2) - pointerKeyLight.intensity) * lightEase
+        pointerFillLight.intensity += ((activeIndex === null ? 0 : 1.6) - pointerFillLight.intensity) * lightEase
+        if (activeIndex !== null && groups[activeIndex]) {
+          const group = groups[activeIndex]
+          const radius = group.scale.x
+          const pointer = pointerLights[activeIndex]
+          // Two offset highlights move with the pointer across the shell.
+          pointerKeyLight.position.set(group.position.x + (pointer.x * 2.8 - 0.65) * radius, group.position.y + (0.85 - pointer.y * 2.8) * radius, radius * 2.4)
+          pointerFillLight.position.set(group.position.x + (pointer.x * 2.2 + 1.1) * radius, group.position.y + (-0.35 - pointer.y * 2.2) * radius, radius * 2.1)
+          pointerKeyLight.distance = radius * 5
+          pointerFillLight.distance = radius * 4.5
+        }
         renderer.render(scene, camera)
       }
       frame = window.requestAnimationFrame(render)
