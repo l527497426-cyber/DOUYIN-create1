@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useLayoutEffect, useId, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
 import type { ProductId } from './data'
@@ -238,7 +238,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
     dragRef.current = null
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const strip = stripRef.current
     if (!strip) return
     const resize = () => { stripWidthRef.current = strip.clientWidth; setStripWidth(strip.clientWidth) }
@@ -272,7 +272,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
       <div ref={stripRef} className={`fh-orbs${webglReady ? ' has-webgl' : ''}${dragging ? ' is-dragging' : ''}`} style={{ '--glass-rim-opacity': glassSettings.cssRimOpacity, '--glass-rim-blur': `${glassSettings.cssRimBlur}px` } as CSSProperties} role="group" aria-roledescription="轮播" aria-label="滚动切换智能创作作品" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={event => endDrag(event)} onPointerCancel={event => endDrag(event, true)} onPointerLeave={() => { if (dragRef.current && !dragRef.current.active) dragRef.current = null }} onClickCapture={event => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }} onDragStart={event => event.preventDefault()}>
         <SmartGlassScene expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} onCaptionsReady={setCaptionsReady} />
         {smartWorks.map((work, index) => {
-          const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidthRef.current, expanded)
+          const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidth, expanded)
           const isCenter = fixedEntries || index === centerIndex
           const prominence = (size - 64) / 76
           const revealProgress = Math.max(0, Math.min(1, (0.5 - Math.abs(distance)) / 0.35))
@@ -455,7 +455,7 @@ export default function FigmaHomeContent({ onOpenProduct, onScrollStateChange }:
     <div className="fh-content-grid">
       <div className="fh-left-column">
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}><Profile /></motion.div>
-        <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}>{classicLayout ? <PublishRow /> : <SmartCreate expanded onOpenProduct={onOpenProduct} />}</motion.div>
+        <motion.div className="fh-enter" initial={classicLayout && !reducedMotion ? { opacity: 0, y: 14 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, delay: 0.08 }}>{classicLayout ? <PublishRow /> : <SmartCreate expanded onOpenProduct={onOpenProduct} />}</motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.16 }}><Overview /></motion.div>
         <motion.div className="fh-enter" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.46, delay: 0.22 }}><WorkPerformance /></motion.div>
         <Monetization />

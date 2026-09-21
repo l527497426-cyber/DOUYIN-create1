@@ -61,7 +61,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     if (!host) return
     let renderer: THREE.WebGLRenderer
     try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' })
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' })
     } catch {
       return
     }
@@ -93,10 +93,10 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     camera.position.z = 400
     const room = new RoomEnvironment()
     const pmrem = new THREE.PMREMGenerator(renderer)
-    const environmentTarget = pmrem.fromScene(room, 0.04)
+    const environmentTarget = pmrem.fromScene(room, 0.04, 0.1, 100, { size: 128 })
     scene.environment = environmentTarget.texture
     const circleGeometry = new THREE.CircleGeometry(expanded ? 1 : 0.87, 64)
-    const sphereGeometry = new THREE.SphereGeometry(1, 64, 40)
+    const sphereGeometry = new THREE.SphereGeometry(1, 48, 32)
     const initialSettings = settingsRef.current
     const shellMaterial = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color(initialSettings.tintColor),
@@ -309,7 +309,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       const [title, description] = await Promise.all([makeCaption(caption.title, true), makeCaption(caption.description, false)])
       if (title && description) captionMeshes[index] = { title, description }
     })).then(() => { if (!disposed) onCaptionsReady(true) }).catch(() => { /* Keep HTML captions if SVG decoding fails. */ })
-    postersReady.then((textures) => {
+    postersReady.then(async (textures) => {
       if (disposed) { textures.forEach(texture => texture.dispose()); return }
       posterTextures = textures
       textures.forEach((texture, index) => {
@@ -342,10 +342,15 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         groups.push(group)
         artworkMaterials.push(artworkMaterial)
       })
+      resize()
       updatePositions()
-      renderer.render(scene, camera)
+      // Compile without blocking the UI where parallel shader compilation exists.
+      await renderer.compileAsync(scene, camera)
+      if (disposed) return
+      // The first visible frame uses the same optics, lighting and positions as
+      // subsequent frames; do not display an unconfigured intermediate frame.
+      render()
       onReady(true)
-      frame = window.requestAnimationFrame(render)
     }).catch(() => { /* The poster and HTML video remain visible as a fallback. */ })
 
     return () => {
