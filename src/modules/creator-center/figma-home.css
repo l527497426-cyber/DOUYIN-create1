@@ -137,7 +137,7 @@
 .fh-tab-label { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; }
 .fh-insight { display: flex; align-items: center; gap: 10px; min-height: 52px; margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: linear-gradient(100deg,#edf7ff,#f8f3f7 65%,#fff2ee); }
 .fh-insight-icon { position: relative; width: 24px; height: 24px; flex: none; }
-.fh-insight-icon img { position: absolute; left: -3px; top: -2px; width: 30px; height: 31px; max-width: none; }
+.fh-insight-icon img { position: absolute; left: -9px; top: -8px; width: 42px; height: 43px; max-width: none; }
 .fh-insight p { margin: 0; font-size: 12px; line-height: 20px; color: rgba(28,31,35,.8); }
 .fh-insight b { color: #252632; font-weight: 600; }
 .fh-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); column-gap: 20px; row-gap: 28px; padding: 24px 12px 4px; }
@@ -391,19 +391,19 @@
 /* Small radial comets sit both behind and in front of the insight star. */
 .fh-insight-icon { isolation: isolate; pointer-events: none; overflow: visible; }
 .fh-insight-icon img { z-index: 1; }
-.fh-insight-glow { position: absolute; inset: -7px; z-index: 0; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.85), rgba(177,209,255,.28) 40%, transparent 72%); animation: fh-insight-breathe 3.2s ease-in-out infinite; }
+.fh-insight-glow { position: absolute; inset: -6px; z-index: 0; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.95) 38%, rgba(255,255,255,.5) 56%, transparent 72%); animation: fh-insight-breathe 3.2s ease-in-out infinite; }
 .fh-insight-ray { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--ray-angle)); }
 .fh-insight-ray.is-back { z-index: 0; }
 .fh-insight-ray.is-front { z-index: 2; }
-.fh-insight-ray i { position: absolute; left: 0; top: -.65px; width: 8px; height: 1.3px; border-radius: 100%; background: linear-gradient(90deg, transparent, #bad9ff 55%, #fff 95%); box-shadow: 1px 0 3px rgba(157,190,255,.8); opacity: 0; transform-origin: right center; animation: fh-insight-comet var(--ray-duration) linear var(--ray-delay) infinite; }
-.fh-insight-ray.is-front i { background: linear-gradient(90deg, transparent, #ffcbdc 58%, #fff 95%); }
+.fh-insight-ray i { position: absolute; left: 0; top: -.65px; width: 8px; height: 1.3px; border-radius: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.8) 55%, #fff 95%); box-shadow: 1px 0 3px rgba(255,255,255,.95); opacity: 0; transform-origin: right center; animation: fh-insight-comet var(--ray-duration) linear var(--ray-delay) infinite; }
+.fh-insight-ray.is-front i { background: linear-gradient(90deg, transparent, rgba(255,255,255,.8) 58%, #fff 95%); }
 @keyframes fh-insight-comet {
   0% { transform: translateX(-4px) scaleX(.25); opacity: 0; }
   18% { opacity: .9; }
   58% { opacity: .65; }
   85%, 100% { transform: translateX(16px) scaleX(.6); opacity: 0; }
 }
-@keyframes fh-insight-breathe { 0%, 100% { opacity: .5; transform: scale(.9); } 50% { opacity: .9; transform: scale(1.08); } }
+@keyframes fh-insight-breathe { 0%, 100% { opacity: .8; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
 @media (prefers-reduced-motion: reduce) {
   .fh-insight-ray { display: none; }
   .fh-insight-glow { animation: none; opacity: .6; }
