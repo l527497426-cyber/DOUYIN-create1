@@ -169,7 +169,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     resize()
 
     const coverScale = (width: number, height: number, index: number) => expanded
-      ? new THREE.Vector2(Math.min(1, height / width), Math.min(1, width / height)).multiplyScalar(isWorld[index] ? 1.04 : 1)
+      ? new THREE.Vector2(Math.min(1, height / width), Math.min(1, width / height)).multiplyScalar(isWorld[index] ? 1.10 : 1)
       : new THREE.Vector2(1, 1)
 
     const updateVideo = (elapsed: number) => {
@@ -318,7 +318,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
             uPosterMap: { value: texture },
             uVideoMap: { value: texture },
             uVideoMix: { value: 0 },
-            uMediaCenter: { value: new THREE.Vector2(0.5, 0.5) },
+            uMediaCenter: { value: new THREE.Vector2(0.5, expanded && isWorld[index] ? 0.57 : 0.5) },
             uPosterScale: { value: coverScale(texture.image.width, texture.image.height, index) },
             uVideoScale: { value: new THREE.Vector2(1, 1) },
             uBrightness: { value: initialSettings.imageBrightness },
