@@ -218,7 +218,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         const prominence = (size - 64) / 76
         const edgeOpacity = fixedEntries ? 1 : THREE.MathUtils.smoothstep(2.2 - Math.abs(distance), 0, 0.6)
         const reveal = fixedEntries ? 1 : THREE.MathUtils.smoothstep(0.5 - Math.abs(distance), 0, 0.35)
-        caption.title.position.set(offset, captionY - 22, 1)
+        caption.title.position.set(offset, captionY - (expanded ? 32 : 22), 1)
         caption.title.scale.setScalar(fixedEntries ? 1 : 0.8 + 0.2 * prominence)
         caption.title.material.opacity = edgeOpacity * (fixedEntries ? 1 : 0.6 + 0.4 * prominence)
         caption.title.visible = group.visible
