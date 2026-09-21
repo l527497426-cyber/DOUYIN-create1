@@ -107,6 +107,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     // Fill more of the sphere with UI artwork while retaining the shared glass optics.
     const isInterfaceArtwork = posters.map(url => url.endsWith('/interface.webp'))
     const groups: THREE.Group[] = []
+    const hoverScales = posters.map(() => 1)
     const captionGeometry = new THREE.PlaneGeometry(220, 20)
     const captionMeshes: { title: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>; description: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> }[] = []
     const captionTextures: THREE.Texture[] = []
@@ -168,11 +169,13 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       })
     }
 
-    const updatePositions = () => groups.forEach((group, index) => {
+    const updatePositions = (elapsed = 16) => groups.forEach((group, index) => {
       const { size, offset, distance } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
       const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, performance.now()) : 0
       group.position.set(offset, -floatY, -Math.abs(distance) * 0.01)
-      group.scale.setScalar(size / 2)
+      const targetScale = expanded && hoveredRef.current === index ? 1.045 : 1
+      hoverScales[index] += (targetScale - hoverScales[index]) * (motionPreference.matches ? 1 : 1 - Math.exp(-elapsed / 85))
+      group.scale.setScalar(size / 2 * hoverScales[index])
       group.visible = Math.abs(distance) < 2.5
       const caption = captionMeshes[index]
       if (caption) {
@@ -223,7 +226,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.uniforms.uContrast.value = settings.imageContrast
         })
         updateVideo(elapsed)
-        updatePositions()
+        updatePositions(elapsed)
         renderer.render(scene, camera)
       }
       frame = window.requestAnimationFrame(render)

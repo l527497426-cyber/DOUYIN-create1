@@ -379,3 +379,8 @@
 .fh-layout-create-first .fh-smart > h2 { display: none; }
 .fh-layout-create-first .fh-orbs { margin-top: 24px; }
 .fh-layout-create-first .fh-orb-media { inset: 0; width: 100%; height: 100%; object-position: center; }
+.fh-layout-create-first .fh-orb { transition: transform 240ms ease-out; }
+.fh-layout-create-first .fh-orb:hover, .fh-layout-create-first .fh-orb:focus-visible { transform: scale(1.045); }
+@media (prefers-reduced-motion: reduce) {
+  .fh-layout-create-first .fh-orb { transition: none; }
+}
