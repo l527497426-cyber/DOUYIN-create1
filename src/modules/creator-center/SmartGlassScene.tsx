@@ -18,16 +18,17 @@ const artworkFragmentShader = `
   uniform float uVideoMix;
   uniform vec2 uPosterScale;
   uniform vec2 uVideoScale;
+  uniform vec2 uMediaCenter;
   uniform float uBrightness;
   uniform float uSaturation;
   uniform float uContrast;
   varying vec2 vUv;
   void main() {
-    vec4 sampleColor = texture2D(uPosterMap, (vUv - 0.5) * uPosterScale + 0.5);
+    vec4 sampleColor = texture2D(uPosterMap, (vUv - 0.5) * uPosterScale + uMediaCenter);
     if (uVideoMix > 0.0) {
       // Video textures need the same sRGB decode as Three's built-in map shader.
       // Poster textures are already decoded by the GPU's sRGB texture format.
-      vec4 videoColor = sRGBTransferEOTF(texture2D(uVideoMap, (vUv - 0.5) * uVideoScale + 0.5));
+      vec4 videoColor = sRGBTransferEOTF(texture2D(uVideoMap, (vUv - 0.5) * uVideoScale + uMediaCenter));
       sampleColor = mix(sampleColor, videoColor, uVideoMix);
     }
     float luma = dot(sampleColor.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -108,6 +109,9 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     const isInterfaceArtwork = posters.map(url => url.endsWith('/interface.webp'))
     const groups: THREE.Group[] = []
     const hoverScales = posters.map(() => 1)
+    const pointerTargets = posters.map(() => new THREE.Vector2())
+    const pointerLights = posters.map(() => new THREE.Vector2())
+    const isWorld = posters.map(url => url.endsWith("/mountain.webp"))
     const captionGeometry = new THREE.PlaneGeometry(220, 20)
     const descriptionGeometry = new THREE.PlaneGeometry(220, expanded ? 40 : 20)
     const captionMeshes: { title: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>; description: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> }[] = []
@@ -127,14 +131,29 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       camera.right = width / 2
       camera.updateProjectionMatrix()
     }
+    const pointerSurface = host.parentElement
+    const moveLight = (event: PointerEvent) => {
+      const index = hoveredRef.current
+      if (index === null) return
+      const bounds = host.getBoundingClientRect()
+      const { size, offset } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
+      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, performance.now()) : 0
+      pointerTargets[index].set(
+        THREE.MathUtils.clamp((event.clientX - bounds.left - sceneWidth / 2 - offset) / (size / 2), -1, 1),
+        THREE.MathUtils.clamp((event.clientY - bounds.top - 70 - floatY) / (size / 2), -1, 1),
+      )
+    }
+    const resetLight = () => pointerTargets.forEach(target => target.set(0, 0))
+    pointerSurface?.addEventListener('pointermove', moveLight)
+    pointerSurface?.addEventListener('pointerleave', resetLight)
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(host)
     const visibilityObserver = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? true })
     visibilityObserver.observe(host)
     resize()
 
-    const coverScale = (width: number, height: number) => expanded
-      ? new THREE.Vector2(Math.min(1, height / width), Math.min(1, width / height))
+    const coverScale = (width: number, height: number, index: number) => expanded
+      ? new THREE.Vector2(Math.min(1, height / width), Math.min(1, width / height)).multiplyScalar(isWorld[index] ? 1 / 1.08 : 1)
       : new THREE.Vector2(1, 1)
 
     const updateVideo = (elapsed: number) => {
@@ -157,7 +176,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         }
         if (!videoWasActive[index]) {
           material.uniforms.uVideoMap.value = videoTextures[index]
-          material.uniforms.uVideoScale.value.copy(coverScale(video.videoWidth, video.videoHeight))
+          material.uniforms.uVideoScale.value.copy(coverScale(video.videoWidth, video.videoHeight, index))
           warmupFrames[index] = 2
           videoWasActive[index] = true
         }
@@ -221,7 +240,10 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.envMapIntensity = settings.envMapIntensity * reflection * (expanded ? 1.8 : 1)
           material.attenuationDistance = settings.attenuationDistance
           const lightPhase = expanded && !motionPreference.matches ? now * 0.00045 + index * 0.7 : 0
-          material.envMapRotation.set(Math.sin(lightPhase) * 0.45, lightPhase, Math.sin(lightPhase * 0.7) * 0.3)
+          if (hoveredRef.current !== index) pointerTargets[index].set(0, 0)
+          pointerLights[index].lerp(pointerTargets[index], motionPreference.matches ? 1 : 1 - Math.exp(-elapsed / 140))
+          const pointer = pointerLights[index]
+          material.envMapRotation.set(Math.sin(lightPhase) * 0.45 + pointer.y * 0.8, lightPhase + pointer.x * 1.2, Math.sin(lightPhase * 0.7) * 0.3 + pointer.x * 0.15)
         })
         artworkMaterials.forEach(material => {
           material.uniforms.uBrightness.value = settings.imageBrightness
@@ -280,7 +302,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
             uPosterMap: { value: texture },
             uVideoMap: { value: texture },
             uVideoMix: { value: 0 },
-            uPosterScale: { value: coverScale(texture.image.width, texture.image.height) },
+            uMediaCenter: { value: new THREE.Vector2(0.5, expanded && isWorld[index] ? 0.63 : 0.5) },
+            uPosterScale: { value: coverScale(texture.image.width, texture.image.height, index) },
             uVideoScale: { value: new THREE.Vector2(1, 1) },
             uBrightness: { value: initialSettings.imageBrightness },
             uSaturation: { value: initialSettings.imageSaturation },
@@ -309,6 +332,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     return () => {
       disposed = true
       window.cancelAnimationFrame(frame)
+      pointerSurface?.removeEventListener('pointermove', moveLight)
+      pointerSurface?.removeEventListener('pointerleave', resetLight)
       resizeObserver.disconnect()
       visibilityObserver.disconnect()
       posterTextures.forEach(texture => texture.dispose())
