@@ -408,3 +408,15 @@
   .fh-insight-ray { display: none; }
   .fh-insight-glow { animation: none; opacity: .6; }
 }
+/* The loading image is a capture of the exact glass scene at motion time zero. */
+.has-glass-placeholder .fh-glass-canvas { opacity: 0; transition: opacity 400ms ease; }
+.has-glass-placeholder.has-webgl .fh-glass-canvas { opacity: 1; }
+.has-glass-placeholder .fh-orb { background: transparent; box-shadow: none; }
+.has-glass-placeholder .fh-orb::before, .has-glass-placeholder .fh-orb::after { display: none; }
+.has-glass-placeholder .fh-orb-poster { inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 400ms ease; }
+.has-glass-placeholder .fh-orb-video { visibility: hidden; }
+.fh-smart-fixed .fh-smart-caption { top: calc(100% + 22px); gap: 2px; width: 220px; }
+.fh-smart-fixed .fh-smart-caption span { white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  .has-glass-placeholder .fh-glass-canvas, .has-glass-placeholder .fh-orb-poster { transition: none; }
+}

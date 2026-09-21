@@ -85,6 +85,7 @@ const smartPosters = smartWorks.map(work => asset(`media/${work.id}.webp`))
 function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: ProductId) => void; expanded?: boolean }) {
   const [phase, setPhase] = useState(2)
   const phaseRef = useRef(2)
+  const motionTimeRef = useRef(0)
   const stripRef = useRef<HTMLDivElement>(null)
   const stripWidthRef = useRef(371)
   const [stripWidth, setStripWidth] = useState(371)
@@ -154,11 +155,14 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
   useEffect(() => {
     let frame = 0
     let previousTime = 0
+    let readyAt: number | null = null
     const animate = (now: number) => {
       const elapsed = previousTime ? Math.min(now - previousTime, 50) : 0
       previousTime = now
+      if (webglReady && readyAt === null) readyAt = now
+      motionTimeRef.current = readyAt === null ? 0 : Math.max(0, now - readyAt - 400)
       stripRef.current?.querySelectorAll<HTMLElement>(".fh-orb-position").forEach((element, index) => {
-        element.style.translate = expanded && stripWidthRef.current >= 640 && !reducedMotion ? `0 ${smartFloat(index, now)}px` : "none"
+        element.style.translate = expanded && stripWidthRef.current >= 640 && !reducedMotion ? `0 ${smartFloat(index, motionTimeRef.current)}px` : "none"
       })
       if (expanded && stripWidthRef.current >= 640) {
         frame = window.requestAnimationFrame(animate)
@@ -189,7 +193,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
     }
     frame = window.requestAnimationFrame(animate)
     return () => window.cancelAnimationFrame(frame)
-  }, [reducedMotion, expanded])
+  }, [reducedMotion, expanded, webglReady])
 
   const startDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     if ((expanded && stripWidthRef.current >= 640) || event.button !== 0 || dragRef.current) return
@@ -269,8 +273,8 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
   return (
     <><section className={`fh-panel fh-smart${fixedEntries ? " fh-smart-fixed" : ""}`} aria-label="智能创作">
       <h2>智能创作</h2>
-      <div ref={stripRef} className={`fh-orbs${webglReady ? ' has-webgl' : ''}${dragging ? ' is-dragging' : ''}`} style={{ '--glass-rim-opacity': glassSettings.cssRimOpacity, '--glass-rim-blur': `${glassSettings.cssRimBlur}px` } as CSSProperties} role="group" aria-roledescription="轮播" aria-label="滚动切换智能创作作品" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={event => endDrag(event)} onPointerCancel={event => endDrag(event, true)} onPointerLeave={() => { if (dragRef.current && !dragRef.current.active) dragRef.current = null }} onClickCapture={event => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }} onDragStart={event => event.preventDefault()}>
-        <SmartGlassScene expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} onCaptionsReady={setCaptionsReady} />
+      <div ref={stripRef} className={`fh-orbs${expanded ? ' has-glass-placeholder' : ''}${webglReady ? ' has-webgl' : ''}${dragging ? ' is-dragging' : ''}`} style={{ '--glass-rim-opacity': glassSettings.cssRimOpacity, '--glass-rim-blur': `${glassSettings.cssRimBlur}px` } as CSSProperties} role="group" aria-roledescription="轮播" aria-label="滚动切换智能创作作品" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={event => endDrag(event)} onPointerCancel={event => endDrag(event, true)} onPointerLeave={() => { if (dragRef.current && !dragRef.current.active) dragRef.current = null }} onClickCapture={event => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }} onDragStart={event => event.preventDefault()}>
+        <SmartGlassScene motionTimeRef={motionTimeRef} expanded={expanded} posters={smartPosters} captions={smartWorks} phaseRef={phaseRef} hoveredRef={hoveredRef} readyVideoRef={readyVideoRef} videoRefs={videoRefs} settingsRef={settingsRef} onReady={setWebglReady} onCaptionsReady={setCaptionsReady} />
         {smartWorks.map((work, index) => {
           const { distance, size, offset } = smartOrbGeometry(index, phase, smartWorks.length, stripWidth, expanded)
           const isCenter = fixedEntries || index === centerIndex
@@ -280,7 +284,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
           return <div
             key={work.id}
             className="fh-orb-position"
-            style={{ left: '50%', top: 0, transform: `translate3d(${offset - size / 2}px, ${(140 - size) / 2}px, 0)`, width: size, height: size, zIndex: Math.round(100 - Math.abs(distance) * 10) }}
+            style={{ left: '50%', top: 0, transform: `translate3d(${offset - size / 2}px, ${(140 - size) / 2}px, 0)`, width: size, height: size, translate: fixedEntries && !reducedMotion ? `0 ${smartFloat(index, 0)}px` : undefined, zIndex: Math.round(100 - Math.abs(distance) * 10) }}
           ><button
             type="button"
             className={`fh-orb${isCenter ? ' is-center' : ''}`}
@@ -302,7 +306,7 @@ function SmartCreate({ onOpenProduct, expanded = false }: { onOpenProduct: (id: 
             }}
             aria-label={`${work.title}${isCenter ? '，进入' : '，移至中间'}`}
             aria-current={!fixedEntries && isCenter ? 'true' : undefined}
-          ><img className="fh-orb-media fh-orb-poster" src={smartPosters[index]} alt="" draggable={false} /><video className={`fh-orb-media fh-orb-video${readyVideoIndex === index ? ' is-playing' : ''}`} ref={videoRefCallbacks[index]} poster={smartPosters[index]} preload="none" muted loop playsInline aria-hidden="true" /></button>
+          ><img className="fh-orb-media fh-orb-poster" src={expanded ? asset(`media/glass-first/${work.id}.webp`) : smartPosters[index]} alt="" draggable={false} /><video className={`fh-orb-media fh-orb-video${readyVideoIndex === index ? ' is-playing' : ''}`} ref={videoRefCallbacks[index]} poster={smartPosters[index]} preload="none" muted loop playsInline aria-hidden="true" /></button>
             {(!webglReady || !captionsReady) && <div className="fh-smart-caption" style={{ opacity: fixedEntries ? 1 : Math.max(0, Math.min(1, (2.2 - Math.abs(distance)) / 0.6)) }}>
               <strong style={{ transform: `scale(${0.8 + 0.2 * prominence})`, opacity: 0.6 + 0.4 * prominence }}>{work.title}</strong>
               <span

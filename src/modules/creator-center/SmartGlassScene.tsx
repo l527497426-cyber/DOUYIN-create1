@@ -44,6 +44,7 @@ type GlassSceneProps = {
   expanded?: boolean
   posters: string[]
   captions: { title: string; description: string }[]
+  motionTimeRef: RefObject<number>
   phaseRef: RefObject<number>
   hoveredRef: RefObject<number | null>
   readyVideoRef: RefObject<number | null>
@@ -53,7 +54,7 @@ type GlassSceneProps = {
   onCaptionsReady: (ready: boolean) => void
 }
 
-function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady, onCaptionsReady }: GlassSceneProps) {
+function SmartGlassScene({ expanded = false, posters, captions, motionTimeRef, phaseRef, hoveredRef, readyVideoRef, videoRefs, settingsRef, onReady, onCaptionsReady }: GlassSceneProps) {
   const hostRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -164,7 +165,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       if (index === null) return
       const bounds = host.getBoundingClientRect()
       const { size, offset } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
-      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, performance.now()) : 0
+      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, motionTimeRef.current) : 0
       pointerTargets[index].set(
         THREE.MathUtils.clamp((event.clientX - bounds.left - sceneWidth / 2 - offset) / (size / 2), -1, 1),
         THREE.MathUtils.clamp((event.clientY - bounds.top - 70 - floatY) / (size / 2), -1, 1),
@@ -218,7 +219,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
 
     const updatePositions = (elapsed = 16) => groups.forEach((group, index) => {
       const { size, offset, distance } = smartOrbGeometry(index, phaseRef.current, posters.length, sceneWidth, expanded)
-      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, performance.now()) : 0
+      const floatY = expanded && sceneWidth >= 640 && !motionPreference.matches ? smartFloat(index, motionTimeRef.current) : 0
       group.position.set(offset, -floatY, -Math.abs(distance) * 0.01)
       const targetScale = expanded && hoveredRef.current === index ? 1.045 : 1
       hoverScales[index] += (targetScale - hoverScales[index]) * (motionPreference.matches ? 1 : 1 - Math.exp(-elapsed / 85))
@@ -266,7 +267,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.specularIntensity = settings.specularIntensity * reflection * (expanded ? 1.6 : 1)
           material.envMapIntensity = settings.envMapIntensity * reflection * (expanded ? 1.8 : 1)
           material.attenuationDistance = settings.attenuationDistance
-          const lightPhase = expanded && !motionPreference.matches ? now * 0.00045 + index * 0.7 : 0
+          const lightPhase = expanded && !motionPreference.matches ? motionTimeRef.current * 0.00045 + index * 0.7 : 0
           if (hoveredRef.current !== index) pointerTargets[index].set(0, 0)
           pointerLights[index].lerp(pointerTargets[index], motionPreference.matches ? 1 : 1 - Math.exp(-elapsed / 140))
           const pointer = pointerLights[index]
@@ -380,7 +381,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
       onReady(false)
       onCaptionsReady(false)
     }
-  }, [onCaptionsReady, expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
+  }, [motionTimeRef, onCaptionsReady, expanded, captions, hoveredRef, readyVideoRef, onReady, phaseRef, posters, settingsRef, videoRefs])
 
   return <div ref={hostRef} className="fh-glass-canvas" style={expanded ? { height: 228 } : undefined} aria-hidden="true" />
 }
