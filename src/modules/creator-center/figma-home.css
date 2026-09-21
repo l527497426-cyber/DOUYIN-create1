@@ -374,3 +374,8 @@
 .fh-smart-fixed .fh-smart-caption strong { transform: none !important; opacity: 1 !important; }
 .fh-smart-fixed .fh-smart-caption span { transform: none !important; max-width: 100%; line-height: 18px; text-wrap: balance; }
 .fh-smart-fixed .fh-orb:focus-visible { outline-offset: 4px; }
+/* Floating product entries keep their labels without an outer panel. */
+.fh-layout-create-first .fh-smart { background: transparent; border-radius: 0; padding-top: 16px; }
+.fh-layout-create-first .fh-smart > h2 { display: none; }
+.fh-layout-create-first .fh-orbs { margin-top: 24px; }
+.fh-layout-create-first .fh-orb-media { inset: 0; width: 100%; height: 100%; object-position: center; }

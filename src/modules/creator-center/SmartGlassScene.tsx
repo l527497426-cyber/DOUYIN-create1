@@ -16,16 +16,18 @@ const artworkFragmentShader = `
   uniform sampler2D uPosterMap;
   uniform sampler2D uVideoMap;
   uniform float uVideoMix;
+  uniform vec2 uPosterScale;
+  uniform vec2 uVideoScale;
   uniform float uBrightness;
   uniform float uSaturation;
   uniform float uContrast;
   varying vec2 vUv;
   void main() {
-    vec4 sampleColor = texture2D(uPosterMap, vUv);
+    vec4 sampleColor = texture2D(uPosterMap, (vUv - 0.5) * uPosterScale + 0.5);
     if (uVideoMix > 0.0) {
       // Video textures need the same sRGB decode as Three's built-in map shader.
       // Poster textures are already decoded by the GPU's sRGB texture format.
-      vec4 videoColor = sRGBTransferEOTF(texture2D(uVideoMap, vUv));
+      vec4 videoColor = sRGBTransferEOTF(texture2D(uVideoMap, (vUv - 0.5) * uVideoScale + 0.5));
       sampleColor = mix(sampleColor, videoColor, uVideoMix);
     }
     float luma = dot(sampleColor.rgb, vec3(0.2126, 0.7152, 0.0722));
@@ -80,7 +82,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     const pmrem = new THREE.PMREMGenerator(renderer)
     const environmentTarget = pmrem.fromScene(room, 0.04)
     scene.environment = environmentTarget.texture
-    const circleGeometry = new THREE.CircleGeometry(0.87, 64)
+    const circleGeometry = new THREE.CircleGeometry(expanded ? 1 : 0.87, 64)
     const sphereGeometry = new THREE.SphereGeometry(1, 64, 40)
     const initialSettings = settingsRef.current
     const shellMaterial = new THREE.MeshPhysicalMaterial({
@@ -128,6 +130,10 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
     visibilityObserver.observe(host)
     resize()
 
+    const coverScale = (width: number, height: number) => expanded
+      ? new THREE.Vector2(Math.min(1, height / width), Math.min(1, width / height))
+      : new THREE.Vector2(1, 1)
+
     const updateVideo = (elapsed: number) => {
       const hovered = hoveredRef.current === readyVideoRef.current ? hoveredRef.current : null
       artworkMaterials.forEach((material, index) => {
@@ -148,6 +154,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
         }
         if (!videoWasActive[index]) {
           material.uniforms.uVideoMap.value = videoTextures[index]
+          material.uniforms.uVideoScale.value.copy(coverScale(video.videoWidth, video.videoHeight))
           warmupFrames[index] = 2
           videoWasActive[index] = true
         }
@@ -195,9 +202,9 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           material.color.set(settings.tintColor)
           material.attenuationColor.set(settings.attenuationColor)
           material.transmission = 1 - (1 - settings.transmission) * optics
-          material.ior = 1 + (settings.ior - 1) * optics
-          material.thickness = settings.thickness * optics
-          material.dispersion = settings.dispersion * chromatic
+          material.ior = 1 + (settings.ior - 1) * optics * (expanded ? 0.25 : 1)
+          material.thickness = settings.thickness * optics * (expanded ? 0.16 : 1)
+          material.dispersion = settings.dispersion * chromatic * (expanded ? 0.25 : 1)
           material.roughness = settings.roughness
           material.clearcoat = settings.clearcoat * reflection
           material.clearcoatRoughness = settings.clearcoatRoughness
@@ -260,6 +267,8 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
             uPosterMap: { value: texture },
             uVideoMap: { value: texture },
             uVideoMix: { value: 0 },
+            uPosterScale: { value: coverScale(texture.image.width, texture.image.height) },
+            uVideoScale: { value: new THREE.Vector2(1, 1) },
             uBrightness: { value: initialSettings.imageBrightness },
             uSaturation: { value: initialSettings.imageSaturation },
             uContrast: { value: initialSettings.imageContrast },
@@ -268,7 +277,7 @@ function SmartGlassScene({ expanded = false, posters, captions, phaseRef, hovere
           toneMapped: false,
         })
         const artwork = new THREE.Mesh(circleGeometry, artworkMaterial)
-        if (isInterfaceArtwork[index]) artwork.scale.setScalar(0.96 / 0.87)
+        if (!expanded && isInterfaceArtwork[index]) artwork.scale.setScalar(0.96 / 0.87)
         artwork.position.z = -0.12
         group.add(artwork)
         const shell = new THREE.Mesh(sphereGeometry, shellMaterials[index])
