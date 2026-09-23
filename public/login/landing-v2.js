@@ -275,16 +275,7 @@
     video.classList.remove("is-fading-out");
     if (video.paused) video.play().catch(() => {});
   };
-  aiCards.forEach((card) => {
-    const title = card.querySelector(".card-copy h3");
-    if (!title) return;
-    const summary = document.createElement("div");
-    summary.className = "card-summary";
-    summary.setAttribute("aria-hidden", "true");
-    summary.append(...[...title.childNodes].map((node) => node.cloneNode(true)));
-    title.before(summary);
-  });
-  aiGrid?.classList.add("summaries-ready");
+  // Both accordion states share the original heading to avoid overlapping text.
   const aiAutoplayDelay = 5200;
   let activeAiIndex = 0;
   let aiAutoplayTimer = 0;
@@ -374,10 +365,10 @@
         description,
         {
           opacity: active ? 1 : 0,
-          maskPosition: active ? "0% 0" : "100% 0",
-          webkitMaskPosition: active ? "0% 0" : "100% 0",
-          duration: active ? duration * 0.9 : Math.min(duration, 0.16),
-          ease: active ? "power2.out" : "power2.in",
+          maskPosition: active ? "0% 0%" : "100% 100%",
+          webkitMaskPosition: active ? "0% 0%" : "100% 100%",
+          duration: active ? Math.max(0, duration - 0.04) : Math.min(duration, 0.16),
+          ease: active ? "none" : "power2.in",
         },
         active && duration ? 0.04 : 0,
       );

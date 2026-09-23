@@ -19,23 +19,23 @@ export type GlassSettings = {
 }
 
 export const defaultGlassSettings: GlassSettings = {
-  tintColor: '#ffffff',
-  attenuationColor: '#ffffff',
-  transmission: 1,
-  ior: 1.14,
-  thickness: 0.75,
-  roughness: 0,
-  clearcoat: 0.54,
-  clearcoatRoughness: 0.17,
-  specularIntensity: 0.14,
-  envMapIntensity: 0.23,
-  dispersion: 0.04,
-  attenuationDistance: 0.1,
-  imageBrightness: 1.03,
-  imageSaturation: 1,
-  imageContrast: 1.11,
-  cssRimOpacity: 0.33,
-  cssRimBlur: 6.3,
+  "tintColor": "#ffffff",
+  "attenuationColor": "#ffffff",
+  "transmission": 1,
+  "ior": 1.01,
+  "thickness": 2,
+  "roughness": 0,
+  "clearcoat": 0.06,
+  "clearcoatRoughness": 0.145,
+  "specularIntensity": 0.58,
+  "envMapIntensity": 2,
+  "dispersion": 0.155,
+  "attenuationDistance": 7.7,
+  "imageBrightness": 1.02,
+  "imageSaturation": 1,
+  "imageContrast": 1.1,
+  "cssRimOpacity": 0,
+  "cssRimBlur": 6.3
 }
 
 export const glassSettingControls: { key: Exclude<keyof GlassSettings, 'tintColor' | 'attenuationColor'>; label: string; min: number; max: number; step: number; group: 'optics' | 'reflection' | 'image' }[] = [
@@ -56,7 +56,7 @@ export const glassSettingControls: { key: Exclude<keyof GlassSettings, 'tintColo
   { key: 'imageContrast', label: '视频对比度', min: 0.6, max: 1.5, step: 0.01, group: 'image' },
 ]
 
-const storageKey = 'creator-center-glass-settings-v5'
+const storageKey = 'creator-center-glass-settings-v6'
 
 export function loadGlassSettings(): GlassSettings {
   try {
