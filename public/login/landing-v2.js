@@ -265,7 +265,7 @@
       if (aiVideoFadeTimers.get(video) !== timer) return;
       video.currentTime = 0;
       aiVideoFadeTimers.delete(video);
-    }, 560);
+    }, 500);
     aiVideoFadeTimers.set(video, timer);
   };
   const playAiVideo = (card) => {
@@ -356,7 +356,7 @@
       timeline.to(
         copy,
         {
-          top: active ? 242 : 312,
+          top: active ? 242 : 284,
           duration,
         },
         0,

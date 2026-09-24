@@ -1108,33 +1108,9 @@ input:focus-visible {
   transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1), transform 850ms var(--ease-out);
 }
 
-.ai-grid.layout-accordion .card-art::after {
-  position: absolute;
-  z-index: 2;
-  inset: auto 0 -20px;
-  height: 160px;
-  content: "";
-  background: linear-gradient(
-    180deg,
-    rgba(var(--card-tint), 0) 0%,
-    rgba(var(--card-tint), 0.12) 20%,
-    rgba(var(--card-tint), 0.48) 42%,
-    rgba(var(--card-tint), 0.84) 56%,
-    rgb(var(--card-tint)) 70%,
-    rgb(var(--card-tint)) 100%
-  );
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6) 35%, #000 68%);
-  mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6) 35%, #000 68%);
-  opacity: 1;
-  pointer-events: none;
-  transition: opacity 600ms var(--ease-out);
-}
-
-.ai-grid.layout-accordion .ai-card.is-active .card-art::after {
-  opacity: 0;
-}
+/* Keep the artwork sharp; frosting belongs only to the copy panel. */
+.ai-grid.layout-accordion .card-art::after { display: none; }
+/* The first frame stays underneath the opaque video, ready for its return fade. */
 
 /* Figma exports include antialiased canvas pixels around the rounded corners.
    Overscan the four supplied artworks so those pixels stay outside the crop. */
@@ -1317,6 +1293,7 @@ input:focus-visible {
 
 /* One card surface for both states; only its top edge moves during expansion. */
 .ai-grid.layout-accordion .card-copy {
+  top: 284px;
   padding: 35px 19px 15px 21px;
   border: 1px solid #fff;
   border-radius: 20px;
